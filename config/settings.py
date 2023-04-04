@@ -50,7 +50,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "message_application.urls"
+ROOT_URLCONF = "CAPSTONE.urls"
 
 TEMPLATES = [
     {
@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "message_application.wsgi.application"
+WSGI_APPLICATION = "CAPSTONE.wsgi.application"
 
 
 # Database
