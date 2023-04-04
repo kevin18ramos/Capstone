@@ -1,0 +1,58 @@
+/*Top of the page*/
+/*image background*/
+.imageshape {
+    position: absolute;
+    background-color: gray;
+    text-align: center;
+    height: 67%;
+    width: 100%;
+    padding: 2%;
+    margin: 0%;
+    overflow: hidden;
+  }
+
+/*Logo*/
+.logocircle{
+    position: absolute;
+    background-color: black;
+    height: 10%;
+    width: 5.5%;
+    padding: 2%;
+    margin: 0%;
+    overflow: hidden;
+    border-radius: 50%;
+    top: 2%;
+    left: 44%;
+}
+.logoline{
+    position: absolute;
+    background-color: black;
+    height: 0.3%;
+    width: 20%;
+    top: 25%;
+    left: 39%;
+}
+.logotext1{
+    position: absolute;
+    top: 25%;
+    font-size: 300%;
+    color: white;
+    background-color: transparent;
+}
+.logotext2{
+    
+}
+
+
+
+.searchbarshape{
+
+}
+
+.navshape{
+
+}
+
+.loginshape{
+    
+}
