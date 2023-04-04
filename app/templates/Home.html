@@ -8,12 +8,19 @@
   <meta name= "viewpoint" content="width=device-width, initial-scale=1.0">
   <title> Document</title>
   <link rel="stylesheet" href= "{% static 'Base.css' %}">
+  <link rel="stylesheet" href= "{% static 'Shapes.css' %}">
 </head>
 <body>
 
   {% block content%} 
-  <div class="container">
-    hello
+  <div class="topcontent">
+    <div class="imageshape"></div>
+    <div class="logoline"></div>
+    <div class="logocircle">
+      <div class="logotext1">
+        T.S
+      </div>
+    </div>
   </div>
   {% endblock%}
 

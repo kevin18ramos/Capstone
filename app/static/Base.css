@@ -1,15 +1,7 @@
-/* .navshape{
-
-}
-
-.pictureshape{
-
-} */
-
-.container{
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-    align-items: center;
-    justify-content: center;
+*{
+    background-color: white;
+    background-attachment: fixed;
+    padding: 0%;
+    margin: 0%;
+    overflow-x: hidden;
 }
