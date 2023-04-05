@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 # Create your models here.
 class ArtistInformation(models.Model):
     name = models.CharField(null = True, max_length=255)
-    userName = models.CharField(max_length=200, null=True)
     firstName = models.CharField(max_length=200, null=True)
     lastName = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
@@ -11,22 +10,9 @@ class ArtistInformation(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     websiteLink = models.CharField(max_length=200, null=True)
     bio = models.TextField(null=True, blank=True)
-    
-
+    password = models.CharField(max_length=200, null=True)
     def __str__(self):      
         return self.name
-
-
-
-
-
-
-
-
-
-
-
-
 
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
