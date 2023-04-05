@@ -52,14 +52,36 @@
 /*Navbar*/
 .navbar{
     position: absolute;
-    background-color: transparent;
-    top: 42%;
-    left: 41%;
-    font-size: x-large;
-    color: black;
+    background-color:transparent;
+    top: 32%;
+    left: 1%;
+    width: 100%;
+    height: 40%;
 }
-.navbar h1{
+.navshop{
+    background-color: transparent;
+    font-size: 265%;
+    color: black;
+    position: absolute;
+    left: 31%;
+    top: 15%;
 
+}
+.navabout{
+    background-color: transparent;
+    font-size: 265%;
+    color: black;
+    position: absolute;
+    left: 43.7%;
+    top: 15%;
+}
+.navmore{
+    background-color: transparent;
+    font-size: 260%;
+    color: black;
+    position: absolute;
+    left: 57.2%;
+    top: 15%;
 }
 
 
