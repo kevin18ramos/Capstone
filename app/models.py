@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 
 class ArtistInformation(models.Model):
     name = models.CharField(null = True, max_length=255)
-    userAdmin = models.OneToOneField(User,null = True, on_delete=models.CASCADE)
-    userName = models.CharField(max_length=200, null=True)
     firstName = models.CharField(max_length=200, null=True)
     lastName = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
@@ -14,7 +12,8 @@ class ArtistInformation(models.Model):
     websiteLink = models.CharField(max_length=200, null=True)
     bio = models.TextField(null=True, blank=True)
     
-    def __str__(self):
+
+    def __str__(self):      
         return self.name
 
 class Post(models.Model):
