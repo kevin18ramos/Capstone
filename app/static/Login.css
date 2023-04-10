@@ -1,0 +1,23 @@
+.login {
+    position: absolute;
+    background-color: gray;
+    text-align: center;
+    height: 70%;
+    width: 100%;
+    padding: 2%;
+    margin: 0%;
+    overflow: hidden;
+  }
+
+.login_btn_location{
+    position: absolute;
+    background-color: gray;
+    text-align: center;
+    height: 70%;
+    width: 100%;
+    padding: 2%;
+    margin: 0%;
+    overflow: hidden;
+    top: 60%;
+    left: 15%;
+  }
