@@ -30,6 +30,9 @@ def loginPage(request):
 
         return render(request,'app/login.html')
 
+
+        
+
 def registerPage(request):
     if request.user.is_authenticated:
         return redirect('home')

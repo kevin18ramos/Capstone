@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
+
 class ArtistInformation(models.Model):
     name = models.CharField(null = True, max_length=255)
     firstname = models.CharField(max_length=200, null=True)
@@ -8,9 +9,10 @@ class ArtistInformation(models.Model):
     email = models.CharField(max_length=200, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    websiteLink = models.CharField(max_length=200, null=True)
+    websiteLink = models.URLField(max_length=200, null=True)
     bio = models.TextField(null=True, blank=True)
-    password = models.CharField(max_length=200, null=True)
+    
+
     def __str__(self):      
         return self.name
 
