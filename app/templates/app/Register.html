@@ -1,0 +1,49 @@
+
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type = "text/css" href="{% static '/css/main.css'%}">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Space Grotesk">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Barlow">
+    <title>Document</title>
+</head>
+<body class = "login-page">
+    <div class = "title-placement">
+        <h1 class = "title-1">Create</h1>
+        <h1 class = "title-2">an</h1>
+        <h1 class = "title-3">account</h1>
+        <h1 class = "title-4">today!</h1>
+    </div>
+    <div class = "desc-placement">
+        <h1 class = "desc-1">To</h1>
+        <h1 class = "desc-2">message</h1>
+        <h1 class = "desc-3">someone</h1>
+        <h1 class = "desc-4">sign-up:</h1> 
+    </div>
+    <div class = "go-mid">
+        <form method = 'POST' action = ''>
+            {% csrf_token %}
+            <div class = "first-in">
+                <h4 class = "regi-username">What would you like to be called? {{form.username}}</h4>
+                
+            
+                <h4 class = "regi-password">Choose a secure password:{{form.password1}}</h4>
+
+                <h4 class = "regi-password" >Re-enter password:{{form.password2}}</h4>
+       
+                <input class = "buto1" type = "submit" name = "Create User">
+            </div>
+        </form>
+
+     
+    </div>
+    
+
+</body>
+</html>
