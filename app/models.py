@@ -12,7 +12,6 @@ class ArtistInformation(models.Model):
     websiteLink = models.URLField(max_length=200, null=True)
     bio = models.TextField(null=True, blank=True)
     
-
     def __str__(self):      
         return self.name
 
