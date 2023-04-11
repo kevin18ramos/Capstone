@@ -38,7 +38,7 @@ def registerPage(request):
             if form.is_valid():
                 artist = form.save()
                 username = form.cleaned_data.get('username')
-                firstname = form.cleaned_data.get('firstname')
+                firstname = form.cleaned_data.ge0t('firstname')
                 lastname = form.cleaned_data.get('lastname')
                 email = form.cleaned_data.get('email')
                 messages.success(request, 'Account was created for ' + username)
