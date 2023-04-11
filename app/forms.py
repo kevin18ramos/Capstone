@@ -8,9 +8,8 @@ from .models import *
 
 class CreateUserForm(UserCreationForm):
 	class Meta:
-		model = ArtistInformation
-		fields = ['username','firstname','lastname','email', 'password1', 'password2']
-                
+		model = User
+		fields = ['username', 'password1', 'password2']           
 
 class PostForm(ModelForm):
     class Meta:
