@@ -5,14 +5,28 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from .forms import PostForm
 from .forms import *
 #from .decorators import *
 
-
-# Create your views here.
+# home view
 def home(request):
     return render(request, 'app/Home.html')
 
+def addProductsPage(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = PostForm(request.POST)
+            if form.is_valid():
+                messages.info(request, 'Product Posted')
+        return render(request, 'AddProducts.html', {'form':form})
+    else:
+        return redirect('login')
+
+
+
+
+#login register and logout
 def loginPage(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -35,21 +49,21 @@ def loginPage(request):
         
 
 def registerPage(request):
-    print("here")
+    print("register")
     if request.user.is_authenticated:
+        print("authenticated")
         return redirect('home')
     else:
-        print("there")
+        print("unauthenticated")
         form = CreateUserForm()
         if request.method == 'POST':
-            print("2here")
+            print("post")
             form = CreateUserForm(request.POST)
             if form.is_valid():
-                print("overthere")
+                print("form")
                 user = form.save()
                 username = form.cleaned_data.get('username')
                 messages.success(request, 'Account was created for ' + username)
-                print("downhere")
                 ArtistInformation.objects.create(
 				user = user,
                 name = user.username
