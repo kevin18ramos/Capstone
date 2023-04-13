@@ -1,0 +1,24 @@
+{% extends 'Base.html' %}
+{% load static%}
+{% block content%} 
+<script crossorigin='anonymous' src='https://kit.fontawesome.com/85274771d6.js'></script>
+<body>
+  <div class = "go-mid">
+    {% comment %} <p class="pull-left"><a href="login/"><small>Already have an account? Login</small></a></p> {% endcomment %}
+    <form method = 'POST' action = ''>
+        {% csrf_token %}
+        <h2 id="register__title">Create your profile</h2>
+  <div class="register__box">
+    <h4 class = "regi-username">What would you like to be called? {{form.username}}</h4>
+        
+    <h4 class = "regi-password">Choose a secure password:{{form.password1}}</h4>
+
+    <h4 class = "regi-password" >Re-enter password:{{form.password2}}</h4>
+
+    <input class = "buto1" type = "submit" name = "Create User">
+  </div>
+    </form>
+
+</body>
+{% endblock%}
+</html>
