@@ -1,0 +1,49 @@
+{% extends 'Base.html' %}
+{% load static%}
+{% block content%} 
+<script crossorigin='anonymous' src='https://kit.fontawesome.com/85274771d6.js'></script>
+<body>
+<main>
+  <form id="register" method="post" enctype="multipart/form-data">
+  <h2 id="register__title">Create your profile</h2>
+  <div class="register__box">
+    <label for="user">First Name<i class="fas fa-asterisk"></i></label>
+    <input id="user" type="text" maxLength="64" required placeholder="First Name">
+  </div>
+  <div class="register__box">
+    <label for="user">Last Name<i class="fas fa-asterisk"></i></label>
+    <input id="user" type="text" maxLength="64" required placeholder="Last Name">
+  </div>
+  <div class="register__box">
+    <label for="user">User<i class="fas fa-asterisk"></i></label>
+    <input id="user" type="text" maxLength="64" required placeholder="Username">
+  </div>
+  <div class="register__box">
+    <label for="mail">E-mail<i class="fas fa-asterisk"></i></label>
+    <input id="mail" type="email" size="64" maxLength="64" required placeholder="Example@gmail.com" pattern=".+@gmail.com" title="Example@gmail.com">
+  </div>
+  <div class="register__box">
+    <label for="password">Password<i class="fas fa-asterisk"></i></label>
+    <input id="password" type="password" minLength="6" required placeholder="Password">
+  </div>
+  <div class="register__box">
+    <label for="age">Age</label>
+    <input id="age" type="date" minLength="2">
+  </div>
+  <div class="register__box">
+    <label for="image">Choose profile picture</label>
+    <input type="file" id="image" name="image" accept="image/*">
+    <div id="preview">
+        <p>No files currently selected for upload</p>
+    </div>
+  </div>
+  <input type="button" value="Create profile" id="register__btn" href="login/">
+  </form>
+  <div id="overlay" class="hidden">
+    <div id="avatar"></div>
+  </div>
+</main>
+
+</body>
+{% endblock%}
+</html>
