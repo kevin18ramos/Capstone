@@ -11,9 +11,8 @@
 
     {% for product in products %}
     <div class="product" style="width: 18rem;">
-        <img class="product-img-top" src="{{MEDIA_URL}}{{product.picture.url}}" alt="image not worky">
+        <img style="width: 150px;" class="product-img-top" src="{{product.picture.url}}" alt="image not worky">
         <div class="product-body">
-            <p>{{ MEDIA_URL }}{{product.picture.url}}</p>
             <h5 class="product-title">{{ product.name }}</h5>
             <p class="product-text">{{ product.description }}</p>
             <p class="product-price">Price: {{ product.price }}</p>
