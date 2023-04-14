@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset = "UTF-8">
+  <meta http-equiv = "X-UA-Compatible" content="IE=edge">
+  <meta name= "viewpoint" content="width=device-width, initial-scale=1.0">
+  <title> Document</title>
+</head>
+<body>
+
+    {% for product in products %}
+    <div class="product" style="width: 18rem;">
+        <img class="product-img-top" src="{{MEDIA_URL}}{{product.picture.url}}" alt="image not worky">
+        <div class="product-body">
+            <p>{{ MEDIA_URL }}{{product.picture.url}}</p>
+            <h5 class="product-title">{{ product.name }}</h5>
+            <p class="product-text">{{ product.description }}</p>
+            <p class="product-price">Price: {{ product.price }}</p>
+            <a href="#" class="btn btn-primary">Buy Now</a>
+        </div>
+    </div>
+    {% endfor %}
+    
+
+</body>

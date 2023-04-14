@@ -13,18 +13,20 @@ from .forms import *
 def home(request):
     return render(request, 'app/Home.html')
 
+# products page
 def addProductsPage(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = PostForm(request.POST)
             if form.is_valid():
                 messages.info(request, 'Product Posted')
-        return render(request, 'AddProducts.html', {'form':form})
+        return render(request, 'app/AddProducts.html', {'form':form})
     else:
         return redirect('login')
 
-
-
+def productsPage(request):
+    products = Post.objects.all()
+    return render(request, 'app/Products.html', {'products':products})
 
 #login register and logout
 def loginPage(request):
