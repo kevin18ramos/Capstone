@@ -1,7 +1,8 @@
-{% extends 'Base.html' %}
+{% extends 'app/Base.html' %}
 {% load static %}
   {% block content%} 
     <body>
+    <section>
       <div class="topcontent">
         <div class="imageshape"></div>
         <div class="logoline"></div>
@@ -12,6 +13,7 @@
           </div>
         </div>
         <nav class="login">
+          <a href="shoppingcart">Shopping</a>
           <a href="login/">Login</a>
           <a href="/register">Register</a>
         </nav>
@@ -21,6 +23,7 @@
           <a class="navmore">more...</a>
         </nav>
       </div>
+    </section>
         <section class="gallery">
             <div class="container">
               <div class="toolbar">
