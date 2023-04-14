@@ -10,10 +10,11 @@
 <body>
 
     {% for product in products %}
-    <div class="product" style="width: 18rem;">
+    <div class="product" style="border : 4px solid;">
+        <h2 class="product-title">{{ product.name }}</h2>
         <img style="width: 150px;" class="product-img-top" src="{{product.picture.url}}" alt="image not worky">
         <div class="product-body">
-            <p class="product-title">{{ product.name }}</p>
+            {% comment %} <p class="product-title">{{ product.name }}</p> {% endcomment %}
             <p class="product-text">{{ product.description }}</p>
             <p class="product-price">Price: {{ product.price }}</p>
             <p class="product-user">posted by: {{ product.user }}</p>
