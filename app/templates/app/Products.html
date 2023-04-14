@@ -13,9 +13,10 @@
     <div class="product" style="width: 18rem;">
         <img style="width: 150px;" class="product-img-top" src="{{product.picture.url}}" alt="image not worky">
         <div class="product-body">
-            <h5 class="product-title">{{ product.name }}</h5>
+            <p class="product-title">{{ product.name }}</p>
             <p class="product-text">{{ product.description }}</p>
             <p class="product-price">Price: {{ product.price }}</p>
+            <p class="product-user">posted by: {{ product.user }}</p>
             <a href="#" class="btn btn-primary">Buy Now</a>
         </div>
     </div>
