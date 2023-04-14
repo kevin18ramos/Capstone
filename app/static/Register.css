@@ -1,24 +1,24 @@
 html {line-height: 1.15; -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; overflow-x: hidden; scroll-behavior: smooth;}
 ::-webkit-scrollbar {width: 8px;}
 ::-webkit-scrollbar-track {margin: 4px;}
-::-webkit-scrollbar-thumb {background: #c5c5c5; border-radius: 10px;}
+::-webkit-scrollbar-thumb {background: #C5C5C5; border-radius: 10px;}
 ::selection {background-color: #000000;}
 :root {
-    --main-bg: #f0f1f5;
-    --bg: #ffffff;
+    --main-bg: #F0F1F5;
+    --bg: #FFFFFF;
     --color: #333;
-    --link: #3ea6ff;
-    --red: #ff0000;
-    --green: #adff2f;
-    --light-blue: #87cefa;
+    --link: #3EA6FF;
+    --red: #FF0000;
+    --green: #ADFF2F;
+    --light-blue: #87CEFA;
 }
 @media (prefers-color-scheme: dark) {
     :root {
         --main-bg: #1F1F1F;
         --bg: #282828;
-        --color: #f0f1f5;
-        --red: #b42121;
-        --green: #76a52f;
+        --color: #F0F1F5;
+        --red: #B42121;
+        --green: #76A52F;
         --light-blue: #447492;
     }
 }
