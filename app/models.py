@@ -5,6 +5,7 @@ from datetime import datetime
 # Create your models here.
 
 class ArtistInformation(models.Model):
+    profile_pic = models.ImageField(default="Bojack.png", null=True, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(null = True, max_length=255)
     firstname = models.CharField(max_length=200, null=True)
