@@ -78,6 +78,16 @@ def registerPage(request):
         context = {'form':form}
         return render(request,'app/Register.html',context)
 
+    
+def findUser(request):
+    currentUser = request.user
+    currentArtist = ArtistInformation.objects.get(user = currentUser)
+    print(currentUser)
+    print(currentArtist)
+    print(currentArtist.firstname)
+    print(currentArtist.lastname)
+    print(currentArtist.created_at)
+    return render(request,'app/profilepage.html')
 
 
 def logoutUser(request):

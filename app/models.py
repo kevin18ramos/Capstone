@@ -16,6 +16,9 @@ class ArtistInformation(models.Model):
     websiteLink = models.URLField(max_length=200, null=True)
     bio = models.TextField(null=True, blank=True)
 
+    def __str__(self):
+        return self.name
+
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     picture = models.ImageField(upload_to='pics/', null = True, blank = True)
@@ -23,4 +26,6 @@ class Post(models.Model):
     description = models.CharField(max_length=200) 
     date = models.DateField()
     price = price = models.DecimalField(decimal_places=2, max_digits=10)
-
+    
+    def __str__(self):
+        return self.name
