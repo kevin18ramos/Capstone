@@ -16,21 +16,22 @@ urlpatterns = [
      path("products/add/", views.addProductsPage, name= "addProducts"),
      path("products/", views.productsPage, name= "products"),
      path("profilepage/", views.findUser, name= "findUser"),
-     path("shoppingcart", views.shoppingcart, name="shoppingcart")
+     path("shoppingcart", views.shoppingcart, name="shoppingcart"),
+     path("Login/Register/", views.register, name="register"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
  
 
-from django.contrib import admin
-from django.urls import path
-from app import views
-from app.views import *
+# from django.contrib import admin
+# from django.urls import path
+# from app import views
+# from app.views import *
 
 
-urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", views.home, name="home"),
-    path("Login/", views.login, name="login"),
-    path("Register/", views.register, name="register"),
-    path("Profile/", views.profile, name="profile"),
-     path("Login/Register/", views.register, name="register"),
-]
+# urlpatterns = [
+#     path("admin/", admin.site.urls),
+#     path("", views.home, name="home"),
+#     path("Login/", views.login, name="login"),
+#     path("Register/", views.register, name="register"),
+#     path("Profile/", views.profile, name="profile"),
+#      path("Login/Register/", views.register, name="register"),
+# ]
