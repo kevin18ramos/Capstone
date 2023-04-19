@@ -18,18 +18,24 @@ def profile(request):
 
 # products page
 def addProductsPage(request):
-    if request.user.is_authenticated:
+    form = PostForm(request.POST)
+    currentUser = request.user
+    if form.is_valid():
         if request.method == 'POST':
-            form = PostForm(request.POST)
-            if form.is_valid():
-                messages.info(request, 'Product Posted')
-        return render(request, 'app/AddProducts.html', {'form':form})
-    else:
-        return redirect('login')
+            form = PostForm(request.POST, request.FILES)
+            form.user = currentUser 
+            post = form.save(commit=False) # Save form instance to post variable
+            post.user = currentUser # Set user field
+            post.save() # Save to the database
+            messages.info(request, 'Product Posted')
+            return redirect('addProducts')
+    return render(request, 'app/AddProducts.html', {'post_form':form})
+
 
 def productsPage(request):
     products = Post.objects.all()
     return render(request, 'app/Products.html', {'products':products})
+
 
 #login register and logout
 def loginPage(request):
@@ -83,3 +89,4 @@ def registerPage(request):
 def logoutUser(request):
     logout(request)
     return redirect('login')
+

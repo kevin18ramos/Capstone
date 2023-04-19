@@ -22,5 +22,5 @@ class Post(models.Model):
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=200) 
     date = models.DateField()
-    price = price = models.DecimalField(decimal_places=2, max_digits=10)
+    price = price = models.DecimalField(decimal_places=2, max_digits=1000)
 
