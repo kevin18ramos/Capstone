@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+}
+
+
+
+body{
+    color: aliceblue;
+}
+
+
+#header{
+    height: 70px;
+    background-color: orange;
+}
+
+#home,
+#nav,
+#contact{
+    height: 700px;
+}
+
+
+
+
+
+#Art{
+    background-color: aqua;
+}
+#nav{
+    background-color: red;
+}
+#contact{
+    background-color: rebeccapurple;
+}
