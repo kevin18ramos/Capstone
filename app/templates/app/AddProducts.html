@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% extends 'app/Base.html' %}
+{% load static %}
+    {% block content%} 
+<html>
+    <body>
+        <div class="addProductsPage">
+            <h1>tin.makers</h1>
+            <form method='POST' enctype='multipart/form-data'>
+              {% csrf_token %} {%comment%}{{post_form}} {% endcomment %}
+              <p>Upload a picture below. {{post_form.picture}}</p>
+              <p>Type your artwork's name: {{post_form.name}}</p>
+              <p>Description: {{post_form.description}}</p>
+              <p>Type the date the art was made: (yyyy-mm-dd){{post_form.date}}</p>
+              <p>What would you price your artwork at: {{post_form.price}}</p>
+              <div class="addProductsButton">
+                <button>add product</button>
+              </div>
+            </form>
+          </div>
+    </body>
+<html> 
+{% endblock%}

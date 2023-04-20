@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from .forms import PostForm
 from .forms import *
+import stripe
 #from .decorators import *
 
 # home view
@@ -21,18 +22,51 @@ def profile(request):
 
 # products page
 def addProductsPage(request):
-    if request.user.is_authenticated:
+    form = PostForm(request.POST)
+    currentUser = request.user
+    if form.is_valid():
         if request.method == 'POST':
-            form = PostForm(request.POST)
-            if form.is_valid():
-                messages.info(request, 'Product Posted')
-        return render(request, 'app/AddProducts.html', {'form':form})
-    else:
-        return redirect('login')
+            form = PostForm(request.POST, request.FILES)
+            form.user = currentUser 
+            post = form.save(commit=False) # Save form instance to post variable
+            post.user = currentUser # Set user field
+            post.save() # Save to the database
+            messages.info(request, 'Product Posted')
+            return redirect('products')
+    return render(request, 'app/AddProducts.html', {'post_form':form})
 
 def productsPage(request):
     products = Post.objects.all()
     return render(request, 'app/Products.html', {'products':products})
+
+
+#checkout
+
+class CreateCheckoutSession(APIView):
+  def post(self, request):
+    dataDict = dict(request.data)
+    price = dataDict['price'][0]
+    product_name = dataDict['product_name'][0]
+    try:
+      checkout_session = stripe.checkout.Session.create(
+        line_items =[{
+        'price_data' :{
+          'currency' : 'usd',  
+            'product_data': {
+              'name': product_name,
+            },
+          'unit_amount': price
+        },
+        'quantity' : 1
+      }],
+        mode= 'payment',
+        success_url= FRONTEND_CHECKOUT_SUCCESS_URL,
+        cancel_url= FRONTEND_CHECKOUT_FAILED_URL,
+        )
+      return redirect(checkout_session.url , code=303)
+    except Exception as e:
+        print(e)
+        return e
 
 #login register and logout
 def loginPage(request):
