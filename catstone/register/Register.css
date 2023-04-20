@@ -1,0 +1,82 @@
+html {line-height: 1.15; -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; overflow-x: hidden; scroll-behavior: smooth;}
+::-webkit-scrollbar {width: 8px;}
+::-webkit-scrollbar-track {margin: 4px;}
+::-webkit-scrollbar-thumb {background: #C5C5C5; border-radius: 10px;}
+::selection {background-color: #000000;}
+:root {
+    --main-bg: #F0F1F5;
+    --bg: #FFFFFF;
+    --color: #333;
+    --link: #3EA6FF;
+    --red: #FF0000;
+    --green: #ADFF2F;
+    --light-blue: #87CEFA;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --main-bg: #1F1F1F;
+        --bg: #282828;
+        --color: #F0F1F5;
+        --red: #B42121;
+        --green: #76A52F;
+        --light-blue: #447492;
+    }
+}
+* {margin: 0; padding: 0; word-wrap: break-word; font-size: 1rem; font-family: 'Raleway', sans-serif; box-sizing: border-box; color: var(--color);}
+body {background-color: var(--bg);}
+main {display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: var(--main-bg); padding: 32px;}
+img {max-width: 100%; height: auto;}
+form img {max-width: 250px; max-height: 250px;}
+h2, input[type="submit"], input[type="button"], button {text-transform: uppercase;}
+#register {width: 100%; max-width: 1000px;}
+#register, #profile {border-radius: 10px;} input, button {border-radius: 5px;}
+#register, #profile {background-color: var(--bg); display: flex; flex-flow: column wrap; gap: 8px; padding: 16px;}
+.register__box {display: inherit; flex-flow: row wrap; gap: 8px;}
+.register__box label {display: inherit; justify-content: space-between; align-items: center; flex: 1 100%;}
+input, button {border: none; width: 100%; padding: 8px; background-color: var(--main-bg);}
+input[type="submit"]:hover, input[type="button"]:hover, button:hover {background-color: rgb(0,0,0,.1);}
+input[type="submit"]:active, input[type="button"]:active, button:active {background-color: rgb(0,0,0,.2);}
+[class*="fa-asterisk"] {color: var(--red);}
+input:focus:valid:not([type="submit"]){outline: none;
+    box-shadow: 1px 1px 2px .4px var(--green), inset 1px 1px 2px .4px var(--green);}
+input:focus:invalid{outline: none;
+    box-shadow: 1px 1px 2px .4px var(--red), inset 1px 1px 2px .4px var(--red);}
+input[type="radio"], input[type="checkbox"], select {appearance: none; min-width: 20px; min-height: 20px; box-shadow: 0 0 0 1.5px #333; transition: .3s all;}
+input[type="radio"] {border-radius: 50%;}
+input[type="radio"]:checked, input[type="checkbox"]:checked {background-color: var(--bg);}
+.conteiner__check {display: inherit; flex-flow: row wrap; gap: 8px; align-items: center;}
+.conteiner__check.inline {gap: 16px;}
+.contact__box label {display: inherit; justify-content: space-between; align-items: center; flex: 1 100%;}
+.conteiner__check li {display: inherit; column-gap: 8px; align-items: center;}
+.profile__img {border-radius: 50%;}
+::file-selector-button {background: var(--bg); border: none; border-radius: 5px; color: var(--color); padding: 16px; margin-right: 16px; text-transform: uppercase; font-size: .75rem; cursor: pointer;}
+#register__btn {cursor: pointer;}
+#overlay, #content__avatar {display: flex; gap: 16px; flex-direction: column; justify-content: center; align-items: center;}
+#content__avatar {min-height: 100%; text-align: center;}
+#overlay {position: fixed; top: 0; left: 0; background-color: rgba(0,0,0, .5); width: 100%; height: 100vh; z-index: 9999; transition: opacity .8s; opacity: 1; word-break: break-word;}
+#overlay.hidden {opacity: 0; visibility: hidden;}
+#avatar {width: 70vh; height: 70vh; background: var(--bg); border-radius: 8px; padding: 16px; overflow: hidden;}
+#avatar.open {animation-name: stretch; animation-duration: .8s; animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);}
+.profile__img {aspect-ratio: 1; object-fit: cover;}
+.error {display: flex; justify-content: center; align-items: center; height: 100%; text-align: center;}
+@keyframes stretch {
+  0% {transform: scale(.5); border-radius: 100%;}
+  100% {transform: scale(1);}
+}
+@media (max-width: 576px){
+  #register {min-width: 100%;}
+  #avatar {width: 70vw; height: 70vw; overflow-y: scroll;}
+  #avatar h2 {margin-bottom: 1rem;}
+  @keyframes stretch {
+      0% {transform: scale(.5);}
+      100% {transform: scale(1);}
+  }
+}
+@media (max-height: 480px){
+  #avatar {overflow-y: scroll;}
+  #avatar h2 {margin-bottom: 1rem;}
+  @keyframes stretch {
+    0% {transform: scale(.5);}
+    100% {transform: scale(1);}
+  }
+}

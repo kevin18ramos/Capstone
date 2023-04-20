@@ -1,0 +1,36 @@
+{% extends 'app/Base.html' %}
+{% load static %}
+  {% block content%} 
+<body>
+    <script src="https://code.jquery.com/jquery-2.1.0.min.js" ></script>
+    <div id="formWrapper">
+    <div id="form">
+    <div class="logo">
+        <!-- logo -->
+    </div>
+    <div>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="form-item">
+                <p class="formLabel">Email</p>
+                <input type="text" name="username" id="email" class="form-style" autocomplete="off"/>
+            </div>
+            <div class="form-item">
+                <p class="formLabel">Password</p>
+                <input type="password" name="password" id="password" class="form-style" />
+                <div class="pw-view"><i class="fa fa-eye"></i></div>
+                <p><a href="#" ><small>Already have an account ?</small></a></p>
+            </div>
+          
+            <div class="form-item">
+            <p class="pull-left"><a href="Register/"><small>Register</small></a></p>
+            <input type="submit" class="login pull-right" value="Log In">
+            <div class="clear-fix"></div>
+            </div> 
+             {% for message in messages %}
+                 <p class = "alert" id="messages">{{message}}</p>
+                 {% endfor %}
+        </form>
+    </div>
+
+{% endblock%}
