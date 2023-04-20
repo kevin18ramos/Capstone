@@ -12,10 +12,16 @@
             <img src="static/images/me7.png" alt="Anna" />
             <span></span>
           </div>
-          <h2>Anna</h2>
-          <p>UX/UI Designer</p>
-          <p>anna@example.com</p>
+          <h2>{{request.user}}</h2>
+         
 
+            
+        
+            <img class="profile-pic" src="{{person1.profile_pic.url}}" >
+          
+            <p>UX/UI Designer</p>
+            <p>{{ request.user.artistinformation.email }}</p>
+     
           <!-- <ul class="about">
             <li><span>4,073</span>Followers</li>
             <li><span>322</span>Following</li>
@@ -24,9 +30,7 @@
 
           <div class="content">
             <p>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam
-              erat volutpat. Morbi imperdiet, mauris ac auctor dictum, nisl
-              ligula egestas nulla.
+              {{ request.user.artistinformation.bio }}
             </p>
 
             <ul>
@@ -60,4 +64,5 @@
       </div>
     </div>
   </body>
+  
 {% endblock %}
