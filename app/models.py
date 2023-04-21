@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from django.db import models
 
 # Create your models here.
@@ -23,7 +22,7 @@ from django.db import models
 #     description = models.CharField(max_length=200) 
 #     date = models.DateField()
 #     price = price = models.DecimalField(decimal_places=2, max_digits=10)
-=======
+
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -55,4 +54,3 @@ class Post(models.Model):
     
     def __str__(self):
         return self.name
->>>>>>> 1f64f8a2c53c0a6fdbb0b825149c4d84efac9df5

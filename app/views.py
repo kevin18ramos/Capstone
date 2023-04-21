@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *
@@ -21,7 +20,7 @@ def register(request):
 
 def profile(request):
     return render(request, 'app/Profile.html')
-=======
+
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import *
@@ -120,4 +119,3 @@ def findUser(request):
 def logoutUser(request):
     logout(request)
     return redirect('login')
->>>>>>> 1f64f8a2c53c0a6fdbb0b825149c4d84efac9df5
