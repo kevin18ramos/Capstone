@@ -53,9 +53,6 @@ def loginPage(request):
 
         return render(request,'app/Login.html')
 
-
-        
-
 def registerPage(request):
     print("register")
     if request.user.is_authenticated:
