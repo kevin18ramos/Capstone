@@ -17,6 +17,7 @@ def shoppingcart(request):
     return render(request, 'app/Shopping.html')
 
 def profile(request):
+
     return render(request, 'app/Profile.html')
 
 # products page
@@ -51,7 +52,7 @@ def loginPage(request):
                         messages.info(request, 'Username or Password Is Incorrect')
                         return redirect('login')
 
-        return render(request,'app/Login.html')
+    return render(request,'app/Login.html')
 
 def registerPage(request):
     print("register")
