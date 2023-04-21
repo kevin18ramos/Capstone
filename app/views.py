@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -24,6 +25,8 @@ def profile(request):
     return render(request, 'app/Profile.html')
 
 >>>>>>> 3acea72a27b8563b2e4b64fd58437e47afbc32d8
+=======
+>>>>>>> 8cd1913f7cb5cc6261b7dc3b4c584c238045453e
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import *
@@ -78,9 +81,6 @@ def loginPage(request):
                         return redirect('login')
 
         return render(request,'app/Login.html')
-
-
-        
 
 def registerPage(request):
     print("register")

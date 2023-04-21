@@ -1,5 +1,6 @@
 
 from django.db import models
+from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
 # Create your models here.
@@ -15,12 +16,15 @@ class ArtistInformation(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     websiteLink = models.URLField(max_length=200, null=True)
     bio = models.TextField(null=True, blank=True)
+    cart = models.CharField(null=True)
+
+
 
     def __str__(self):
         return self.name
 
 class Post(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     picture = models.ImageField(upload_to='pics/', null = True, blank = True)
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=200) 
