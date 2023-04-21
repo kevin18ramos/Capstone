@@ -12,18 +12,22 @@
     <div>
         <form method="POST" action="">
             {% csrf_token %}
-            <div class = "form-item">
-                <input class = "form-style" type="text" name="username" placeholder="Username..." class="form-control">
-        
-                
-                <input class = "form-style" type="password" name="password" placeholder="Password..." class="form-control" >
-                
+            <div class="form-item">
+                <p class="formLabel">Email</p>
+                <input type="text" name="username" id="email" class="form-style" autocomplete="off"/>
+            </div>
+            <div class="form-item">
+                <p class="formLabel">Password</p>
+                <input type="password" name="password" id="password" class="form-style" />
+                <div class="pw-view"><i class="fa fa-eye"></i></div>
+                <p><a href="#" ><small>Already have an account ?</small></a></p>
+            </div>
           
 
                 <div class="form-item">
                     <p><a href="#" ><small>Forgot Password ?</small></a></p>
                     <p>Don't have an account?</p>
-                    <p class="pull-left"><a href="/Register"><small>Register</small></a></p>
+                    <p class="pull-left"><a href="/register"><small>Register</small></a></p>
                     <input class = "login pull-right" type="submit" value="Login"> 
                     <div class="clear-fix"></div>
                 </div>
@@ -32,9 +36,7 @@
                  {% for message in messages %}
                  <p class = "alert" id="messages">{{message}}</p>
                  {% endfor %}
-            </div>
         </form>
     </div>
-</body>
-</html>
+
 {% endblock%}
