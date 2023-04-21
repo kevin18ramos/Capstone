@@ -1,6 +1,7 @@
 {% extends 'app/Base.html' %}
 {% load static %}
   {% block content%} 
+  <link rel="stylesheet" href= "{% static 'css/Login.css' %}">
 <body>
     <script src="https://code.jquery.com/jquery-2.1.0.min.js" ></script>
     <div id="formWrapper">
@@ -22,7 +23,7 @@
                 <div class="form-item">
                     <p><a href="#" ><small>Forgot Password ?</small></a></p>
                     <p>Don't have an account?</p>
-                    <p class="pull-left"><a href="/register"><small>Register</small></a></p>
+                    <p class="pull-left"><a href="/Register"><small>Register</small></a></p>
                     <input class = "login pull-right" type="submit" value="Login"> 
                     <div class="clear-fix"></div>
                 </div>
