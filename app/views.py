@@ -14,7 +14,10 @@ def home(request):
     return render(request, 'app/Home.html')
 
 def shoppingcart(request):
-    return render(request, 'app/Shopping.html')
+    return render(request, 'app/Checkout.html')
+
+def settingChange(request):
+    return render(request, 'app/settings.html')
 
 def profile(request):
     return render(request, 'app/Profile.html')
@@ -60,10 +63,7 @@ def loginPage(request):
                         messages.info(request, 'Username or Password Is Incorrect')
                         return redirect('login')
 
-        return render(request,'app/Login.html')
-
-
-        
+    return render(request,'app/Login.html')
 
 def registerPage(request):
     print("register")
@@ -99,7 +99,7 @@ def findUser(request):
     print(currentArtist.firstname)
     print(currentArtist.lastname)
     print(currentArtist.created_at)
-    return render(request,'app/profilepage.html')
+    return render(request,'app/Profile.html')
 
 
 def logoutUser(request):

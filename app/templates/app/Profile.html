@@ -1,27 +1,83 @@
 {% extends 'app/Base.html' %}
 {% load static %}
-
   
 {% block content %}
+  <style>
+
+  </style>
   <body>
+    <nav class="upper-nav">
+      <!-- <img src="images/logo.png" class="logo"> -->
+      <ul class="upper-ul">
+         <li class="upper-li"><a class="upper-a" href="#">Home</a></li>
+         <li class="upper-li"><a class="upper-a" href="#">Features</a></li>
+         <li class="upper-li"><a class="upper-a" href="#">About</a></li>
+         <li class="upper-li"><a class="upper-a" href="#">Contact</a></li>
+      </ul>
+      <img src="images/user.png" class="user-pic" onclick="toggleMenu()">
+
+      <div class="sub-menu-wrap" id="subMenu">
+         <div class="sub-menu">
+             <div class="user-info">
+                 <img src="images/user.png" alt="">
+                 <h3>Anna Mcleod</h3>
+             </div>
+             <hr>
+                 <a href="#"class="sub-menu-links">
+                     <img src="images/profile.png">
+                     <p>Edit Profile</p>
+                     <span>></span>
+                 </a>
+
+                 <a href="#"class="sub-menu-links">
+                     <img src="images/setting.png">
+                     <p>Setting & Privacy</p>
+                     <span>></span>
+                 </a>
+
+                 <a href="#"class="sub-menu-links">
+                     <img src="images/help.png">
+                     <p>Help & Support</p>
+                     <span>></span>
+                 </a>
+
+                 <a href="#"class="sub-menu-links">
+                     <img src="images/logout.png">
+                     <p>Logout</p>
+                     <span>></span>
+                 </a>
+                     
+
+         </div>
+      </div>
+ </nav>
+</div>
+
+<script>
+ let subMenu = document.getElementById("subMenu")
+ function toggleMenu(){
+     subMenu.classList.toggle("open-menu");
+ }
+</script>
     <div class="header__wrapper">
       <header></header>
       <div class="cols__container">
         <div class="left__col">
           <div class="img__container">
-            <img src="static/images/me7.png" alt="Anna" />
+
+            {% if request.user.artistinformation.profile_pic %}
+              <img src="{{ request.user.artistinformation.profile_pic.url }}"/>
+            {% else %}
+              <img src="{% static 'images/cabbage.jpg' %}" />
+            {% endif %}
+
             <span></span>
           </div>
           <h2>{{request.user}}</h2>
-         
 
-            
-        
-            <img class="profile-pic" src="{{person1.profile_pic.url}}" >
-          
             <p>UX/UI Designer</p>
             <p>{{ request.user.artistinformation.email }}</p>
-     
+
           <!-- <ul class="about">
             <li><span>4,073</span>Followers</li>
             <li><span>322</span>Following</li>
@@ -53,12 +109,12 @@
           </nav>
 
           <div class="photos">
-            <img src="static/images/img_1.avif" alt="Photo" />
-            <img src="static/images/img_2.avif" alt="Photo" />
-            <img src="static/images/img_3.avif" alt="Photo" />
-            <img src="static/images/img_4.avif" alt="Photo" />
-            <img src="static/images/img_5.avif" alt="Photo" />
-            <img src="static/images/img_6.avif" alt="Photo" />
+            <img  src="{% static 'images/img_1.avif' %}" alt="Photo" />
+            <img  src="{% static 'images/img_2.avif' %}" alt="Photo" />
+            <img  src="{% static 'images/img_3.avif' %}" alt="Photo" />
+            <img  src="{% static 'images/img_4.avif' %}" alt="Photo" />
+            <img  src="{% static 'images/img_5.avif' %}" alt="Photo" />
+     
           </div>
         </div>
       </div>
