@@ -16,13 +16,11 @@ urlpatterns = [
      path("products/add/", views.addProductsPage, name= "addProducts"),
      path("products/", views.productsPage, name= "products"),
      path("profilepage/", views.findUser, name= "findUser"),
-<<<<<<< HEAD
      path("shoppingcart/", views.shoppingcart, name="shoppingcart"),
-     path("Login/Register/", views.register, name="register"),
-=======
+     path("Login/Register/", views.registerPage, name="register"),
      path("shoppingcart", views.shoppingcart, name="shoppingcart"),
      path("Login/Register/", views.registerPage, name="register")
->>>>>>> 0eaaebc27e9fc73f42ca2a21624d7fd3589ac37e
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
  
 

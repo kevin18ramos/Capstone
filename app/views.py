@@ -14,7 +14,7 @@ def home(request):
     return render(request, 'app/Home.html')
 
 def shoppingcart(request):
-    return render(request, 'app/Shopping.html')
+    return render(request, 'app/Checkout.html')
 
 def profile(request):
     return render(request, 'app/Profile.html')
@@ -87,7 +87,7 @@ def findUser(request):
     print(currentArtist.firstname)
     print(currentArtist.lastname)
     print(currentArtist.created_at)
-    return render(request,'app/profilepage.html')
+    return render(request,'app/Profile.html')
 
 
 def logoutUser(request):
