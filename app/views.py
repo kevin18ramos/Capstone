@@ -16,7 +16,7 @@ def home(request):
 def shoppingcart(request):
     return render(request, 'app/Checkout.html')
 
-def s(request):
+def settingChange(request):
     return render(request, 'app/settings.html')
 
 def profile(request):
