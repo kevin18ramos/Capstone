@@ -35,8 +35,24 @@ class Post(models.Model):
     def __str__(self):
         return self.name
     
-class Cart(models.Model):
-    art = models.OneToManyField()
+# class Cart(models.Model):
+#     pass
+# #     art = models.OneToManyField(User)
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
+
+# class add_to_cart(models.model):
+#     pass
+
+#     def __str__(self):
+#         return self.name
+
+# class remove_from_cart(models.model):
+#     pass
+
+#     def __str__(self):
+#         return self.name
+    
+
+
