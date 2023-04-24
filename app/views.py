@@ -17,7 +17,6 @@ def shoppingcart(request):
     return render(request, 'app/Shopping.html')
 
 def profile(request):
-
     return render(request, 'app/Profile.html')
 
 # products page
