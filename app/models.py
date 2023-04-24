@@ -30,6 +30,13 @@ class Post(models.Model):
     description = models.CharField(max_length=200) 
     date = models.DateField()
     price = price = models.DecimalField(decimal_places=2, max_digits=10)
+    # art_id = models.IntegerField(max_length=200)
     
+    def __str__(self):
+        return self.name
+    
+class Cart(models.Model):
+    art = models.OneToManyField()
+
     def __str__(self):
         return self.name
