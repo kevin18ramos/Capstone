@@ -16,6 +16,9 @@ def home(request):
 def shoppingcart(request):
     return render(request, 'app/Shopping.html')
 
+def s(request):
+    return render(request, 'app/settings.html')
+
 def profile(request):
     return render(request, 'app/Profile.html')
 

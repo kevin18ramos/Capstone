@@ -9,7 +9,11 @@
         <div class="left__col">
           <div class="img__container">
 
-            <img src="{% static 'images/cabbage.jpg' %}" />
+            {% if request.user.artistinformation.profile_pic %}
+              <img src="{{ request.user.artistinformation.profile_pic.url }}"/>
+            {% else %}
+              <img src="{% static 'images/cabbage.jpg' %}" />
+            {% endif %}
 
             <span></span>
           </div>
@@ -17,7 +21,7 @@
 
             <p>UX/UI Designer</p>
             <p>{{ request.user.artistinformation.email }}</p>
-          
+
           <!-- <ul class="about">
             <li><span>4,073</span>Followers</li>
             <li><span>322</span>Following</li>
