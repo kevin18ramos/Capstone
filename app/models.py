@@ -29,7 +29,7 @@ class ArtistInformation(models.Model):
 class Post(models.Model):
     id = models.BigAutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    picture = models.ImageField(upload_to='pics/', null = True, blank = True)
+    picture = models.ImageField(upload_to='images/', null = True, blank = True)
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=200) 
     date = models.DateField()
@@ -46,7 +46,7 @@ class Order(models.Model):
     customer_email = models.EmailField()
     stripe_payment_intent = models.CharField(max_length=200)
     has_paid = models.BooleanField(default=False)
-    
+
 class Cart(models.Model):
     art = models.ForeignKey(User, on_delete=models.CASCADE)
     TotalPrice = 0

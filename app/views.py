@@ -1,3 +1,4 @@
+from urllib import request
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import *
@@ -18,7 +19,8 @@ import json
 
 # home view
 def home(request):
-    return render(request, 'app/Home.html')
+    products = Post.objects.all()
+    return render(request, 'app/Home.html', {'products':products})
 
 @login_required(login_url = 'login')
 def shoppingcart(request):
@@ -88,12 +90,8 @@ def settingChange(request):
 def profile(request):
     return render(request, 'app/Profile.html')
 
-<<<<<<< HEAD
 # add products view
-=======
-# products page
 @login_required(login_url = 'login')
->>>>>>> newkevin
 def addProductsPage(request):
     form = PostForm(request.POST)
     currentUser = request.user
@@ -144,10 +142,6 @@ def create_checkout_session(reqeust, id):
         cancel_url=request.build_absolute_uri(reverse('failed')),
     )
 
-    # OrderDetail.objects.create(
-    #     customer_email=email,
-    #     product=product, ......
-    # )
 
     order = Order()
     order.customer_email = request_data['email']
@@ -156,7 +150,6 @@ def create_checkout_session(reqeust, id):
     order.amount = int(product.price * 100)
     order.save()
 
-    # return JsonResponse({'data': checkout_session})
     return JsonResponse({'sessionId': checkout_session.id})
 
 
