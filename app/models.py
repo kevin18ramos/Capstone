@@ -36,9 +36,8 @@ class Post(models.Model):
         return self.name
     
 class Cart(models.Model):
-    Items = models.ManyToManyField(Post)
+    art = models.ForeignKey(User, on_delete=models.CASCADE)
     TotalPrice = 0
-    User = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def add_to_cart(self):
         pass

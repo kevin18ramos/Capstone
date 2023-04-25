@@ -18,13 +18,7 @@ urlpatterns = [
      path("profilepage/", views.findUser, name= "findUser"),
      path("shoppingcart/", views.shoppingcart, name="shoppingcart"),
      path("Login/Register/", views.registerPage, name="register"),
-     path("shoppingcart", views.shoppingcart, name="shoppingcart"),
-<<<<<<< HEAD
      path("Login/Register/", views.registerPage, name="register"),
-=======
-     path("Login/Register/", views.registerPage, name="register")
-
->>>>>>> cbf078214f76245dc82613d23c73e13e60066539
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
  
 
