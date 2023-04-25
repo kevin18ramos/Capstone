@@ -117,21 +117,22 @@
               </li>
             </ul>
           </div>
-          <ol class="image-list grid-view">
+          <ol class="image-list grid-view" >
+            {% for product in products %}
             <li>
-              {% for product in products %}
               <figure>
-                <p>{{product.name}}</p>
                 <img src="{{product.picture.url}}" alt="">
                 <figcaption>
+                  <p>{{product.name}}</p>
                   <p style="display: none;">di</p>
                   <p>{{product.description}}</p>
                   <p>Art by {{product.user}}</p>
                   <p class="product-price">Price: {{ product.price }}</p> 
-                  {% endfor %}
                   <p><a><i class="fa-solid fa-cart-shopping"></i>Add to cart</a></p>                </figcaption>
-              </figure>
-            </li>
+                </figure>
+              </li>
+              {% endfor %}
+
           </ol>
         </div>
       </section>
