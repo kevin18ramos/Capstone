@@ -17,7 +17,14 @@ urlpatterns = [
      path("products/", views.productsPage, name= "products"),
      path("profilepage/", views.findUser, name= "findUser"),
      path("shoppingcart/", views.shoppingcart, name="shoppingcart"),
+<<<<<<< HEAD
      path("settingChange/", views.settingChange, name="settingChange")
+=======
+     path("Login/Register/", views.registerPage, name="register"),
+     path("settingChange/", views.settingChange, name="settingChange"),
+     path("Login/Register/", views.registerPage, name="register")
+
+>>>>>>> 0ccd8cc76054642cf0734a667890e8a20e612b07
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
  
 

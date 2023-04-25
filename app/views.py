@@ -144,12 +144,8 @@ def registerPage(request):
 
 def findUser(request):
     currentUser = request.user
-    currentArtist = ArtistInformation.objects.get(user = currentUser)
+   
     print(currentUser)
-    print(currentArtist)
-    print(currentArtist.firstname)
-    print(currentArtist.lastname)
-    print(currentArtist.created_at)
     return render(request,'app/Profile.html')
 
 

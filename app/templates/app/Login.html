@@ -1,12 +1,24 @@
-{% extends 'app/Base.html' %}
+{% extends 'app/Nav-Base.html' %}
 {% load static %}
   {% block content%} 
 <body>
+    <div class="hero">
+        <nav>
+             <!-- <img src="images/logo.png" class="logo"> -->
+             <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+             </ul>
+
+        </nav>
+    </div>
     <script src="https://code.jquery.com/jquery-2.1.0.min.js" ></script>
     <div id="formWrapper">
     <div id="form">
     <div class="logo">
-        <!-- logo  has to be plased 200px-500px this can fix any a=image i think and if not to can crop it to be Z-->
+        <!-- logo  has to be plased 200px-500px this can fix any image i think and if not-->
     </div>
     <div>
         <form method="POST" action="">
