@@ -34,6 +34,7 @@ class Post(models.Model):
     description = models.CharField(max_length=200) 
     date = models.DateField()
     price = price = models.DecimalField(decimal_places=2, max_digits=10)
+    # art_id = models.IntegerField(max_length=200)
     
     def __str__(self):
         return self.name
@@ -45,4 +46,18 @@ class Order(models.Model):
     customer_email = models.EmailField()
     stripe_payment_intent = models.CharField(max_length=200)
     has_paid = models.BooleanField(default=False)
+    
+class Cart(models.Model):
+    art = models.ForeignKey(User, on_delete=models.CASCADE)
+    TotalPrice = 0
+
+    def add_to_cart(self):
+        pass
+
+    def remove_from_cart(self):
+        pass
+
+    def __str__(self):
+        return self.art
+
 

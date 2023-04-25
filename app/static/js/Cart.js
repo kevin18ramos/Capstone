@@ -1,7 +1,4 @@
-// (document).ready(function() {
-//   $('#list').click(function(event){event.preventDefault();$('#products .item').addClass('list-group-item');});
-//   $('#grid').click(function(event){event.preventDefault();$('#products .item').removeClass('list-group-item');$('#products .item').addClass('grid-group-item');});
-// });// VARIABLES
+
 const rangeInput = document.querySelector('input[type = "range"]');
 const imageList = document.querySelector(".image-list");
 const searchInput = document.querySelector('input[type="search"]');
