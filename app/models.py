@@ -37,7 +37,7 @@ class Post(models.Model):
     
 class Cart(models.Model):
     art = models.ForeignKey(User, on_delete=models.CASCADE)
-    TotalPrice = 0
+    totalprice = models.IntegerField()
 
     def add_to_cart(self):
         pass
