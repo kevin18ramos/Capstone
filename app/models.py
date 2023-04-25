@@ -27,6 +27,7 @@ class ArtistInformation(models.Model):
         return self.name
 
 class Post(models.Model):
+    id = models.BigAutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     picture = models.ImageField(upload_to='pics/', null = True, blank = True)
     name = models.CharField(max_length=200)
@@ -36,4 +37,12 @@ class Post(models.Model):
     
     def __str__(self):
         return self.name
+    
+class Order(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    product = models.ForeignKey(to=Post, on_delete=models.PROTECT)
+    amount = models.IntegerField()
+    customer_email = models.EmailField()
+    stripe_payment_intent = models.CharField(max_length=200)
+    has_paid = models.BooleanField(default=False)
 

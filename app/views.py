@@ -7,6 +7,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from .forms import PostForm
 from .forms import *
+from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
+from django.http.response import HttpResponseNotFound, JsonResponse
+from django.shortcuts import get_object_or_404, render
+from django.urls import reverse, reverse_lazy
+import stripe
+import json
 #from .decorators import *
 
 # home view
@@ -22,7 +29,7 @@ def settingChange(request):
 def profile(request):
     return render(request, 'app/Profile.html')
 
-# products page
+# add products view
 def addProductsPage(request):
     form = PostForm(request.POST)
     currentUser = request.user
@@ -35,15 +42,58 @@ def addProductsPage(request):
             post.save() # Save to the database
             messages.info(request, 'Product Posted')
             return redirect('products')
-    return render(request, 'app/AddProducts.html', {'post_form':form})
+    return render(request, 'app/AddProducts.html', {'post_form':form, 'context':settings.STRIPE_PUBLISHABLE_KEY})
 
+# view products view
 def productsPage(request):
     products = Post.objects.all()
     return render(request, 'app/Products.html', {'products':products})
 
-
 #checkout
+@csrf_exempt
+def create_checkout_session(reqeust, id):
+    request_data = json.loads(request.body)
+    product = get_object_or_404(Post, pk=id)
 
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    checkout_session = stripe.checkout.Session.create(
+        # Customer Email is optional,
+        # It is not safe to accept email directly from the client side
+        customer_email = request_data['email'],
+        payment_method_types=['card'],
+        line_items=[
+            {
+                'price_data': {
+                    'currency': 'usd',
+                    'product_data': {
+                    'name': product.name,
+                    },
+                    'unit_amount': int(product.price * 100),
+                },
+                'quantity': 1,
+            }
+        ],
+        mode='payment',
+        success_url=request.build_absolute_uri(
+            reverse('success')
+        ) + "?session_id={CHECKOUT_SESSION_ID}",
+        cancel_url=request.build_absolute_uri(reverse('failed')),
+    )
+
+    # OrderDetail.objects.create(
+    #     customer_email=email,
+    #     product=product, ......
+    # )
+
+    order = Order()
+    order.customer_email = request_data['email']
+    order.product = product
+    order.stripe_payment_intent = checkout_session['payment_intent']
+    order.amount = int(product.price * 100)
+    order.save()
+
+    # return JsonResponse({'data': checkout_session})
+    return JsonResponse({'sessionId': checkout_session.id})
 
 
 #login register and logout
