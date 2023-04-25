@@ -35,24 +35,18 @@ class Post(models.Model):
     def __str__(self):
         return self.name
     
-# class Cart(models.Model):
-#     pass
-# #     art = models.OneToManyField(User)
+class Cart(models.Model):
+    Items = models.ManyToManyField(Post)
+    TotalPrice = 0
+    User = models.ForeignKey(User, on_delete=models.CASCADE)
 
-#     def __str__(self):
-#         return self.name
+    def add_to_cart(self):
+        pass
 
-# class add_to_cart(models.model):
-#     pass
+    def remove_from_cart(self):
+        pass
 
-#     def __str__(self):
-#         return self.name
-
-# class remove_from_cart(models.model):
-#     pass
-
-#     def __str__(self):
-#         return self.name
-    
+    def __str__(self):
+        return self.art
 
 
