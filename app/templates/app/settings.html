@@ -11,13 +11,18 @@
 				<div class="profile-tab-nav border-right">
 					<div class="p-4">
 						<div class="img-circle text-center mb-3">
-							<img  src="{% static 'images/me7.png' %}" alt="Image" class="shadow">
+						
+							{% if request.user.artistinformation.profile_pic %}
+							<img src="{{ request.user.artistinformation.profile_pic.url }}" alt="Image" class="shadow"/>
+						  {% else %}
+							<img src="{% static 'images/cabbage.jpg' %}" alt="Image" class="shadow"/>
+						  {% endif %}
 						</div>
-						<h4 class="text-center">Anna</h4>
+						<h4 class="text-center">{{request.user.artistinformation.name}}</h4>
 					</div>
 					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 						<a class="nav-link active" id="account-tab" data-toggle="pill" href="#account" role="tab" aria-controls="account" aria-selected="true">
-							<i class="fa fa-home text-center mr-1"></i> 
+							<i class="fa fa-home text-center mr-1"></i>   <!-- Displaying an icon using Font Awesome -->
 							Account
 						</a>
 						<a class="nav-link" id="password-tab" data-toggle="pill" href="#password" role="tab" aria-controls="password" aria-selected="false">
@@ -39,49 +44,41 @@
 					</div>
 				</div>
 				<div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
-					<div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+
+					<form method="POST" action="" class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+					{% csrf_token %}
+					<div>
 						<h3 class="mb-4">Account Settings</h3>
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 								  	<label>First Name</label>
-								  	<input type="text" class="form-control" value="anna">
+								  	<input type="text" class="form-control" name = "firstname" placeholder={{request.user.artistinformation.firstname}}>   <!-- Displaying the user's first name -->
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 								  	<label>Last Name</label>
-								  	<input type="text" class="form-control" value="mcloed">
+								  	<input type="text" class="form-control" name = "lastname" placeholder={{request.user.artistinformation.lastname}}>   <!-- Displaying the user's last name -->
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 								  	<label>Email</label>
-								  	<input type="text" class="form-control" value="anna@gmail.com">
+								  	<input type="text" class="form-control" name = "email" placeholder={{request.user.artistinformation.email}}>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-								  	<label>Phone number</label>
-								  	<input type="text" class="form-control" value="+91 9876543215">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-								  	<label>Company</label>
-								  	<input type="text" class="form-control" value="base">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-								  	<label>Designation</label>
-								  	<input type="text" class="form-control" value="UI Developer">
+								  	<label>Artist Name</label>
+								  	<input type="text" class="form-control" name = "name" placeholder={{request.user.artistinformation.name}}>
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
 								  	<label>Bio</label>
-									<textarea class="form-control" rows="4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore vero enim error similique quia numquam ullam corporis officia odio repellendus aperiam consequatur laudantium porro voluptatibus, itaque laboriosam veritatis voluptatum distinctio!</textarea>
+									<textarea class="form-control" name = "bio" rows="4">{{request.user.artistinformation.bio}}</textarea>
+									
 								</div>
 							</div>
 						</div>
@@ -90,13 +87,18 @@
 							<button class="btn btn-light">Cancel</button>
 						</div>
 					</div>
-					<div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+					</form>
+
+
+					<form method="POST" class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab" action = "">
+					{% csrf_token %}
+					<div >
 						<h3 class="mb-4">Password Settings</h3>
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 								  	<label>Old password</label>
-								  	<input type="password" class="form-control">
+								  	<input id = "original_password" name="original_password" type="password" class="form-control">
 								</div>
 							</div>
 						</div>
@@ -104,21 +106,23 @@
 							<div class="col-md-6">
 								<div class="form-group">
 								  	<label>New password</label>
-								  	<input type="password" class="form-control">
+								  	<input id = "password_x1" name="password_x1" type="password" class="form-control">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 								  	<label>Confirm new password</label>
-								  	<input type="password" class="form-control">
+								  	<input id = "password_x2" type="password" name="password_x2" class="form-control">
 								</div>
 							</div>
 						</div>
 						<div>
-							<button class="btn btn-primary">Update</button>
-							<button class="btn btn-light">Cancel</button>
+							<button class="btn btn-primary" type="submit">Update</button>
+							<button class="btn btn-light" >Cancel</button>
 						</div>
 					</div>
+					</form>
+					
 					<div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
 						<h3 class="mb-4">Security Settings</h3>
 						<div class="row">

@@ -13,13 +13,76 @@ from .forms import *
 def home(request):
     return render(request, 'app/Home.html')
 
+@login_required(login_url = 'login')
 def shoppingcart(request):
     return render(request, 'app/Checkout.html')
 
+@login_required(login_url = 'login')
+def settingChange(request):
+    CurrentUser = request.user
+    CurrentArtist = ArtistInformation.objects.get(user = CurrentUser)
+    if request.method == 'POST':
+                original_password = request.POST.get('original_password')
+                password_x1 = request.POST.get('password_x1')
+                password_x2 = request.POST.get('password_x2')
+                firstname = request.POST.get('firstname')
+                lastname = request.POST.get('lastname')
+                email = request.POST.get('email')
+                name = request.POST.get('name')
+                bio = request.POST.get('bio')
+                if original_password != None:
+                        if CurrentUser.check_password(original_password) == True:
+                            if password_x1 == password_x2:
+                                CurrentUser.set_password(password_x1)
+                                CurrentUser.save()     
+                                messages.info(request, 'Password is updated.')
+                                return redirect('home')
+                            else:
+                                print("password not mathc")
+                                messages.info(request, 'Passwords do not match.')
+                                return redirect('home')
+                        else:
+                                print("password not mathc og")
+                                messages.info(request, 'Passwords is incorrect.')
+                                return redirect('home')
+                elif name != CurrentUser.username and name != "" :
+                    CurrentUser.username = name
+                    CurrentUser.save()
+                    CurrentArtist.name = name
+                    CurrentArtist.save()
+                    messages.info(request, 'Username has been changed.')
+                    return redirect('settingChange')
+                elif firstname != "" and firstname != CurrentArtist.firstname:
+                    CurrentArtist.firstname = firstname
+                    CurrentArtist.save()
+                    messages.info(request, 'Firstname has been changed.')
+                    return redirect('settingChange')
+                elif lastname != "" and lastname != CurrentArtist.lastname:
+                    CurrentArtist.lastname = lastname
+                    CurrentArtist.save()
+                    messages.info(request, 'Firstname has been changed.')
+                    return redirect('settingChange')
+                elif email != "" and email != CurrentArtist.email:
+                    CurrentArtist.email = email
+                    CurrentArtist.save()
+                    messages.info(request, 'Firstname has been changed.')
+                    return redirect('settingChange')
+                elif bio != "" and email != CurrentArtist.bio:
+                    CurrentArtist.bio = bio
+                    CurrentArtist.save()
+                    messages.info(request, 'Firstname has been changed.')
+                    return redirect('settingChange')
+ 
+        
+    return render(request, 'app/settings.html')
+
+
+@login_required(login_url = 'login')
 def profile(request):
     return render(request, 'app/Profile.html')
 
 # products page
+@login_required(login_url = 'login')
 def addProductsPage(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
