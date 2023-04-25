@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'app/Base.html' %}
 {% comment %} {% load static %}
   
@@ -411,10 +412,19 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   
   </body> {% endcomment %} 
+=======
+{% extends 'app/Nav-Base.html' %}
+>>>>>>> cbf078214f76245dc82613d23c73e13e60066539
 
 {% load static %}
+
+{% block content%} 
+
   
+<<<<<<< HEAD
 {% block content %}
+=======
+>>>>>>> cbf078214f76245dc82613d23c73e13e60066539
 <body>
 
 
@@ -460,9 +470,10 @@
             </div>
   
             <form action="#">
-  
+                  <!-- saw the login was a form so chose to make its one a well hope it helps -->
               <div class="cardholder-name">
                 <label for="cardholder-name" class="label-default">Cardholder name</label>
+                
                 <input type="text" name="cardholder-name" id="cardholder-name" class="input-default">
               </div>
   
@@ -512,14 +523,14 @@
   
           <div class="cart-item-box">
   
-            <h2 class="section-heading">Order Summery</h2>
+            <h2 class="section-heading">Order Summary</h2>
   
             <div class="product-card">
   
               <div class="card">
   
                 <div class="img-box">
-                  <img src="./images/img_1.avif" alt="Green tomatoes" width="80px" class="product-img">
+                  <img  src="{% static 'images/img_1.avif' %}" alt="Green" width="80px" class="product-img">
                 </div>
   
                 <div class="detail">
@@ -561,7 +572,7 @@
               <div class="card">
   
                 <div class="img-box">
-                  <img src="./images/img_2.avif" alt="Cabbage" width="80px" class="product-img">
+                  <img  src="{% static 'images/img_2.avif' %}" alt="Cabbage" width="80px" class="product-img">
                 </div>
   
                 <div class="detail">
@@ -602,7 +613,7 @@
               <div class="card">
   
                 <div class="img-box">
-                  <img src="./images/img_3.avif" alt="Cabbage" width="80px" class="product-img">
+                  <img src="{% static 'images/img_3.avif' %}" alt="image" width="80px" class="product-img">
                 </div>
   
                 <div class="detail">
@@ -638,127 +649,7 @@
               </div>
   
             </div>
-            <div class="product-card">
-  
-              <div class="card">
-  
-                <div class="img-box">
-                  <img src="./images/img_4.avif" alt="Cabbage" width="80px" class="product-img">
-                </div>
-  
-                <div class="detail">
-  
-                  <h4 class="product-name">Art 4</h4>
-  
-                  <div class="wrapper">
-  
-                    <div class="product-qty">
-                      <button id="decrement">
-                        <ion-icon name="remove-outline"></ion-icon>
-                      </button>
-  
-                      <span id="quantity">1</span>
-  
-                      <button id="increment">
-                        <ion-icon name="add-outline"></ion-icon>
-                      </button>
-                    </div>
-  
-                    <div class="price">
-                      $ <span id="price">0.80</span>
-                    </div>
-  
-                  </div>
-  
-                </div>
-  
-                <button class="product-close-btn">
-                  <ion-icon name="close-outline"></ion-icon>
-                </button>
-  
-              </div>
-  
-            </div>
-            <div class="product-card">
-  
-              <div class="card">
-  
-                <div class="img-box">
-                  <img src="./images/img_5.avif" alt="Cabbage" width="80px" class="product-img">
-                </div>
-  
-                <div class="detail">
-  
-                  <h4 class="product-name">Art 5</h4>
-  
-                  <div class="wrapper">
-  
-                    <div class="product-qty">
-                      <button id="decrement">
-                        <ion-icon name="remove-outline"></ion-icon>
-                      </button>
-  
-                      <span id="quantity">1</span>
-  
-                      <button id="increment">
-                        <ion-icon name="add-outline"></ion-icon>
-                      </button>
-                    </div>
-  
-                    <div class="price">
-                      $ <span id="price">0.80</span>
-                    </div>
-  
-                  </div>
-  
-                </div>
-  
-                <button class="product-close-btn">
-                  <ion-icon name="close-outline"></ion-icon>
-                </button>
-  
-              </div>
-  
-            </div>
-            <div class="product-card">
-  
-              <div class="card">
-  
-                <div class="img-box">
-                  <img src="./images/img_6.avif" alt="Cabbage" width="80px" class="product-img">
-                </div>
-  
-                <div class="detail">
-  
-                  <h4 class="product-name">Art 6</h4>
-  
-                  <div class="wrapper">
-  
-                    <div class="product-qty">
-                      <button id="decrement">
-                        <ion-icon name="remove-outline"></ion-icon>
-                      </button>
-  
-                      <span id="quantity">1</span>
-  
-                      <button id="increment">
-                        <ion-icon name="add-outline"></ion-icon>
-                      </button>
-                    </div>
-  
-                    <div class="price">
-                      $ <span id="price">0.80</span>
-                    </div>
-  
-                  </div>
-  
-                </div>
-  
-                <button class="product-close-btn">
-                  <ion-icon name="close-outline"></ion-icon>
-                </button>
-  
-              </div>
+          
   
             </div>
           </div>
@@ -815,7 +706,7 @@
     <!--
       - custom js link
     -->
-    <script src="static/js/checkout.js"></script>
+ 
   
     <!--
       - ionicon link
@@ -824,4 +715,10 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   
   </body>
+<<<<<<< HEAD
 {% endblock %} 
+=======
+
+
+  {% endblock %}
+>>>>>>> cbf078214f76245dc82613d23c73e13e60066539

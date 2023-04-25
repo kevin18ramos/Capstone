@@ -1,64 +1,219 @@
-{% extends 'app/Base.html' %}
+{% extends 'app/Nav-Base.html' %}
 {% load static %}
   
 {% block content %}
+  <style>
+    *{
+    margin: 0;
+    padding: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.hero{
+    width: 100%;
+    min-height: 100vh;
+    background: #eceaff;
+    color: #525252;
+}
+
+nav{
+    background: #1a1a1a;
+    width: 100%;
+    padding: 10px 10% ;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+
+.logo{
+    width: 120px;
+}
+.user-pic{
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 30px;
+}
+
+nav ul{
+   width: 100%;
+   text-align: right;
+}
+
+nav ul li{
+    display: inline-block;
+    list-style: none;
+    margin: 10px 20px;
+}
+
+nav ul li a{
+    color: #fff;
+    text-decoration: none;
+}
+
+.sub-menu-wrap{
+    position: absolute;
+    top: 100%;
+    right: 10%;
+    width: 320px;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.5s;
+}
+
+.sub-menu-wrap.open-menu{
+    max-height: 400px;
+}
+
+.sub-menu{
+    background: #fff;
+    padding: 20px;
+    margin: 10px;
+}
+
+.user-info{
+   display: flex;
+   align-items: center;
+}
+
+.user-info h3{
+    font-weight: 500;
+}
+
+.user-info img{
+    width: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.sub-menu hr{
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background: #ccc;
+    margin: 15px 0 10px;
+}
+
+
+.sub-menu-links{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #767474;
+    margin: 12px 0;
+}
+
+.sub-menu-links p{
+    width: 100%;
+}
+
+.sub-menu-links img{
+    width: 40px;
+    background: #e5e5e5;
+    border-radius: 50%;
+    padding: 8px;
+    margin-right: 15px;
+}
+
+.sub-menu-links span{
+    font-size: 22px;
+    transition: transform 0.5s;
+}
+.sub-menu-links:hover span{
+    transform: translateX(5px);
+}
+
+.sub-menu-links:hover p{
+    color: rgb(13, 12, 12);
+}
+
+  </style>
   <body>
-    <div class="header__wrapper">
-      <header></header>
-      <div class="cols__container">
-        <div class="left__col">
-          <div class="img__container">
+    <div class="hero">
+        <nav>
+             <!-- <img src="images/logo.png" class="logo"> -->
+             <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+             </ul>
+             <img src="images/user.png" class="user-pic" onclick="toggleMenu()">
 
-            <img src="{% static 'images/cabbage.jpg' %}" />
+             <div class="sub-menu-wrap" id="subMenu">
+                <div class="sub-menu">
+                    <div class="user-info">
+                        <img src="images/user.png" alt="">
+                        <h3>Anna Mcleod</h3>
+                    </div>
+                    <hr>
+                        <a href="#"class="sub-menu-links">
+                            <img src="images/profile.png">
+                            <p>Edit Profile</p>
+                            <span>></span>
+                        </a>
 
-            <span></span>
-          </div>
-          <h2>{{request.user}}</h2>
+                        <a href="#"class="sub-menu-links">
+                            <img src="images/setting.png">
+                            <p>Setting & Privacy</p>
+                            <span>></span>
+                        </a>
 
-            <p>UX/UI Designer</p>
-            <p>{{ request.user.artistinformation.email }}</p>
-          
-          <!-- <ul class="about">
-            <li><span>4,073</span>Followers</li>
-            <li><span>322</span>Following</li>
-            <li><span>200,543</span>Attraction</li>
-          </ul> -->
+                        <a href="#"class="sub-menu-links">
+                            <img src="images/help.png">
+                            <p>Help & Support</p>
+                            <span>></span>
+                        </a>
 
-          <div class="content">
-            <p>
-              {{ request.user.artistinformation.bio }}
-            </p>
+                        <a href="#"class="sub-menu-links">
+                            <img src="images/logout.png">
+                            <p>Logout</p>
+                            <span>></span>
+                        </a>
+                            
 
-            <ul>
-              <li><i class="fab fa-twitter"></i></li>
-              <i class="fab fa-pinterest"></i>
-              <i class="fab fa-facebook"></i>
-              <i class="fab fa-dribbble"></i>
-            </ul>
-          </div>
-        </div>
-        <div class="right__col">
-          <nav>
-            <ul>
-              <li><a href="">photos</a></li>
-              <!-- <li><a href="">galleries</a></li>
-              <li><a href="">groups</a></li>
-              <li><a href="">about</a></li> -->
-            </ul>
-            <button>Buy Art</button>
-          </nav>
-
-          <div class="photos">
-            <img src="static/images/img_2.avif" alt="Photo" />
-            <img src="static/images/img_2.avif" alt="Photo" />
-            <img src="static/images/img_3.avif" alt="Photo" />
-            <img src="static/images/img_4.avif" alt="Photo" />
-            <img src="static/images/img_5.avif" alt="Photo" />
-            <img src="static/images/img_6.avif" alt="Photo" />
-          </div>
-        </div>
-      </div>
+                </div>
+             </div>
+        </nav>
+        
+        <div class="content-profile-page">
+            <div class="profile-user-page card">
+               <div class="img-user-profile">
+                 <img class="profile-bgHome" src="">
+                 <img class="art market" src=""alt="tofflightsun"/>
+                    </div>
+                   <button>Buy art</button>
+                   <div class="user-profile-data">
+                     <h1>{{request.user}}</h1>
+                     <p>{{ request.user.artistinformation.email }}</p>
+                   </div> 
+                   <div class="description-profile">digitel | painting | blender | <a href="https://basecamelinks" title="link"><strong></strong></a> | latin tex fill</div>
+                   <div class="description-profile"> discription</div>
+                <ul class="data-user">
+                 <li><a><strong>facebook</strong><span>link</span></a></li>
+                 <li><a><strong>Instagram</strong><span>link</span></a></li>
+                 <li><a><strong>twiter</strong><span>link</span></a></li>
+                </ul>
+               </div>
+             </div>
+         
     </div>
-  </body>
-  
+
+    <script>
+        let subMenu = document.getElementById("subMenu")
+        function toggleMenu(){
+            subMenu.classList.toggle("open-menu");
+        }
+    </script>
+
+   
+     <footer>
+        
+     </footer>
+    
+</body>
 {% endblock %}
+

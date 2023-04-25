@@ -87,7 +87,7 @@ def findUser(request):
     print(currentArtist.firstname)
     print(currentArtist.lastname)
     print(currentArtist.created_at)
-    return render(request,'app/profilepage.html')
+    return render(request,'app/Profile.html')
 
 
 def logoutUser(request):

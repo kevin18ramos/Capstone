@@ -1,6 +1,6 @@
 'use strict';
 
-// all initial elements
+// all iniial elments
 const payAmountBtn = document.querySelector('#payAmount');
 const decrementBtn = document.querySelectorAll('#decrement');
 const quantityElem = document.querySelectorAll('#quantity');
@@ -19,11 +19,11 @@ for (let i = 0; i < incrementBtn.length; i++) {
 
     let increment = Number(this.previousElementSibling.textContent);
 
-    // plus `increment` variable value by 1
+    // plus inc variable value by 1
     increment++;
 
-    // show the `increment` variable value on `quantity` element
-    // based on clicked `increment` button sibling.
+    // show the inc varble value on quanty element
+    // on clicked inc button sibling.
     this.previousElementSibling.textContent = increment;
 
     totalCalc();
@@ -47,35 +47,33 @@ for (let i = 0; i < incrementBtn.length; i++) {
 
 
 
-// function: for calculating total amount of product price
 const totalCalc = function () {
 
-  // declare all initial variable
+
   const tax = 0.05;
   let subtotal = 0;
   let totalTax = 0;
   let total = 0;
 
-  // loop: for calculating `subtotal` value from every single product
+  
   for (let i = 0; i < quantityElem.length; i++) {
 
     subtotal += Number(quantityElem[i].textContent) * Number(priceElem[i].textContent);
 
   }
 
-  // show the `subtotal` variable value on `subtotalElem` element
+
   subtotalElem.textContent = subtotal.toFixed(2);
 
-  // calculating the `totalTax`
+
   totalTax = subtotal * tax;
 
-  // show the `totalTax` on `taxElem` element
+
   taxElem.textContent = totalTax.toFixed(2);
 
-  // calcualting the `total`
+  
   total = subtotal + totalTax;
 
-  // show the `total` variable value on `totalElem` & `payAmountBtn` element
   totalElem.textContent = total.toFixed(2);
   payAmountBtn.textContent = total.toFixed(2);
 
