@@ -16,6 +16,9 @@ def home(request):
 def shoppingcart(request):
     return render(request, 'app/Checkout.html')
 
+def settingChange(request):
+    return render(request, 'app/settings.html')
+
 def profile(request):
     return render(request, 'app/Profile.html')
 
@@ -81,12 +84,8 @@ def registerPage(request):
 
 def findUser(request):
     currentUser = request.user
-    currentArtist = ArtistInformation.objects.get(user = currentUser)
+   
     print(currentUser)
-    print(currentArtist)
-    print(currentArtist.firstname)
-    print(currentArtist.lastname)
-    print(currentArtist.created_at)
     return render(request,'app/Profile.html')
 
 
