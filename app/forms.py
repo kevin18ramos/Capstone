@@ -16,3 +16,8 @@ class PostForm(ModelForm):
     class Meta:
         model = Post
         fields = ["picture","name",'description',"date","price"]
+
+class PhotoForm(ModelForm):
+    class Meta:
+        model = ArtistInformation
+        fields = ["profile_pic"]

@@ -154,31 +154,32 @@
 							<button class="btn btn-light">Cancel</button>
 						</div>
 					</div>
-					<div class="tab-pane fade" id="application" role="tabpanel" aria-labelledby="application-tab">
+
+					<form method="POST"  class="tab-pane fade" id="application" role="tabpanel" aria-labelledby="application-tab" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div>
 						<h3 class="mb-4">Images Settings</h3>
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<div class="form-check">
-										<form action="/action_page.php">
+										
 											<p>Profile Image</p>
-											<input type="file" id="myFile" name="filename">
-										  </form>
+											<input type="file" id="myFile" name="profilepic">
+										
 									</div>
-									<div class="form-check">
-										<p>Art Image</p>
-										<form action="/action_page.php">
-											<input type="file" id="myFile" name="filename">
-										  </form>
-									</div>
+						
 								</div>
 							</div>
 						</div>
 						<div>
-							<button class="btn btn-primary">Update</button>
+							<button class="btn btn-primary" type="submit">Update</button>
 							<button class="btn btn-light">Cancel</button>
 						</div>
 					</div>
+					</form>
+
+
 					<div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="notification-tab">
 						<h3 class="mb-4">Notification Settings</h3>
 						<div class="form-group">
