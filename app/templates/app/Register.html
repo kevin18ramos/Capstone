@@ -2,10 +2,9 @@
 {% load static %}
   
 {% block content %}
-
+<!-- /* dont mess with this this its not working i have to link bootstraplink that i have not finshed Z */ -->
 
 <style>
-  /* dont mess with this this its not working i have to link bootstraplink that i have not finshed Z */
   html {line-height: 1.15; -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; overflow-x: hidden; scroll-behavior: smooth;}
 ::-webkit-scrollbar {width: 8px;}
 ::-webkit-scrollbar-track {margin: 4px;}
@@ -89,8 +88,143 @@ input[type="radio"]:checked, input[type="checkbox"]:checked {background-color: v
   }
 }
 
+
+
+
+
+.hero{
+  width: 100%;
+  min-height: 100vh;
+  background: #eceaff;
+  color: #525252;
+}
+
+nav{
+  background: #1a1a1a;
+  width: 100%;
+  padding: 10px 10% ;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+
+.logo{
+  width: 120px;
+}
+.user-pic{
+  width: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 30px;
+}
+
+nav ul{
+ width: 100%;
+ text-align: center;
+}
+
+nav ul li{
+  display: inline-block;
+  list-style: none;
+  margin: 10px 20px;
+}
+
+nav ul li a{
+  color: #fff;
+  text-decoration: none;
+}
+
+.sub-menu-wrap{
+  position: absolute;
+  top: 100%;
+  right: 10%;
+  width: 320px;
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height 0.5s;
+}
+
+.sub-menu-wrap.open-menu{
+  max-height: 400px;
+}
+
+.sub-menu{
+  background: #fff;
+  padding: 20px;
+  margin: 10px;
+}
+
+.user-info{
+ display: flex;
+ align-items: center;
+}
+
+.user-info h3{
+  font-weight: 500;
+}
+
+.user-info img{
+  width: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.sub-menu hr{
+  border: 0;
+  height: 1px;
+  width: 100%;
+  background: #ccc;
+  margin: 15px 0 10px;
+}
+
+
+.sub-menu-links{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #767474;
+  margin: 12px 0;
+}
+
+.sub-menu-links p{
+  width: 100%;
+}
+
+.sub-menu-links img{
+  width: 40px;
+  background: #e5e5e5;
+  border-radius: 50%;
+  padding: 8px;
+  margin-right: 15px;
+}
+
+.sub-menu-links span{
+  font-size: 22px;
+  transition: transform 0.5s;
+}
+.sub-menu-links:hover span{
+  transform: translateX(5px);
+}
+
+.sub-menu-links:hover p{
+  color: rgb(13, 12, 12);
+}
 </style>
 <body>
+  <div class="hero">
+    <nav>
+         <!-- <img src="images/logo.png" class="logo"> -->
+         <ul>
+            <li><a href="http://127.0.0.1:8000/ ">Home</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Tin.Merch</a></li>
+            <li><a href="http://127.0.0.1:8000/Login/">Login</a></li>
+         </ul>
+
+    </nav>
+
     <main>
       <form id="register" method="post" enctype="multipart/form-data">
       <h2 id="register__title">Create your profile</h2>
@@ -114,20 +248,43 @@ input[type="radio"]:checked, input[type="checkbox"]:checked {background-color: v
         <label for="password">Password<i class="fas fa-asterisk"></i></label>
         <input id="password" type="password" minLength="6" required placeholder="Password">
       </div>
+      <div class="register__box conteiner__check">
+        <label for="genders">Gender</label>
+        <ul class="conteiner__check">
+          <li>
+            <input id="female" name="gender" type="radio" value="Female">
+            <label for="female">Female</label>
+          </li>
+          <li>
+            <input id="male" name="gender" type="radio" value="Male">
+            <label for="male">Male</label>
+          </li>
+          <li>
+            <input id="other" name="gender" type="radio" value="Other">
+            <label for="other">Other</label>
+          </li>
+        </ul>
+      </div>
+      <div class="register__box">
+        <label for="age">Age</label>
+        <input id="age" type="date" minLength="2">
+      </div>
       <div class="register__box">
         <label for="image">Choose profile picture</label>
         <input type="file" id="image" name="image" accept="image/*">
         <div id="preview">
             <p>No files currently selected for upload</p>
         </div>
-      </div>
-      <p><a href="http://127.0.0.1:8000/Login/" ><small>Already have an account ?</small></a></p>
+      </div>       
+       <p class="pull-left"><a href="http://127.0.0.1:8000/Login/"><small>Already have an Account?</small></a></p>
+
       <input type="button" value="Create profile" id="register__btn">
       </form>
       <div id="overlay" class="hidden">
         <div id="avatar"></div>
       </div>
     </main>
+  </div>
     <script crossorigin='anonymous' src='https://kit.fontawesome.com/85274771d6.js'></script>
   </body>
 
