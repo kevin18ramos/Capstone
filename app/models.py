@@ -44,6 +44,7 @@ class Order(models.Model):
     customer_email = models.EmailField()
     stripe_payment_intent = models.CharField(max_length=200)
     has_paid = models.BooleanField(default=False)
+    
 class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # art = models.ForeignKey(User, on_delete=models.CASCADE)
