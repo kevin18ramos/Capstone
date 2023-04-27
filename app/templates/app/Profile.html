@@ -1,4 +1,4 @@
-{% extends 'app/profile-Base.html' %}
+{% extends 'app/pfi.html' %}
 {% load static %}
   
 {% block content %}
@@ -23,9 +23,9 @@
                <div class="img-user-profile">
                  <img class="profile-bgHome" src="">
                  {% if request.user.artistinformation.profile_pic %}
-                 <img  src="{{ request.user.artistinformation.profile_pic.url }}"/>
+                 <img  class="avatar" style="height: 149px; width: 190px;" src="{{ request.user.artistinformation.profile_pic.url }}"/>
                {% else %}
-                 <img class="avatar" alt="jtojr" style="height: 100px; width: 100px; " src="{% static 'images/cabbage.jpg' %}" />
+                 <img  class="avatar" alt="jtojr" style="height: 149px; width: 190px;" src="{% static 'images/cabbage.jpg' %}" />
                {% endif %}
  
                     </div>

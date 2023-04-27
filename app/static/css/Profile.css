@@ -10,6 +10,11 @@ a {
   width: 44.23em;
 }
 
+
+img{{
+  height: 100px;
+}}
+
 .card {
   background: #fff;
   border-radius: 0.3rem;
