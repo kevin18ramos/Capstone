@@ -29,10 +29,7 @@
 							<i class="fa fa-key text-center mr-1"></i> 
 							Password
 						</a>
-						<a class="nav-link" id="security-tab" data-toggle="pill" href="#security" role="tab" aria-controls="security" aria-selected="false">
-							<i class="fa fa-user text-center mr-1"></i> 
-							Security
-						</a>
+						
 						<a class="nav-link" id="application-tab" data-toggle="pill" href="#application" role="tab" aria-controls="application" aria-selected="false">
 							<i class="fa fa-tv text-center mr-1"></i> 
 							Images
@@ -40,6 +37,12 @@
 						<a class="nav-link" id="notification-tab" data-toggle="pill" href="#notification" role="tab" aria-controls="notification" aria-selected="false">
 							<i class="fa fa-bell text-center mr-1"></i> 
 							Notification
+						</a>
+						<a class="nav-link" id="security-tab" data-toggle="pill" href="#security" role="tab" aria-controls="security" aria-selected="false">
+							<i class="fa fa-exclamation"></i>&nbsp;
+							{% for message in messages %}
+							{{message}}
+							{% endfor %}
 						</a>
 					</div>
 				</div>
@@ -123,37 +126,8 @@
 					</div>
 					</form>
 					
-					<div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
-						<h3 class="mb-4">Security Settings</h3>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-								  	<label>Login</label>
-								  	<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-								  	<label>Two-factor auth</label>
-								  	<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" value="" id="recovery">
-										<label class="form-check-label" for="recovery">
-										Recovery
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div>
-							<button class="btn btn-primary">Update</button>
-							<button class="btn btn-light">Cancel</button>
-						</div>
-					</div>
+					
+					
 
 					<form method="POST"  class="tab-pane fade" id="application" role="tabpanel" aria-labelledby="application-tab" enctype="multipart/form-data">
 					{% csrf_token %}
@@ -180,8 +154,8 @@
 						<h3 class="mb-4">Notification Settings</h3>
 						<div class="form-group">
 							<div class="form-check">
-								<input class="form-check-input" type="checkbox" value="" id="notification1">
-								<label class="form-check-label" for="notification1">
+								<input class="form-check-input" type="checkbox" value="" id="notification">
+								<label class="form-check-label" for="notification">
 									Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum accusantium accusamus, neque cupiditate quis
 								</label>
 							</div>
@@ -207,6 +181,7 @@
 							<button class="btn btn-light">Cancel</button>
 						</div>
 					</div>
+					
 				</div>
 			</div>
 		</div>

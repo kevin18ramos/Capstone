@@ -46,39 +46,46 @@ def settingChange(request):
                 print("password not match og")
                 messages.info(request, 'Passwords is incorrect.')
                 return redirect('home')
-        elif name != CurrentUser.username and name != None and name != "":
-            CurrentUser.username = name
-            CurrentUser.save()
-            CurrentArtist.name = name
-            CurrentArtist.save()
-            messages.info(request, 'Username has been changed.')
-            return redirect('settingChange')
+        elif name != CurrentArtist.name and name != None and name != "":
+            try:
+                user_with_name = User.objects.get(username=name)
+                messages.info(request, 'This username is already taken. Please choose another one.')
+                return redirect('settingChange')
+            except User.DoesNotExist:
+                CurrentUser = request.user
+                CurrentUser.username = name
+                CurrentUser.save()
+                CurrentArtist.name = name
+                CurrentArtist.save()
+                messages.info(request, 'Username successfully changed.')
+                return redirect('settingChange')
         elif firstname != None and firstname != CurrentArtist.firstname and firstname != "":
             CurrentArtist.firstname = firstname
             CurrentArtist.save()
-            messages.info(request, 'Firstname has been changed.')
+            messages.info(request, 'First name successfully changed.')
             return redirect('settingChange')
         elif lastname != None and lastname != CurrentArtist.lastname and lastname != "":
             CurrentArtist.lastname = lastname
             CurrentArtist.save()
-            messages.info(request, 'Firstname has been changed.')
+            messages.info(request, 'Last name successfully changed.')
             return redirect('settingChange')
         elif email != None and email != CurrentArtist.email and email != "":
             CurrentArtist.email = email
             CurrentArtist.save()
-            messages.info(request, 'Firstname has been changed.')
+            messages.info(request, 'Email successfully changed.')
             return redirect('settingChange')
         elif bio != "" and bio != CurrentArtist.bio and bio != None:
             CurrentArtist.bio = bio
             CurrentArtist.save()
-            messages.info(request, 'Firstname has been changed.')
+            messages.info(request, 'Bio successfully changed.')
             return redirect('settingChange')
         elif request.FILES.get('profilepic'):
             profilepic = request.FILES.get('profilepic')
             CurrentArtist.profile_pic = profilepic
             CurrentArtist.save()
-            messages.info(request, 'Profile picture has been changed.')
+            messages.info(request, 'Profile picture successfully changed.')
             return redirect('settingChange')
+     
     return render(request, 'app/settings.html')
 
 
