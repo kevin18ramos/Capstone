@@ -1,136 +1,144 @@
-{% extends 'app/Nav-Base.html' %}
+{% extends 'app/profile-Base.html' %}
 {% load static %}
   
 {% block content %}
-  <style>
+<<<<<<< HEAD
+<style>
     *{
-    margin: 0;
-    padding: 0;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  box-sizing: border-box;
 }
 
 .hero{
-    width: 100%;
-    min-height: 100vh;
-    background: #eceaff;
-    color: #525252;
+  width: 100%;
+  min-height: 100vh;
+  background: #eceaff;
+  color: #525252;
 }
 
 nav{
-    background: #1a1a1a;
-    width: 100%;
-    padding: 10px 10% ;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
+  background: #1a1a1a;
+  width: 100%;
+  padding: 10px 10% ;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
 }
 
 
 .logo{
-    width: 120px;
+  width: 120px;
 }
 .user-pic{
-    width: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    margin-left: 30px;
+  width: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 30px;
 }
 
 nav ul{
-   width: 100%;
-   text-align: right;
+ width: 100%;
+ text-align: right;
 }
 
+
 nav ul li{
-    display: inline-block;
-    list-style: none;
-    margin: 10px 20px;
+  display: inline-block;
+  list-style: none;
+  margin: 10px 20px;
 }
 
 nav ul li a{
-    color: #fff;
-    text-decoration: none;
+  color: #fff;
+  text-decoration: none;
 }
 
 .sub-menu-wrap{
-    position: absolute;
-    top: 100%;
-    right: 10%;
-    width: 320px;
-    max-height: 0px;
-    overflow: hidden;
-    transition: max-height 0.5s;
+  position: absolute;
+  top: 100%;
+  right: 10%;
+  width: 320px;
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height 0.5s;
 }
 
 .sub-menu-wrap.open-menu{
-    max-height: 400px;
+  max-height: 400px;
 }
 
 .sub-menu{
-    background: #fff;
-    padding: 20px;
-    margin: 10px;
+  background: #fff;
+  padding: 20px;
+  margin: 10px;
+  z-index: 1;
 }
 
 .user-info{
-   display: flex;
-   align-items: center;
+ display: flex;
+ align-items: center;
 }
 
 .user-info h3{
-    font-weight: 500;
+  font-weight: 500;
 }
 
 .user-info img{
-    width: 60px;
-    border-radius: 50%;
-    margin-right: 15px;
+  width: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
 }
 
 .sub-menu hr{
-    border: 0;
-    height: 1px;
-    width: 100%;
-    background: #ccc;
-    margin: 15px 0 10px;
+  border: 0;
+  height: 1px;
+  width: 100%;
+  background: #ccc;
+  margin: 15px 0 10px;
 }
 
 
 .sub-menu-links{
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #767474;
-    margin: 12px 0;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #767474;
+  margin: 12px 0;
 }
 
 .sub-menu-links p{
-    width: 100%;
+  width: 100%;
 }
 
 .sub-menu-links img{
-    width: 40px;
-    background: #e5e5e5;
-    border-radius: 50%;
-    padding: 8px;
-    margin-right: 15px;
+  width: 40px;
+  background: #e5e5e5;
+  border-radius: 50%;
+  padding: 8px;
+  margin-right: 15px;
 }
 
 .sub-menu-links span{
-    font-size: 22px;
-    transition: transform 0.5s;
+  font-size: 22px;
+  transition: transform 0.5s;
 }
 .sub-menu-links:hover span{
-    transform: translateX(5px);
+  transform: translateX(5px);
 }
 
 .sub-menu-links:hover p{
-    color: rgb(13, 12, 12);
+  color: rgb(13, 12, 12);
 }
 
-  </style>
+
+
+</style>
+
+=======
+>>>>>>> a8f6e4553fcaa199034d382c88cb81dcc1c9aa85
   <body>
     <div class="hero">
         <nav>
@@ -138,56 +146,39 @@ nav ul li a{
              <ul>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Features</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="#">Tin.Markrt</a></li>
+                <li><a href="profilepage/settingChange/">Settings</a></li>
                 <li><a href="#">Contact</a></li>
              </ul>
-             <img src="images/user.png" class="user-pic" onclick="toggleMenu()">
 
-             <div class="sub-menu-wrap" id="subMenu">
-                <div class="sub-menu">
-                    <div class="user-info">
-                        <img src="images/user.png" alt="">
-                        <h3>Anna Mcleod</h3>
-                    </div>
-                    <hr>
-                        <a href="#"class="sub-menu-links">
-                            <img src="images/profile.png">
-                            <p>Edit Profile</p>
-                            <span>></span>
-                        </a>
 
-                        <a href="#"class="sub-menu-links">
-                            <img src="images/setting.png">
-                            <p>Setting & Privacy</p>
-                            <span>></span>
-                        </a>
-
-                        <a href="#"class="sub-menu-links">
-                            <img src="images/help.png">
-                            <p>Help & Support</p>
-                            <span>></span>
-                        </a>
-
-                        <a href="#"class="sub-menu-links">
-                            <img src="images/logout.png">
-                            <p>Logout</p>
-                            <span>></span>
-                        </a>
-                            
-
-                </div>
-             </div>
+     
         </nav>
+<<<<<<< HEAD
         
+=======
+
+
+>>>>>>> a8f6e4553fcaa199034d382c88cb81dcc1c9aa85
         <div class="content-profile-page">
             <div class="profile-user-page card">
                <div class="img-user-profile">
                  <img class="profile-bgHome" src="">
+<<<<<<< HEAD
                  <img class="art market" src=""alt="tofflightsun"/>
+=======
+                 {% if request.user.artistinformation.profile_pic %}
+                 <img  src="{{ request.user.artistinformation.profile_pic.url }}"/>
+               {% else %}
+                 <img class="avatar" alt="jtojr" src="{% static 'images/cabbage.jpg' %}" />
+               {% endif %}
+ 
+>>>>>>> a8f6e4553fcaa199034d382c88cb81dcc1c9aa85
                     </div>
                    <button>Buy art</button>
                    <div class="user-profile-data">
                      <h1>{{request.user}}</h1>
+<<<<<<< HEAD
                      <p>{{ request.user.artistinformation.email }}</p>
                    </div> 
                    <div class="description-profile">digitel | painting | blender | <a href="https://basecamelinks" title="link"><strong></strong></a> | latin tex fill</div>
@@ -195,11 +186,21 @@ nav ul li a{
                 <ul class="data-user">
                  <li><a><strong>facebook</strong><span>link</span></a></li>
                  <li><a><strong>Instagram</strong><span>link</span></a></li>
+=======
+                     <p>main-store.com</p>
+                   </div> 
+                   <div class="description-profile">digitel | painting | blender | <a href="" title=""><strong></strong></a> latin fill tex :100words;| </div>
+                   <div class="description-profile">{{ request.user.artistinformation.bio }}</div>
+                <ul class="data-user">
+                 <li><a><strong>facebook</strong><span>link</span></a></li>
+                 <li><a><strong>insta</strong><span>link</span></a></li>
+>>>>>>> a8f6e4553fcaa199034d382c88cb81dcc1c9aa85
                  <li><a><strong>twiter</strong><span>link</span></a></li>
                 </ul>
                </div>
              </div>
          
+<<<<<<< HEAD
     </div>
 
 <script>
@@ -269,6 +270,24 @@ nav ul li a{
       </div>
     </div>
   </body>
+=======
+   
+
+
+   
+     <footer>
+        
+     </footer>
+    
+</body>
+    
+        
+   
+
+
+
+
+>>>>>>> a8f6e4553fcaa199034d382c88cb81dcc1c9aa85
   
 {% endblock %}
 

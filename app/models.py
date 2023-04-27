@@ -33,7 +33,6 @@ class Post(models.Model):
     date = models.DateField()
     numOfArts = models.IntegerField(default=1)
     price = price = models.DecimalField(decimal_places=2, max_digits=10)
-    # art_id = models.IntegerField(max_length=200)
     
     def __str__(self):
         return self.name
@@ -45,6 +44,21 @@ class Order(models.Model):
     customer_email = models.EmailField()
     stripe_payment_intent = models.CharField(max_length=200)
     has_paid = models.BooleanField(default=False)
+class Cart(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # art = models.ForeignKey(User, on_delete=models.CASCADE)
+    # totalprice = models.IntegerField()
+    
+
+    def add_to_cart(self):
+        pass
+        # if request.user.is_authenticated:
+        #     cart = Cart.objects.filter(user=request.user)
+        # cart.items.add(id)
+
+
+    def get_total_price(self):
+        pass
 
 
 
