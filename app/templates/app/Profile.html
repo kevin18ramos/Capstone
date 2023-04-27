@@ -1,0 +1,65 @@
+{% extends 'app/profile-Base.html' %}
+{% load static %}
+  
+{% block content %}
+  <body>
+    <div class="hero">
+        <nav>
+             <!-- <img src="images/logo.png" class="logo"> -->
+             <ul>
+                <li><a href="http://127.0.0.1:8000/home/">Home</a></li>
+                <li><a href="http://127.0.0.1:8000/shoppingcart/">Checkout</a></li>
+                <li><a href="http://127.0.0.1:8000/settingChange/">Settings</a></li>
+                <li><a href="#">Contact</a></li>
+             </ul>
+
+
+     
+        </nav>
+
+
+        <div class="content-profile-page">
+            <div class="profile-user-page card">
+               <div class="img-user-profile">
+                 <img class="profile-bgHome" src="">
+                 {% if request.user.artistinformation.profile_pic %}
+                 <img  src="{{ request.user.artistinformation.profile_pic.url }}"/>
+               {% else %}
+                 <img class="avatar" alt="jtojr" style="height: 100px; width: 100px; " src="{% static 'images/cabbage.jpg' %}" />
+               {% endif %}
+ 
+                    </div>
+                   <button>Buy art</button>
+                   <div class="user-profile-data">
+                     <h1>{{request.user}}</h1>
+                     <p>main-store.com</p>
+                   </div> 
+                   <div class="description-profile">digitel | painting | blender | <a href="" title=""><strong></strong></a> latin fill tex :100words;| </div>
+                   <div class="description-profile">{{ request.user.artistinformation.bio }}</div>
+                <ul class="data-user">
+                 <li><a><strong>facebook</strong><span>link</span></a></li>
+                 <li><a><strong>insta</strong><span>link</span></a></li>
+                 <li><a><strong>twiter</strong><span>link</span></a></li>
+                </ul>
+               </div>
+             </div>
+         
+   
+
+
+   
+     <footer>
+        
+     </footer>
+    
+</body>
+    
+        
+   
+
+
+
+
+  
+{% endblock %}
+
