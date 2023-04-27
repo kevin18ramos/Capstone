@@ -95,16 +95,17 @@ def profile(request):
 def addProductsPage(request):
     form = PostForm(request.POST)
     currentUser = request.user 
+    currentUser
     if form.is_valid():
         if request.method == 'POST':
             form = PostForm(request.POST, request.FILES)
             form.user = currentUser 
             post = form.save(commit=False) # Save form instance to post variable
             post.user = currentUser # Set user field
-            post.save() # Save to the database
+            post.save() # Save to the database  
             messages.info(request, 'Product Posted')
-            return redirect('products')
-    return render(request, 'app/AddProducts.html', {'post_form':form,})
+            return redirect('home')
+    return render(request, 'app/AddProducts.html', {'post_form':form})
 
 # view products view
 def productsPage(request):
