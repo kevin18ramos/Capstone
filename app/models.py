@@ -37,29 +37,6 @@ class Post(models.Model):
     def __str__(self):
         return self.name
     
-<<<<<<< HEAD
-class Cart(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # art = models.ForeignKey(User, on_delete=models.CASCADE)
-    # totalprice = models.IntegerField()
-    
-
-    def add_to_cart(self):
-        pass
-        # if request.user.is_authenticated:
-        #     cart = Cart.objects.filter(user=request.user)
-        # cart.items.add(id)
-
-    def remove_from_cart(self):
-        pass
-
-    def get_total_price(self):
-        pass
-
-
-    def __str__(self):
-        return self.art
-=======
 class Order(models.Model):
     id = models.BigAutoField(primary_key=True)
     product = models.ForeignKey(to=Post, on_delete=models.PROTECT)
@@ -67,8 +44,5 @@ class Order(models.Model):
     customer_email = models.EmailField()
     stripe_payment_intent = models.CharField(max_length=200)
     has_paid = models.BooleanField(default=False)
-
-
->>>>>>> 0555f6bcd0252edb8492f66fe1fffe5d4463f5f3
 
 
