@@ -8,4 +8,5 @@ from .models import *
 
 admin.site.register(ArtistInformation)
 admin.site.register(Post)
+admin.site.register(Cart)
 

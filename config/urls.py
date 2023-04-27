@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.urls import path, include
 from app import views
 from app.views import *
-
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -18,6 +17,8 @@ urlpatterns = [
      path("profilepage/", views.findUser, name= "findUser"),
      path("shoppingcart/", views.shoppingcart, name="shoppingcart"),
      path("settingChange/", views.settingChange, name="settingChange"),
+     path('cart/', views.Cart, name='Cart'),
+     path('checkout/', views.checkout, name='checkout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
  
 

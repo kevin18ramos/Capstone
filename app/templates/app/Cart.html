@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Your Cart</h1>
+{% if cart_items %}
+<ul>
+{% for item in cart_items %}
+    <li>{{ item.item.name }} - {{ item.quantity }} x ${{ item.price }}</li>
+{% endfor %}
+</ul>
+<p>Total price: ${{ total_price }}</p>
+<form action="{% url 'checkout' %}" method="POST">
+    {% csrf_token %}
+    <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="{{ STRIPE_PUBLIC_KEY }}"
+        data-amount="{{ total_price|floatformat:2|int }}00"
+        data-name="Example Company"
+        data-description="Example purchase"
+        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+        data-locale="auto"
+        data-zip-code="true">
+    </script>
+</form>
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}

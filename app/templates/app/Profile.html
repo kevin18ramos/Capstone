@@ -139,10 +139,10 @@ nav ul li a{
         <nav>
              <!-- <img src="images/logo.png" class="logo"> -->
              <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="#">Features</a></li>
-                <li><a href="#">Tin.Markrt</a></li>
-                <li><a href="profilepage/settingChange/">Settings</a></li>
+                <li><a href="#">Tin.Market</a></li>
+                <li><a href= "{% url 'settingChange' %}">Settings</a></li>
                 <li><a href="#">Contact</a></li>
              </ul>
 
@@ -194,7 +194,9 @@ nav ul li a{
       <div class="cols__container">
         <div class="left__col">
           <div class="img__container">
-
+            
+                
+            
             {% if request.user.artistinformation.profile_pic %}
               <img src="{{ request.user.artistinformation.profile_pic.url }}"/>
             {% else %}
