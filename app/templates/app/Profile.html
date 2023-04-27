@@ -1,7 +1,8 @@
-{% extends 'app/Nav-Base.html' %}
+{% extends 'app/profile-Base.html' %}
 {% load static %}
   
 {% block content %}
+<<<<<<< HEAD
 <style>
     *{
   margin: 0;
@@ -42,6 +43,7 @@ nav ul{
  width: 100%;
  text-align: right;
 }
+
 
 nav ul li{
   display: inline-block;
@@ -135,6 +137,8 @@ nav ul li a{
 
 </style>
 
+=======
+>>>>>>> a8f6e4553fcaa199034d382c88cb81dcc1c9aa85
   <body>
     <div class="hero">
         <nav>
@@ -142,56 +146,39 @@ nav ul li a{
              <ul>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Features</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="#">Tin.Markrt</a></li>
+                <li><a href="profilepage/settingChange/">Settings</a></li>
                 <li><a href="#">Contact</a></li>
              </ul>
-             <img src="images/user.png" class="user-pic" onclick="toggleMenu()">
 
-             <div class="sub-menu-wrap" id="subMenu">
-                <div class="sub-menu">
-                    <div class="user-info">
-                        <img src="images/user.png" alt="">
-                        <h3>Anna Mcleod</h3>
-                    </div>
-                    <hr>
-                        <a href="#"class="sub-menu-links">
-                            <img src="images/profile.png">
-                            <p>Edit Profile</p>
-                            <span>></span>
-                        </a>
 
-                        <a href="#"class="sub-menu-links">
-                            <img src="images/setting.png">
-                            <p>Setting & Privacy</p>
-                            <span>></span>
-                        </a>
-
-                        <a href="#"class="sub-menu-links">
-                            <img src="images/help.png">
-                            <p>Help & Support</p>
-                            <span>></span>
-                        </a>
-
-                        <a href="#"class="sub-menu-links">
-                            <img src="images/logout.png">
-                            <p>Logout</p>
-                            <span>></span>
-                        </a>
-                            
-
-                </div>
-             </div>
+     
         </nav>
+<<<<<<< HEAD
         
+=======
+
+
+>>>>>>> a8f6e4553fcaa199034d382c88cb81dcc1c9aa85
         <div class="content-profile-page">
             <div class="profile-user-page card">
                <div class="img-user-profile">
                  <img class="profile-bgHome" src="">
+<<<<<<< HEAD
                  <img class="art market" src=""alt="tofflightsun"/>
+=======
+                 {% if request.user.artistinformation.profile_pic %}
+                 <img  src="{{ request.user.artistinformation.profile_pic.url }}"/>
+               {% else %}
+                 <img class="avatar" alt="jtojr" src="{% static 'images/cabbage.jpg' %}" />
+               {% endif %}
+ 
+>>>>>>> a8f6e4553fcaa199034d382c88cb81dcc1c9aa85
                     </div>
                    <button>Buy art</button>
                    <div class="user-profile-data">
                      <h1>{{request.user}}</h1>
+<<<<<<< HEAD
                      <p>{{ request.user.artistinformation.email }}</p>
                    </div> 
                    <div class="description-profile">digitel | painting | blender | <a href="https://basecamelinks" title="link"><strong></strong></a> | latin tex fill</div>
@@ -199,11 +186,21 @@ nav ul li a{
                 <ul class="data-user">
                  <li><a><strong>facebook</strong><span>link</span></a></li>
                  <li><a><strong>Instagram</strong><span>link</span></a></li>
+=======
+                     <p>main-store.com</p>
+                   </div> 
+                   <div class="description-profile">digitel | painting | blender | <a href="" title=""><strong></strong></a> latin fill tex :100words;| </div>
+                   <div class="description-profile">{{ request.user.artistinformation.bio }}</div>
+                <ul class="data-user">
+                 <li><a><strong>facebook</strong><span>link</span></a></li>
+                 <li><a><strong>insta</strong><span>link</span></a></li>
+>>>>>>> a8f6e4553fcaa199034d382c88cb81dcc1c9aa85
                  <li><a><strong>twiter</strong><span>link</span></a></li>
                 </ul>
                </div>
              </div>
          
+<<<<<<< HEAD
     </div>
 
 <script>
@@ -273,6 +270,24 @@ nav ul li a{
       </div>
     </div>
   </body>
+=======
+   
+
+
+   
+     <footer>
+        
+     </footer>
+    
+</body>
+    
+        
+   
+
+
+
+
+>>>>>>> a8f6e4553fcaa199034d382c88cb81dcc1c9aa85
   
 {% endblock %}
 
