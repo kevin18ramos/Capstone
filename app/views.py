@@ -1,3 +1,4 @@
+from urllib import request
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import *
@@ -7,11 +8,19 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from .forms import PostForm
 from .forms import *
+from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
+from django.http.response import HttpResponseNotFound, JsonResponse
+from django.shortcuts import get_object_or_404, render
+from django.urls import reverse, reverse_lazy
+import stripe
+import json
 #from .decorators import *
 
 # home view
 def home(request):
-    return render(request, 'app/Home.html')
+    products = Post.objects.all()
+    return render(request, 'app/Home.html', {'products':products})
 
 @login_required(login_url = 'login')
 def shoppingcart(request):
@@ -93,21 +102,28 @@ def settingChange(request):
 def profile(request):
     return render(request, 'app/Profile.html')
 
-# products page
+# add products view
 @login_required(login_url = 'login')
 def addProductsPage(request):
-    if request.user.is_authenticated:
+    form = PostForm(request.POST)
+    currentUser = request.user 
+    if form.is_valid():
         if request.method == 'POST':
-            form = PostForm(request.POST)
-            if form.is_valid():
-                messages.info(request, 'Product Posted')
-        return render(request, 'app/AddProducts.html', {'form':form})
-    else:
-        return redirect('login')
+            form = PostForm(request.POST, request.FILES)
+            form.user = currentUser 
+            post = form.save(commit=False) # Save form instance to post variable
+            post.user = currentUser # Set user field
+            post.save() # Save to the database
+            messages.info(request, 'Product Posted')
+            return redirect('products')
+    return render(request, 'app/AddProducts.html', {'post_form':form, 'context':settings.STRIPE_PUBLISHABLE_KEY})
 
+# view products view
 def productsPage(request):
     products = Post.objects.all()
     return render(request, 'app/Products.html', {'products':products})
+
+#checkout
 
 #login register and logout
 def loginPage(request):
@@ -154,11 +170,7 @@ def registerPage(request):
         return render(request,'app/Register.html',context)
 
 
-def findUser(request):
-    currentUser = request.user
-   
-    print(currentUser)
-    return render(request,'app/Profile.html')
+
 
 
 def logoutUser(request):
