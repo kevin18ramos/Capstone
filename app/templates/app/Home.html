@@ -16,7 +16,11 @@
 						<a class="nav-link" href="shoppingcart/">Cart</a>
 					</li>
 					<li class="nav-item">
+<<<<<<< HEAD
 						<a class="nav-links" href="settingChange/">somthing</a>
+=======
+						<a class="nav-links" href="#">somthing</a>
+>>>>>>> 0555f6bcd0252edb8492f66fe1fffe5d4463f5f3
 					</li>
 					<li class="nav-item">
 						<a class="nav-links" href="#">Tin.merch</a>
@@ -28,12 +32,18 @@
             <a class="nav-links" href="profilepage/">Profile</a>
 						
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">profile</a>
+          <li class="nav-item">
+						<a class="nav-links" href="shoppingcart/">Cart</a>
 					</li>
+					</li>
+<<<<<<< HEAD
         
 					<li class="nav-item">
 						<a class="nav-links" href="Login/">Login</a>
+=======
+          <li class="nav-item">
+						<a class="nav-links" href="/products/add/">ADD A PRODUCT</a>
+>>>>>>> 0555f6bcd0252edb8492f66fe1fffe5d4463f5f3
 					</li>
 	
 				</ul>
@@ -122,17 +132,27 @@
               </li>
             </ul>
           </div>
+<<<<<<< HEAD
           <ol class="image-list grid-view">
 
+=======
+          <ol class="image-list grid-view" >
+            {% for product in products %}
+>>>>>>> 0555f6bcd0252edb8492f66fe1fffe5d4463f5f3
             <li>
               <figure>
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/unsplash_nature1.jpg" alt="">
+                <img src="{{product.picture.url}}" alt="">
                 <figcaption>
-                 
+                  <p>{{product.name}}</p>
                   <p style="display: none;">di</p>
-                  <p>green leafed trees</p>
-                  <p>Photo by <a href="https://unsplash.com/@redcharlie" target="_blank">redcharlie</a></p>
+                  <p>{{product.description}}</p>
+                  <p>Art by {{product.user}}</p>
+                  {%if product.numOfArts < 3%}
+                  <p>{{product.numOfArts}} left!</p>
+                  {%endif%}
+                  <p class="product-price">Price: {{ product.price }}</p> 
                   <p><a><i class="fa-solid fa-cart-shopping"></i>Add to cart</a></p>                </figcaption>
+<<<<<<< HEAD
               </figure>
             </li>
 
@@ -273,6 +293,14 @@
             </li>
             </ol>
           </div>
+=======
+                </figure>
+              </li>
+              {% endfor %}
+
+          </ol>
+        </div>
+>>>>>>> 0555f6bcd0252edb8492f66fe1fffe5d4463f5f3
       </section>
 
       <script src="https://kit.fontawesome.com/dceaf17e09.js" crossorigin="anonymous"></script>

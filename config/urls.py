@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from app import views
 from app.views import *
 
@@ -17,7 +17,7 @@ urlpatterns = [
      path("products/", views.productsPage, name= "products"),
      path("profilepage/", views.findUser, name= "findUser"),
      path("shoppingcart/", views.shoppingcart, name="shoppingcart"),
-     path("settingChange/", views.settingChange, name="settingChange")
+     path("settingChange/", views.settingChange, name="settingChange"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
  
 

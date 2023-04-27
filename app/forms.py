@@ -15,4 +15,4 @@ class CreateUserForm(UserCreationForm):
 class PostForm(ModelForm):
     class Meta:
         model = Post
-        fields = ["picture","name",'description',"date","price"]
+        fields = ["picture","name",'description',"date","numOfArts","price"]
