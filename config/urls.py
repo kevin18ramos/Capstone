@@ -19,7 +19,10 @@ urlpatterns = [
      path("shoppingcart/", views.shoppingcart, name="shoppingcart"),
      path("Login/Register/", views.registerPage, name="register"),
      path("settingChange/", views.settingChange, name="settingChange"),
-     path("Login/Register/", views.registerPage, name="register")
+   
+
+
+  
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
  
