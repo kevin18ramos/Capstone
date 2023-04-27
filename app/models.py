@@ -9,7 +9,7 @@ from datetime import datetime
 # Create your models here.
 
 class ArtistInformation(models.Model):
-    profile_pic = models.ImageField(default="images/cabbage.jpg", null=True, blank=True)
+    profile_pic = models.ImageField(upload_to='images/',default="images/cabbage.jpg", null=True, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(null = True, max_length=255)
     firstname = models.CharField(max_length=200, null=True)
@@ -44,5 +44,23 @@ class Order(models.Model):
     customer_email = models.EmailField()
     stripe_payment_intent = models.CharField(max_length=200)
     has_paid = models.BooleanField(default=False)
+    
+class Cart(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # art = models.ForeignKey(User, on_delete=models.CASCADE)
+    # totalprice = models.IntegerField()
+    
+
+    def add_to_cart(self):
+        pass
+        # if request.user.is_authenticated:
+        #     cart = Cart.objects.filter(user=request.user)
+        # cart.items.add(id)
+
+
+    def get_total_price(self):
+        pass
+
+
 
 
