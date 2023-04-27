@@ -20,7 +20,6 @@ urlpatterns = [
      path("Login/Register/", views.registerPage, name="register"),
      path("shoppingcart", views.shoppingcart, name="shoppingcart"),
      path("settingChange/", views.settingChange, name="settingChange"),
-     path('api/checkout-session/<id>/', create_checkout_session, name='api_checkout_session'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
  
 

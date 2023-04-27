@@ -127,6 +127,9 @@
                   <p style="display: none;">di</p>
                   <p>{{product.description}}</p>
                   <p>Art by {{product.user}}</p>
+                  {%if product.numOfArts < 3%}
+                  <p>{{product.numOfArts}} left!</p>
+                  {%endif%}
                   <p class="product-price">Price: {{ product.price }}</p> 
                   <p><a><i class="fa-solid fa-cart-shopping"></i>Add to cart</a></p>                </figcaption>
                 </figure>

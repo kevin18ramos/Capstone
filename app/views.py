@@ -94,7 +94,7 @@ def profile(request):
 @login_required(login_url = 'login')
 def addProductsPage(request):
     form = PostForm(request.POST)
-    currentUser = request.user
+    currentUser = request.user 
     if form.is_valid():
         if request.method == 'POST':
             form = PostForm(request.POST, request.FILES)
@@ -112,46 +112,6 @@ def productsPage(request):
     return render(request, 'app/Products.html', {'products':products})
 
 #checkout
-@csrf_exempt
-def create_checkout_session(reqeust, id):
-    request_data = json.loads(request.body)
-    product = get_object_or_404(Post, pk=id)
-
-    stripe.api_key = settings.STRIPE_SECRET_KEY
-    checkout_session = stripe.checkout.Session.create(
-        # Customer Email is optional,
-        # It is not safe to accept email directly from the client side
-        customer_email = request_data['email'],
-        payment_method_types=['card'],
-        line_items=[
-            {
-                'price_data': {
-                    'currency': 'usd',
-                    'product_data': {
-                    'name': product.name,
-                    },
-                    'unit_amount': int(product.price * 100),
-                },
-                'quantity': 1,
-            }
-        ],
-        mode='payment',
-        success_url=request.build_absolute_uri(
-            reverse('success')
-        ) + "?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url=request.build_absolute_uri(reverse('failed')),
-    )
-
-
-    order = Order()
-    order.customer_email = request_data['email']
-    order.product = product
-    order.stripe_payment_intent = checkout_session['payment_intent']
-    order.amount = int(product.price * 100)
-    order.save()
-
-    return JsonResponse({'sessionId': checkout_session.id})
-
 
 #login register and logout
 def loginPage(request):
