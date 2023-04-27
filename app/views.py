@@ -104,7 +104,7 @@ def addProductsPage(request):
             post.save() # Save to the database
             messages.info(request, 'Product Posted')
             return redirect('products')
-    return render(request, 'app/AddProducts.html', {'post_form':form, 'context':settings.STRIPE_PUBLISHABLE_KEY})
+    return render(request, 'app/AddProducts.html', {'post_form':form,})
 
 # view products view
 def productsPage(request):
