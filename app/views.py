@@ -123,46 +123,46 @@ def productsPage(request):
     products = Post.objects.all()
     return render(request, 'app/Products.html', {'products':products})
 
-#add to cart
-def addToCart(request, itemId):
-    item = Post.objects.get(id=itemId)
-    cart_item, created = Cart.objects.get_or_create(
-        user=request.user,
-        item=item,
-        defaults={
-            'quantity': 1,
-            'price': item.price,
-        }
-    )
-    if not created:
-        cart_item.quantity += 1
-        cart_item.save()
-    return redirect('Cart')
+#delete products
+
+# #add to cart
+# def addToCart(request, itemId):
+#     item = Post.objects.get(id=itemId)
+#     cartItem, created = Cart.objects.get_or_create(
+#         user=request.user,
+#         item=item,
+#         defaults={
+#             'quantity': 1,
+#             'price': item.price,
+#         }
+#     )
+#     if not created:
+#         cartItem.quantity += 1
+#         cartItem.save()
+#     return redirect('Cart')
 
 
-#checkout
-stripe.api_key = settings.STRIPE_SECRET_KEY
+# #checkout
+# stripe.api_key = settings.STRIPE_SECRET_KEY
 
-def checkout(request):
-    cartItems = Cart.objects.filter(user=request.user)
-    total_price = sum([item.price * item.quantity for item in cartItems])
-    if request.method == 'POST':
-        token = request.POST['stripeToken']
-        try:
-            charge = stripe.Charge.create(
-                amount=int(total_price * 100),
-                currency='usd',
-                description='Example charge',
-                source=token,
-            )
-            # If payment is successful, update the Cart objects and redirect to a success page
-            for item in cartItems:
-                item.delete()
-            return redirect('home')
-        except stripe.error.CardError as e:
-            # Display error message to the user if payment fails
-            return render(request, 'checkout.html', {'error': e.error.message})
-    return render(request, 'checkout.html', {'total_price': total_price})
+# def checkout(request):
+#     cartItems = Cart.objects.filter(user=request.user)
+#     total_price = sum([item.price * item.quantity for item in cartItems])
+#     if request.method == 'POST':
+#         token = request.POST['stripeToken']
+#         try:
+#             charge = stripe.Charge.create(
+#                 amount=int(total_price * 100),
+#                 currency='usd',
+#                 description='Example charge',
+#                 source=token,
+#             )
+#             for item in cartItems:
+#                 item.delete()
+#             return redirect('home')
+#         except stripe.error.CardError as e:
+#             return render(request, 'checkout.html', {'error': e.error.message})
+#     return render(request, 'checkout.html', {'total_price': total_price})
 
 #login register and logout
 def loginPage(request):
