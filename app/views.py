@@ -1,6 +1,7 @@
 from urllib import request
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from .models import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -11,10 +12,12 @@ from .forms import *
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from django.http.response import HttpResponseNotFound, JsonResponse
-from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
 import stripe
 import json
+from django.shortcuts import (get_object_or_404,
+                              render,
+                              HttpResponseRedirect)
 #from .decorators import *
 
 # home view
@@ -124,7 +127,69 @@ def productsPage(request):
     products = Post.objects.all()
     return render(request, 'app/Products.html', {'products':products})
 
-#checkout
+#delete products
+def deleteProducts(request, id):
+    delete_object = Post.objects.get(id=id)
+    current_user = request.user
+    if current_user == delete_object.user:
+        Post.objects.get(id=id).delete()
+        return HttpResponseRedirect("/home/")
+    return render(request, '', context)
+
+#update products
+def updateProducts(request, id):                                       
+    data = get_object_or_404(Post, id=id)
+    form = PostForm(instance=data)                                                               
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=data)
+        if form.is_valid():
+            form.save()
+            return redirect ('home')
+    context = {
+        "form":form
+    }
+    return render(request, '', context)
+
+
+# cart system not worky rn
+# #add to cart
+# def addToCart(request, itemId):
+#     item = Post.objects.get(id=itemId)
+#     cartItem, created = Cart.objects.get_or_create(
+#         user=request.user,
+#         item=item,
+#         defaults={
+#             'quantity': 1,
+#             'price': item.price,
+#         }
+#     )
+#     if not created:
+#         cartItem.quantity += 1
+#         cartItem.save()
+#     return redirect('Cart')
+
+
+# #checkout
+# stripe.api_key = settings.STRIPE_SECRET_KEY
+
+# def checkout(request):
+#     cartItems = Cart.objects.filter(user=request.user)
+#     total_price = sum([item.price * item.quantity for item in cartItems])
+#     if request.method == 'POST':
+#         token = request.POST['stripeToken']
+#         try:
+#             charge = stripe.Charge.create(
+#                 amount=int(total_price * 100),
+#                 currency='usd',
+#                 description='Example charge',
+#                 source=token,
+#             )
+#             for item in cartItems:
+#                 item.delete()
+#             return redirect('home')
+#         except stripe.error.CardError as e:
+#             return render(request, 'checkout.html', {'error': e.error.message})
+#     return render(request, 'checkout.html', {'total_price': total_price})
 
 #login register and logout
 def loginPage(request):
@@ -171,7 +236,11 @@ def registerPage(request):
         return render(request,'app/Register.html',context)
 
 
-
+def findUser(request):
+    currentUser = request.user
+   
+    print(currentUser)
+    return render(request,'app/Profile.html')
 
 
 def logoutUser(request):

@@ -2,16 +2,103 @@
 {% load static %}
   
 {% block content %}
+<style>
+
+
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
+body {
+	background: #f9f9f9;
+	font-family: "Roboto", sans-serif;
+}
+
+.shadow {
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+.profile-tab-nav {
+	min-width: 250px;
+}
+
+.tab-content {
+	flex: 1;
+}
+
+.form-group {
+	margin-bottom: 1.5rem;
+}
+
+.nav-pills a.nav-link {
+	padding: 15px 20px;
+	border-bottom: 1px solid #ddd;
+	border-radius: 0;
+	color: #333;
+}
+.nav-pills a.nav-link i {
+	width: 20px;
+}
+
+.img-circle img {
+	height: 100px;
+	width: 100px;
+	border-radius: 100%;
+	border: 5px solid #fff;
+}
+
+
+
+
+
+
+
+
+
+nav{
+   background: #1a1a1a;
+   width: 100%;
+   padding: -27px 10% ;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   position: relative;
+}
+
+
+.logo{
+   width: 120px;
+}
+.user-pic{
+   width: 40px;
+   border-radius: 50%;
+   cursor: pointer;
+   margin-left: 30px;
+}
+
+nav ul{
+  width: 100%;
+  text-align: center;
+}
+
+nav ul li{
+   display: inline-block;
+   list-style: none;
+   margin: 10px 20px;
+}
+
+nav ul li a{
+   color: #fff;
+   text-decoration: none;
+}
+
+</style>
   <body>
     <div class="hero">
         <nav>
              <!-- <img src="images/logo.png" class="logo"> -->
              <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Features</a></li>
-                <li><a href="#">Tin.Markrt</a></li>
-                <li><a href="profilepage/settingChange/">Settings</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href= "{% url 'settingChange' %}">Settings</a></li>
+                <li><a href= "{% url 'settingChange' %}">Logout</a></li>
+         
              </ul>
 
 
@@ -24,37 +111,32 @@
                <div class="img-user-profile">
                  <img class="profile-bgHome" src="">
                  {% if request.user.artistinformation.profile_pic %}
-                 <img  src="{{ request.user.artistinformation.profile_pic.url }}"/>
+                 <img class="avatar" src="{{ request.user.artistinformation.profile_pic.url }}"/>
                {% else %}
-                 <img class="avatar" alt="jtojr" src="{% static 'images/cabbage.jpg' %}" />
+                 <img alt="jtojr" src="{% static 'images/cabbage.jpg' %}" />
                {% endif %}
- 
                     </div>
                    <button>Buy art</button>
                    <div class="user-profile-data">
                      <h1>{{request.user}}</h1>
                      <p>main-store.com</p>
+                     <p>{{ request.user.artistinformation.email }}</p>
                    </div> 
-                   <div class="description-profile">digitel | painting | blender | <a href="" title=""><strong></strong></a> latin fill tex :100words;| </div>
-                   <div class="description-profile">{{ request.user.artistinformation.bio }}</div>
+                   <div class="description-profile">digital | painting | blender | <a href="https://basecamelinks" title="link"><strong></strong></a> | latin tex fill</div>
+                   <div class="description-profile"> discription</div>
                 <ul class="data-user">
-                 <li><a><strong>facebook</strong><span>link</span></a></li>
-                 <li><a><strong>insta</strong><span>link</span></a></li>
-                 <li><a><strong>twiter</strong><span>link</span></a></li>
+                 <li><a><strong>Facebook</strong><span>link</span></a></li>
+                 <li><a><strong>Instagram</strong><span>link</span></a></li>
+                 <li><a><strong>Twitter</strong><span>link</span></a></li>
+                    
+                   </div> 
                 </ul>
                </div>
              </div>
          
-   
+    </div>
 
 
-   
-     <footer>
-        
-     </footer>
-    
-</body>
-    
         
    
 
