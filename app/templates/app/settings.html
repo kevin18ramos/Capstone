@@ -1,4 +1,4 @@
-z{% extends 'app/Base.html' %}
+{% extends 'app/Base.html' %}
 {% load static %}
   
 {% block content %}
@@ -99,7 +99,7 @@ nav ul li a{
              <ul>
                 <li><a href="http://127.0.0.1:8000/home/">Home</a></li>
                 <li><a href="http://127.0.0.1:8000/home/#">Art</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#">Logout</a></li>
              </ul>
 
         </nav>
@@ -110,9 +110,8 @@ nav ul li a{
 				<div class="profile-tab-nav border-right">
 					<div class="p-4">
 						<div class="img-circle text-center mb-3">
-						
 							{% if request.user.artistinformation.profile_pic %}
-							<img src="{{ request.user.artistinformation.profile_pic.url }}" alt="Image" class="shadow"/>
+							<img  style="margin-left: 50px;" src="{{ request.user.artistinformation.profile_pic.url }}" alt="Image" class="shadow"/>
 						  {% else %}
 							<img src="{% static 'images/cabbage.jpg' %}" alt="Image" class="shadow"/>
 						  {% endif %}
@@ -343,7 +342,7 @@ nav ul li a{
 
 				
 					<div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="notification-tab">
-						<h3 class="mb-4">Notification Settings</h3>
+						<h3 class="mb-4">Notification Settings(newsletter)</h3>
 						<div class="form-group">
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" value="" id="notification1">
