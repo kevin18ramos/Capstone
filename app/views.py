@@ -134,12 +134,12 @@ def deleteProducts(request, id):
     if current_user == delete_object.user:
         Post.objects.get(id=id).delete()
         return HttpResponseRedirect("/home/")
+    return render(request, '', context)
 
 #update products
 def updateProducts(request, id):                                       
     data = get_object_or_404(Post, id=id)
     form = PostForm(instance=data)                                                               
-
     if request.method == "POST":
         form = PostForm(request.POST, instance=data)
         if form.is_valid():
@@ -148,7 +148,7 @@ def updateProducts(request, id):
     context = {
         "form":form
     }
-    return render(request, 'app/createform.html', context)
+    return render(request, '', context)
 
 
 # cart system not worky rn
