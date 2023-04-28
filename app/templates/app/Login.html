@@ -257,10 +257,10 @@ nav ul li a{
         <!-- logo  has to be plased 200px-500px this can fix any image i think and if not-->
     </div>
     <div>
-        <form method="POST" action="">
+         <form method="POST" action="">
             {% csrf_token %}
             <div class="form-item">
-                <p class="formLabel">Email</p>
+                <p class="formLabel">Username</p>
                 <input type="text" name="username" id="email" class="form-style" autocomplete="off"/>
             </div>
             <div class="form-item">
@@ -273,10 +273,10 @@ nav ul li a{
             <input type="submit" class="login pull-right" value="Log In">
             <div class="clear-fix"></div>
             </div> 
-             {% for message in messages %}
+               {% for message in messages %}
                  <p class = "alert" id="messages">{{message}}</p>
-                 {% endfor %}
-        </form>
+               {% endfor %}
+         </form>
     </div>
 </div>
 
