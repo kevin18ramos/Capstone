@@ -17,7 +17,7 @@ urlpatterns = [
      path("profilepage/", views.findUser, name= "findUser"),
      path("shoppingcart/", views.shoppingcart, name="shoppingcart"),
      path("settingChange/", views.settingChange, name="settingChange"),
-     path('cart/', views.Cart, name='Cart'),
+     path('cart/<itemId>', views.Cart, name='Cart'),
      path('checkout/', views.checkout, name='checkout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
  
