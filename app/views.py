@@ -1,6 +1,7 @@
 from urllib import request
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from .models import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -14,6 +15,9 @@ from django.http.response import HttpResponseNotFound, JsonResponse
 from django.urls import reverse, reverse_lazy
 import stripe
 import json
+from django.shortcuts import (get_object_or_404,
+                              render,
+                              HttpResponseRedirect)
 #from .decorators import *
 
 # home view
@@ -124,7 +128,30 @@ def productsPage(request):
     return render(request, 'app/Products.html', {'products':products})
 
 #delete products
+def deleteProducts(request, id):
+    delete_object = Post.objects.get(id=id)
+    current_user = request.user
+    if current_user == delete_object.user:
+        Post.objects.get(id=id).delete()
+        return HttpResponseRedirect("/home/")
 
+#update products
+def updateProducts(request, id):                                       
+    data = get_object_or_404(Post, id=id)
+    form = PostForm(instance=data)                                                               
+
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=data)
+        if form.is_valid():
+            form.save()
+            return redirect ('home')
+    context = {
+        "form":form
+    }
+    return render(request, 'app/createform.html', context)
+
+
+# cart system not worky rn
 # #add to cart
 # def addToCart(request, itemId):
 #     item = Post.objects.get(id=itemId)
