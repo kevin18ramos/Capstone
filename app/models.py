@@ -45,6 +45,16 @@ class Cart(models.Model):
 
 
 
+class SubscribedUsers(models.Model):
+    email = models.CharField(unique=True, max_length=50)
+    name = models.CharField(max_length=50)
+    # Date_Created = models.DateTimeField(False, True, editable=False)
+
+
+    def __str__(self):
+        return self.email
+
+
 
 
 

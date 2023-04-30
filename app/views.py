@@ -7,6 +7,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from .forms import PostForm
+# from django.core.validators import validate_email
+from django.core.validators import ValidationError
+import re
+from .models import SubscribedUsers
+from django.core.mail import send_mail
+from django.conf import settings
 from .forms import *
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
@@ -219,3 +225,87 @@ def findUser(request):
 def logoutUser(request):
     logout(request)
     return redirect('login')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# news--
+
+
+
+
+
+def index(request):
+    if request.method == 'POST':
+        post_data = request.POST.copy()
+        email = post_data.get("email", None)
+        name = post_data.get("name", None)
+        subscribedUsers = SubscribedUsers()
+        subscribedUsers.email = email
+        subscribedUsers.name = name
+        subscribedUsers.save()
+        # send a confirmation mail
+        subject = 'NewsLetter Subscription'
+        message = 'Hello ' + name + ', Thanks for subseibing us. You will get notification of latest artiles posted on our website. Please do not reply on this email.'
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [email, ]
+        send_mail(subject, message, email_from, recipient_list)
+        res = JsonResponse({'msg': 'Thanks. Subscribed Successfully!'})
+        return res
+    return render(request, 'app/index.html')
+
+def validate_email(request): 
+    email = request.POST.get("email", None)   
+    if email is None:
+        res = JsonResponse({'msg': 'Email is required.'})
+    elif SubscribedUsers.objects.get(email = email):
+        res = JsonResponse({'msg': 'Email Address already exists'})
+    elif not re.match(r"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", email):
+        res = JsonResponse({'msg': 'Invalid Email Address'})
+    else:
+        res = JsonResponse({'msg': ''})
+    return res
+
+
+def newsletter(request):
+    # if request.method == 'POST':
+    #     form = NewsletterForm(request.POST)
+    #     if form.is_valid():
+    #         subject = form.cleaned_data.get('subject')
+    #         receivers = form.cleaned_data.get('receivers').split(',')
+    #         email_message = form.cleaned_data.get('message')
+
+    #         mail = EmailMessage(subject, email_message, f"PyLessons <{request.user.email}>", bcc=receivers)
+    #         mail.content_subtype = 'html'
+
+    #         if mail.send():
+    #             messages.success(request, "Email sent succesfully")
+    #         else:
+    #             messages.error(request, "There was an error sending email")
+
+    #     else:
+    #         for error in list(form.errors.values()):
+    #             messages.error(request, error)
+
+    #     return redirect('/')
+
+    form = NewsletterForm()
+    form.fields['receivers'].initial = ','.join([active.email for active in SubscribedUsers.objects.all()])
+    return render(request=request, template_name='app/index.html', context={'form': form})
+
+
+def letter(request):
+    return render(request, 'newsletter.html')
