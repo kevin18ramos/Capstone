@@ -18,8 +18,10 @@ urlpatterns = [
      path("profilepage/", views.findUser, name= "findUser"),
      path("shoppingcart/", views.shoppingcart, name="shoppingcart"),
      path("settingChange/", views.settingChange, name="settingChange"),
-     # path('cart/<itemId>', views.Cart, name='Cart'),
-     # path('checkout/', views.checkout, name='checkout'),
+     path('cancel/', CancelView.as_view(), name='cancel'),
+     path('success/', SuccessView.as_view(), name='success'),
+     path('create-checkout-session/<pk>/', CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
+     path('landing/', ProductLandingPageView.as_view(), name='landing')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
  
 

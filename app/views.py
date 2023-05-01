@@ -20,6 +20,7 @@ from django.shortcuts import (get_object_or_404,
                               HttpResponseRedirect)
 from django.views import View
 from .models import stripePrice
+from django.views.generic import TemplateView
 #from .decorators import *
 
 # home view
@@ -175,8 +176,6 @@ def updateProducts(request, id):
     return render(request, '', context)
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
-
-
 class CreateCheckoutSessionView(View):
     def post(self, request, *args, **kwargs):
         price = stripePrice.objects.get(id=self.kwargs["pk"])
@@ -196,7 +195,25 @@ class CreateCheckoutSessionView(View):
             cancel_url=domain + '/cancel/',
         )
         return redirect(checkout_session.url)
-    
+
+class ProductLandingPageView(TemplateView):
+    template_name = "landing.html"
+
+    def get_context_data(self, **kwargs):
+        product = Post.objects.get(name="Test Product")
+        prices = stripePrice.objects.filter(product=product)
+        context = super(ProductLandingPageView,
+                        self).get_context_data(**kwargs)
+        context.update({
+            "product": product,
+            "prices": prices
+        })
+        return context
+class SuccessView(TemplateView):
+    template_name = "success.html"
+
+class CancelView(TemplateView):
+    template_name = "cancel.html"
 
 #login register and logout
 def loginPage(request):
