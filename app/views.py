@@ -18,6 +18,8 @@ import json
 from django.shortcuts import (get_object_or_404,
                               render,
                               HttpResponseRedirect)
+from django.views import View
+from .models import stripePrice
 #from .decorators import *
 
 # home view
@@ -41,7 +43,9 @@ def settingChange(request):
             password_x1 = request.POST.get('password_x1')
             password_x2 = request.POST.get('password_x2')
             firstname = request.POST.get('firstname')
-            lastname = request.POST.get('lastname')
+            Instalink = request.POST.get('Instalink')
+            Facebooklink = request.POST.get('Facebooklink')
+            Twitterlink = request.POST.get('Twitterlink')
             email = request.POST.get('email')
             name = request.POST.get('name')
             bio = request.POST.get('bio')
@@ -79,8 +83,18 @@ def settingChange(request):
                 CurrentArtist.save()
                 messages.info(request, 'First name successfully changed.')
                 return redirect('settingChange')
-            elif lastname != None and lastname != CurrentArtist.lastname and lastname != "":
-                CurrentArtist.lastname = lastname
+            elif Instalink != None and Instalink != CurrentArtist.Instalink and Instalink != "":
+                CurrentArtist.Instalink = Instalink
+                CurrentArtist.save()
+                messages.info(request, 'Last name successfully changed.')
+                return redirect('settingChange')
+            elif Facebooklink != None and Facebooklink != CurrentArtist.Facebooklink and Facebooklink != "":
+                CurrentArtist.Facebooklink = Facebooklink
+                CurrentArtist.save()
+                messages.info(request, 'Last name successfully changed.')
+                return redirect('settingChange')
+            elif Twitterlink != None and Twitterlink != CurrentArtist.Twitterlink and Twitterlink != "":
+                CurrentArtist.Twitterlink = Twitterlink
                 CurrentArtist.save()
                 messages.info(request, 'Last name successfully changed.')
                 return redirect('settingChange')
@@ -103,7 +117,7 @@ def settingChange(request):
             currentUser = request.user  
 
             #checks whether the current artist has any post
-            posted = Post.objects.filter(user=currentUser).first() 
+            posted = Post.objects.filter(user=currentUser)
             if posted is None:
                 form = PostForm(request.POST, request.FILES)
                 post = form.save(commit=False) # Save form instance to post variable
@@ -160,46 +174,29 @@ def updateProducts(request, id):
     }
     return render(request, '', context)
 
-
-# cart system not worky rn
-# #add to cart
-# def addToCart(request, itemId):
-#     item = Post.objects.get(id=itemId)
-#     cartItem, created = Cart.objects.get_or_create(
-#         user=request.user,
-#         item=item,
-#         defaults={
-#             'quantity': 1,
-#             'price': item.price,
-#         }
-#     )
-#     if not created:
-#         cartItem.quantity += 1
-#         cartItem.save()
-#     return redirect('Cart')
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
-# #checkout
-# stripe.api_key = settings.STRIPE_SECRET_KEY
-
-# def checkout(request):
-#     cartItems = Cart.objects.filter(user=request.user)
-#     total_price = sum([item.price * item.quantity for item in cartItems])
-#     if request.method == 'POST':
-#         token = request.POST['stripeToken']
-#         try:
-#             charge = stripe.Charge.create(
-#                 amount=int(total_price * 100),
-#                 currency='usd',
-#                 description='Example charge',
-#                 source=token,
-#             )
-#             for item in cartItems:
-#                 item.delete()
-#             return redirect('home')
-#         except stripe.error.CardError as e:
-#             return render(request, 'checkout.html', {'error': e.error.message})
-#     return render(request, 'checkout.html', {'total_price': total_price})
+class CreateCheckoutSessionView(View):
+    def post(self, request, *args, **kwargs):
+        price = stripePrice.objects.get(id=self.kwargs["pk"])
+        domain = "https://yourdomain.com"
+        if settings.DEBUG:
+            domain = "http://127.0.0.1:8000"
+        checkout_session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[
+                {
+                    'price': price.stripe_price_id,
+                    'quantity': 1,
+                },
+            ],
+            mode='payment',
+            success_url=domain + '/success/',
+            cancel_url=domain + '/cancel/',
+        )
+        return redirect(checkout_session.url)
+    
 
 #login register and logout
 def loginPage(request):

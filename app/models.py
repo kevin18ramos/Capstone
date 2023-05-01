@@ -15,8 +15,11 @@ class ArtistInformation(models.Model):
     email = models.CharField(max_length=200, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    websiteLink = models.URLField(max_length=200, null=True)
+    Instalink = models.URLField(max_length=200, null=True)
+    Facebooklink = models.URLField(max_length=200, null=True)
+    Twitterlink = models.URLField(max_length=200, null=True)
     bio = models.TextField(null=True, blank=True)
+    
 
     def __str__(self):
         return self.name
@@ -29,9 +32,19 @@ class Post(models.Model):
     description = models.CharField(max_length=200) 
     date = models.DateField()
     numOfArts = models.IntegerField(default=1)
-    price = price = models.DecimalField(decimal_places=2, max_digits=10)
+    price = models.DecimalField(decimal_places=2, max_digits=10)
+    stripe_product_id = models.CharField(max_length=100)
+
     def __str__(self):
         return self.name
+     
+class stripePrice(models.Model):
+    product = models.ForeignKey(Post, on_delete=models.CASCADE)
+    stripe_price_id = models.CharField(max_length=100)
+    price = models.IntegerField(default=0)  # cents
+    
+    def get_display_price(self):
+        return "{0:.2f}".format(self.price / 100)
     
 # class Cart(models.Model):
 #     id = models.BigAutoField(primary_key=True)
