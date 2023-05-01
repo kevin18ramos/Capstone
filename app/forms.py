@@ -24,3 +24,9 @@ class NewsletterForm(forms.Form):
     subject = forms.CharField()
     receivers = forms.CharField()
     message = forms.CharField(widget=TinyMCE(), label="Email content")
+
+
+class MineForm(forms.ModelForm):
+    class Meta:
+        model = Mine
+        fields = ('name','email')

@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,9 +41,16 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'tinymce',
     'crispy_forms',
+    'bootstrap4',
+    'crispy_bootstrap4'
 
 
 ]
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

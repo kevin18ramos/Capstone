@@ -12,6 +12,7 @@ from django.core.validators import ValidationError
 import re
 from .models import SubscribedUsers
 from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from django.conf import settings
 from .forms import *
 from django.views.decorators.csrf import csrf_exempt
@@ -281,31 +282,32 @@ def validate_email(request):
 
 
 def newsletter(request):
-    # if request.method == 'POST':
-    #     form = NewsletterForm(request.POST)
-    #     if form.is_valid():
-    #         subject = form.cleaned_data.get('subject')
-    #         receivers = form.cleaned_data.get('receivers').split(',')
-    #         email_message = form.cleaned_data.get('message')
+    if request.method == 'POST':
+        form = NewsletterForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data.get('subject')
+            receivers = form.cleaned_data.get('receivers').split(',')
+            email_message = form.cleaned_data.get('message')
 
-    #         mail = EmailMessage(subject, email_message, f"PyLessons <{request.user.email}>", bcc=receivers)
-    #         mail.content_subtype = 'html'
+            mail = EmailMessage(subject, email_message, f"PyLessons <{request.user.email}>", bcc=receivers)
+            mail.content_subtype = 'html'
 
-    #         if mail.send():
-    #             messages.success(request, "Email sent succesfully")
-    #         else:
-    #             messages.error(request, "There was an error sending email")
+            if mail.send():
+                messages.success(request, "Email sent succesfully")
+            else:
+                messages.error(request, "There was an error sending email")
 
-    #     else:
-    #         for error in list(form.errors.values()):
-    #             messages.error(request, error)
+        else:
+            for error in list(form.errors.values()):
+                messages.error(request, error)
 
-    #     return redirect('/')
+        return redirect('/')
 
     form = NewsletterForm()
     form.fields['receivers'].initial = ','.join([active.email for active in SubscribedUsers.objects.all()])
-    return render(request=request, template_name='app/index.html', context={'form': form})
+    return render(request=request, template_name='app/newsletter.html', context={'form': form})
 
 
-def letter(request):
-    return render(request, 'newsletter.html')
+# def letter(request):
+#     return render(request, 'app/newsletter.html')
+
