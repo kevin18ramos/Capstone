@@ -30,7 +30,6 @@ class Post(models.Model):
     date = models.DateField()
     numOfArts = models.IntegerField(default=1)
     price = price = models.DecimalField(decimal_places=2, max_digits=10)
-    
     def __str__(self):
         return self.name
     

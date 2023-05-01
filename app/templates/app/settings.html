@@ -97,7 +97,7 @@ nav ul li a{
         <nav>
              <!-- <img src="images/logo.png" class="logo"> -->
              <ul>
-                <li><a href="http://127.0.0.1:8000/home/">Home</a></li>
+                <li><a href="{% url 'home'%}">Home</a></li>
                 <li><a href="http://127.0.0.1:8000/home/#">Art</a></li>
                 <li><a href="#">Logout</a></li>
              </ul>
@@ -133,7 +133,7 @@ nav ul li a{
 						</a>
 						<a class="nav-link" id="application-tab" data-toggle="pill" href="#application" role="tab" aria-controls="application" aria-selected="false">
 							<i class="fa fa-tv text-center mr-1"></i> 
-							Images
+							Art
 						</a>
 						<a class="nav-link" id="notification-tab" data-toggle="pill" href="#notification" role="tab" aria-controls="notification" aria-selected="false">
 							<i class="fa fa-bell text-center mr-1"></i> 
@@ -252,95 +252,52 @@ nav ul li a{
 							<button class="btn btn-light">Cancel</button>
 						</div>
 					</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 					<form method="POST"  enctype="multipart/form-data" class="tab-pane fade" id="application" role="tabpanel" aria-labelledby="application-tab">
 						{% csrf_token %} {%comment%}{{post_form}} {% endcomment %}
 						<div class="addProductsPage"></div>
-						<div>
-							<h3 class="mb-4">Art Form</h3>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										  <label>Type your artwork's name:</label>
-										  <p><input type="text" class="form-control" name = "name" placeholder=""> {{post_form.name}}</p>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										  <label>Type the date the art was made: (yyyy-mm-dd)</label>
-										  <p><input type="date" class="form-control" name = "name" placeholder="">{{post_form.date}}</p>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										  <label>How many artworks are there:</label>
-										  <p><input type="number" class="form-control" name = "name" placeholder="">{{post_form.numOfArts}}</p>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										  <label>What would you price your artwork at:</label>
-										  <p><input  type="number" min="1" step="any" class="form-control" name = "name" placeholder="">{{post_form.price}}</p>
-									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="form-group">
-										  <label>Description:</label>
-										<textarea class="form-control" name = "bio" rows="4">{{post_form.description}}</textarea>
-										
-									</div>
-								</div>
-							</div>
+							{% comment %} connects the addproductspage {% endcomment %}
 							<div>
-								<input class="addProductsButton" type="file" id="myfile" name="myfile">
-								<button class="btn btn-primary">Update</button>
-								<button class="btn btn-light">Cancel</button>
-							</div>
-						</div>
+								<h3 class="mb-4">Art Form</h3>
+								<div class="row">
+								  <div class="col-md-6">
+									<div class="form-group">
+										<label>Type your artwork's name:</label>
+										<p> {{post_form.name}}</p>
+									</div>
+								  </div>
+								  <div class="col-md-6">
+									<div class="form-group">
+										<label>Type the date the art was made: (yyyy-mm-dd)</label>
+										<p>{{post_form.date}}</p>
+									</div>
+								  </div>
+								  <div class="col-md-6">
+									<div class="form-group">
+										<label>How many artworks are there:</label>
+										<p>{{post_form.numOfArts}}</p>
+									</div>
+								  </div>
+								  <div class="col-md-6">
+									<div class="form-group">
+										<label>What would you price your artwork at:</label>
+										<p>{{post_form.price}}</p>
+									</div>
+								  </div>
+								  <div class="col-md-12">
+									<div class="form-group">
+										<label>Description:</label>
+									 {{post_form.description}}</textarea>  
+									</div>
+								  </div>
+								</div>
+								<div>
+									{{post_form.picture}}
+								  <button class="btn btn-primary">Update</button>
+								  <button class="btn btn-light">Cancel</button>
+								</div>
+					</div>
 					</form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-				
+	
 					<div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="notification-tab">
 						<h3 class="mb-4">Notification Settings(newsletter)</h3>
 						<div class="form-group">
