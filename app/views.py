@@ -271,7 +271,7 @@ def index(request):
 def validate_email(request): 
     email = request.POST.get("email", None)   
     if email is None:
-        res = JsonResponse({'msg': 'Email is required.'})
+        res = JsonResponse({'msg': 'Emaiil is required.'})
     elif SubscribedUsers.objects.get(email = email):
         res = JsonResponse({'msg': 'Email Address already exists'})
     elif not re.match(r"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", email):
