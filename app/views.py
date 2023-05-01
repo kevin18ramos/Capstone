@@ -293,7 +293,7 @@ def newsletter(request):
             mail.content_subtype = 'html'
 
             if mail.send():
-                messages.success(request, "Email sent succesffffully")
+                messages.success(request, "Email sent succesfully")
             else:
                 messages.error(request, "There was an error sending email")
 
