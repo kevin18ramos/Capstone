@@ -3,16 +3,21 @@
 {% load crispy_forms_tags %}
   
 {% block content %}
-        <div class="content-section">
-            <form method="POST">
-                {%csrf_token %}
-                {{form|crispy }}
-                {{form.media }}
-                <div class="form-group">
-                    <button class="btn btn-outline-info" type="submit">Sedddnd</button>
-                </div>
-            </form>
+        <div class="col-lg-6 col-md-6" style="margin: 100px auto; display: block;">
+
+            <div class="form-group">
+                <form method="POST" style="text-align: center;">
+                    
+                    {%csrf_token %}
+                    {{form|crispy }}
+                    {{form.media }}
+                    <div class="form-group">
+                        <button class="btn btn-outline-info" type="submit">Sedddnd</button>
+                    </div>
+                </form>
+            </div>
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
 {% endblock %} 
