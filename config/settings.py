@@ -123,9 +123,9 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-EMAIL_HOST_USER = 'zrangel23@basecampcodingacademy.org'
-EMAIL_FROM = 'zrangel23@basecampcodingacademy.org'
-EMAIL_HOST_PASSWORD = 'bzqcbdmrunxxpdot'
+EMAIL_HOST_USER = 'thope1437@gmail.com'
+EMAIL_FROM = 'thope1437@gmail.com'
+EMAIL_HOST_PASSWORD = 'paolqoubdzdfqhhs'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_PORT = 587

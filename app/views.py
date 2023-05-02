@@ -260,10 +260,10 @@ def index(request):
         subscribedUsers.save()
         # send a confirmation mail
         subject = 'NewsLetter Subscription'
-        message = 'Hello ' + name + ', Thanks for subseibing us. You will get notification of latest artiles posted on our website. Please do not reply on this email.'
+        message = 'Hello ' + name + ', Thanks for subseibing us. You will get notification of latest  posted art on our website. Please do not reply on this email.'
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [email, ]
-        send_mail(subject, message, email_from, recipient_list)
+        send_mail(subject, message, email_from, recipient_list,  fail_silently=True)
         res = JsonResponse({'msg': 'Thanks. Subscribed Successfully!'})
         return res
     return render(request, 'app/index.html')
@@ -289,19 +289,20 @@ def newsletter(request):
             receivers = form.cleaned_data.get('receivers').split(',')
             email_message = form.cleaned_data.get('message')
 
-            mail = EmailMessage(subject, email_message, f"PyLessons <{request.user.email}>", bcc=receivers)
+            mail = EmailMessage(subject, email_message, settings.EMAIL_HOST_USER, bcc=receivers)
             mail.content_subtype = 'html'
+            mail.send()
 
-        #     if mail.send():
-        #         messages.success(request, "Email sent succesfully")
-        #     else:
-        #         messages.error(request, "There was an error sending email")
+            if mail.send():
+                messages.success(request, "Email sent succesfully")
+            else:
+                messages.error(request, "There was an error sending email")
 
-        # else:
-        #     for error in list(form.errors.values()):
-        #         messages.error(request, error)
+        else:
+            for error in list(form.errors.values()):
+                messages.error(request, error)
 
-        # return redirect("")
+        return redirect("/")
 
     form = NewsletterForm()
     form.fields['receivers'].initial = ','.join([active.email for active in SubscribedUsers.objects.all()])
