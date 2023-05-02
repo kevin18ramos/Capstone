@@ -38,20 +38,22 @@ def settingChange(request):
     CurrentArtist = ArtistInformation.objects.get(user=CurrentUser)
     form = PostForm(request.POST)
     currentUser = request.user 
-    if form.is_valid():
-        if request.method == 'POST':
-            original_password = request.POST.get('original_password')
-            password_x1 = request.POST.get('password_x1')
-            password_x2 = request.POST.get('password_x2')
-            firstname = request.POST.get('firstname')
-            Instalink = request.POST.get('Instalink')
-            Facebooklink = request.POST.get('Facebooklink')
-            Twitterlink = request.POST.get('Twitterlink')
-            email = request.POST.get('email')
-            name = request.POST.get('name')
-            bio = request.POST.get('bio')
+    print("went through the user")
+    
+   
+         
+    if request.method == 'POST':
+        original_password = request.POST.get('original_password')
+        password_x1 = request.POST.get('password_x1')
+        password_x2 = request.POST.get('password_x2')
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+        email = request.POST.get('email')
+        name1 = request.POST.get('name1')
+        bio = request.POST.get('bio')
 
-            if original_password != None:
+
+        if original_password != None:
                 if CurrentUser.check_password(original_password) == True:
                     if password_x1 == password_x2:
                         CurrentUser.set_password(password_x1)
@@ -66,22 +68,24 @@ def settingChange(request):
                     print("password not match og")
                     messages.info(request, 'Passwords is incorrect.')
                     return redirect('home')
-            elif name != CurrentArtist.name and name != None and name != "":
+        elif name1 != CurrentArtist.name and name1 != None and name1 != "":
                 try:
-                    user_with_name = User.objects.get(username=name)
+                    user_with_name = User.objects.get(username=name1)
                     messages.info(request, 'This username is already taken. Please choose another one.')
                     return redirect('settingChange')
                 except User.DoesNotExist:
                     CurrentUser = request.user
-                    CurrentUser.username = name
+                    CurrentUser.username = name1
                     CurrentUser.save()
-                    CurrentArtist.name = name
+                    CurrentArtist.name = name1
                     CurrentArtist.save()
                     messages.info(request, 'Username successfully changed.')
                     return redirect('settingChange')
-            elif firstname != None and firstname != CurrentArtist.firstname and firstname != "":
+        elif firstname != None and firstname != CurrentArtist.firstname and firstname != "":
+                print("went through the elif")
                 CurrentArtist.firstname = firstname
                 CurrentArtist.save()
+                print("went through the save")
                 messages.info(request, 'First name successfully changed.')
                 return redirect('settingChange')
             # elif Instalink != None and Instalink != CurrentArtist.Instalink and Instalink != "":
@@ -99,45 +103,51 @@ def settingChange(request):
             #     CurrentArtist.save()
             #     messages.info(request, 'Last name successfully changed.')
             #     return redirect('settingChange')
-            elif email != None and email != CurrentArtist.email and email != "":
+        elif email != None and email != CurrentArtist.email and email != "":
                 CurrentArtist.email = email
                 CurrentArtist.save()
                 messages.info(request, 'Email successfully changed.')
                 return redirect('settingChange')
-            elif bio != "" and bio != CurrentArtist.bio and bio != None:
+        elif bio != "" and bio != CurrentArtist.bio and bio != None:
                 CurrentArtist.bio = bio
                 CurrentArtist.save()
                 messages.info(request, 'Bio successfully changed.')
                 return redirect('settingChange')
-            elif request.FILES.get('profilepic'):
+        elif request.FILES.get('profilepic'):
                 profilepic = request.FILES.get('profilepic')
                 CurrentArtist.profile_pic = profilepic
                 CurrentArtist.save()
                 messages.info(request, 'Profile picture successfully changed.')
-                return redirect('settingChange') 
-            currentUser = request.user  
-
-            #checks whether the current artist has any post
-            posted = Post.objects.filter(user=currentUser)
-            if posted is None:
-                form = PostForm(request.POST, request.FILES)
-                post = form.save(commit=False) # Save form instance to post variable
-                post.user = currentUser # Set user field
-                post.save() # Save to the database  
-                messages.info(request, 'Product Posted')
                 return redirect('settingChange')
-            
-            #updates instead of adding to prexisting object
-            else:                                                             
-                if request.method == "POST":
-                    form = PostForm(request.POST, request.FILES, instance=posted)
-                    if form.is_valid():
-                        form.save()
-                        messages.info(request, 'Product successfully changed.')
-                        return redirect ('settingChange')
-                else:
-                    form = PostForm(instance=posted)
-                return render(request, 'app/settings.html', {'post_form': form})       
+        else:
+            currentUser = request.user  
+            #checks whether the current artist has any post
+            posted = Post.objects.filter(user=currentUser).first() # use .first() to retrieve a single instance
+            form = PostForm(request.POST, request.FILES, instance=posted) # pass the instance to the form
+            if form.is_valid():
+                if posted is None:
+                    form = PostForm(request.POST, request.FILES)
+                    post = form.save(commit=False) # Save form instance to post variable
+                    post.user = currentUser # Set user field
+                    post.save() # Save to the database  
+                    messages.info(request, 'Product Posted')
+                    return redirect('settingChange')
+                
+                # updates instead of adding to preexisting object
+                else:                                                             
+                    if request.method == "POST":
+                        form = PostForm(request.POST, request.FILES, instance=posted)
+                        if form.is_valid():
+                            form.save()
+                            messages.info(request, 'Product successfully changed.')
+                            return redirect ('settingChange')
+                    else:
+                        form = PostForm(instance=posted)  
+            else:
+                for field, errors in form.errors.items():
+                    for error in errors:
+                        print(f"{field}: {error}")    
+            return render(request, 'app/settings.html', {'post_form' : form})
     return render(request, 'app/settings.html', {'post_form' : form})
 
 
