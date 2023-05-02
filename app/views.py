@@ -84,21 +84,21 @@ def settingChange(request):
                 CurrentArtist.save()
                 messages.info(request, 'First name successfully changed.')
                 return redirect('settingChange')
-            elif Instalink != None and Instalink != CurrentArtist.Instalink and Instalink != "":
-                CurrentArtist.Instalink = Instalink
-                CurrentArtist.save()
-                messages.info(request, 'Last name successfully changed.')
-                return redirect('settingChange')
-            elif Facebooklink != None and Facebooklink != CurrentArtist.Facebooklink and Facebooklink != "":
-                CurrentArtist.Facebooklink = Facebooklink
-                CurrentArtist.save()
-                messages.info(request, 'Last name successfully changed.')
-                return redirect('settingChange')
-            elif Twitterlink != None and Twitterlink != CurrentArtist.Twitterlink and Twitterlink != "":
-                CurrentArtist.Twitterlink = Twitterlink
-                CurrentArtist.save()
-                messages.info(request, 'Last name successfully changed.')
-                return redirect('settingChange')
+            # elif Instalink != None and Instalink != CurrentArtist.Instalink and Instalink != "":
+            #     CurrentArtist.Instalink = Instalink
+            #     CurrentArtist.save()
+            #     messages.info(request, 'Last name successfully changed.')
+            #     return redirect('settingChange')
+            # elif Facebooklink != None and Facebooklink != CurrentArtist.Facebooklink and Facebooklink != "":
+            #     CurrentArtist.Facebooklink = Facebooklink
+            #     CurrentArtist.save()
+            #     messages.info(request, 'Last name successfully changed.')
+            #     return redirect('settingChange')
+            # elif Twitterlink != None and Twitterlink != CurrentArtist.Twitterlink and Twitterlink != "":
+            #     CurrentArtist.Twitterlink = Twitterlink
+            #     CurrentArtist.save()
+            #     messages.info(request, 'Last name successfully changed.')
+            #     return redirect('settingChange')
             elif email != None and email != CurrentArtist.email and email != "":
                 CurrentArtist.email = email
                 CurrentArtist.save()
@@ -197,23 +197,23 @@ class CreateCheckoutSessionView(View):
         return redirect(checkout_session.url)
 
 class ProductLandingPageView(TemplateView):
-    template_name = "landing.html"
-
+    template_name = "app/landing.html"
     def get_context_data(self, **kwargs):
-        product = Post.objects.get(name="Test Product")
-        prices = stripePrice.objects.filter(product=product)
+        post = Post.objects.get(name="guts")
+        prices = stripePrice.objects.filter(post=post)
         context = super(ProductLandingPageView,
                         self).get_context_data(**kwargs)
         context.update({
-            "product": product,
+            "product": post,
             "prices": prices
         })
         return context
+        
 class SuccessView(TemplateView):
-    template_name = "success.html"
+    template_name = "app/success.html"
 
 class CancelView(TemplateView):
-    template_name = "cancel.html"
+    template_name = "app/cancel.html"
 
 #login register and logout
 def loginPage(request):

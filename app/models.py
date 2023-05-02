@@ -22,14 +22,14 @@ class ArtistInformation(models.Model):
         return self.name
     
 
-class Url(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    Instalink = models.URLField(max_length=200, null=True)
-    Facebooklink = models.URLField(max_length=200, null=True)
-    Twitterlink = models.URLField(max_length=200, null=True)
-    
-    def __str__(self):
-        return self.user
+# class Url(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     Instalink = models.URLField(max_length=200, null=True)
+#     Facebooklink = models.URLField(max_length=200, null=True)
+#     Twitterlink = models.URLField(max_length=200, null=True)
+
+#     def __str__(self):
+#         return self.user
 
 class Post(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -46,7 +46,7 @@ class Post(models.Model):
         return self.name
      
 class stripePrice(models.Model):
-    product = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     stripe_price_id = models.CharField(max_length=100)
     price = models.IntegerField(default=0)  # cents
     
@@ -61,6 +61,7 @@ class stripePrice(models.Model):
 #     customer_email = models.EmailField(default='example@gmail.com')
 #     stripe_payment_intent = models.CharField(max_length=200)
 #     has_paid = models.BooleanField(default=False)
+
 
 
 
