@@ -38,7 +38,7 @@ def settingChange(request):
     CurrentArtist = ArtistInformation.objects.get(user=CurrentUser)
     form = PostForm(request.POST)
     currentUser = request.user 
-    print("went through the user")
+    deleteId = Post.objects.get(user=currentUser)
     
    
          
@@ -147,8 +147,8 @@ def settingChange(request):
                 for field, errors in form.errors.items():
                     for error in errors:
                         print(f"{field}: {error}")    
-            return render(request, 'app/settings.html', {'post_form' : form})
-    return render(request, 'app/settings.html', {'post_form' : form})
+            return render(request, 'app/settings.html', {'post_form' : form, 'deleteId':deleteId})
+    return render(request, 'app/settings.html', {'post_form' : form, 'deleteId':deleteId})
 
 
 @login_required(login_url = 'login')
@@ -168,6 +168,7 @@ def deleteProducts(request, id):
     current_user = request.user
     if current_user == delete_object.user:
         Post.objects.get(id=id).delete()
+        messages.info(request, 'Product successfully changed.')
         return HttpResponseRedirect("/home/")
     return render(request, '', context)
 
