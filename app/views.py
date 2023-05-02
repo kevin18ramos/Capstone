@@ -292,16 +292,16 @@ def newsletter(request):
             mail = EmailMessage(subject, email_message, f"PyLessons <{request.user.email}>", bcc=receivers)
             mail.content_subtype = 'html'
 
-            if mail.send():
-                messages.success(request, "Email sent succesfully")
-            else:
-                messages.error(request, "There was an error sending email")
+        #     if mail.send():
+        #         messages.success(request, "Email sent succesfully")
+        #     else:
+        #         messages.error(request, "There was an error sending email")
 
-        else:
-            for error in list(form.errors.values()):
-                messages.error(request, error)
+        # else:
+        #     for error in list(form.errors.values()):
+        #         messages.error(request, error)
 
-        return redirect('admin/')
+        # return redirect("")
 
     form = NewsletterForm()
     form.fields['receivers'].initial = ','.join([active.email for active in SubscribedUsers.objects.all()])
