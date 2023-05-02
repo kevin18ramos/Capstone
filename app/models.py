@@ -15,14 +15,21 @@ class ArtistInformation(models.Model):
     email = models.CharField(max_length=200, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    bio = models.TextField(null=True, blank=True)
+    
+    def __str__(self):
+        return self.name
+    
+
+class Url(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     Instalink = models.URLField(max_length=200, null=True)
     Facebooklink = models.URLField(max_length=200, null=True)
     Twitterlink = models.URLField(max_length=200, null=True)
-    bio = models.TextField(null=True, blank=True)
     
-
     def __str__(self):
-        return self.name
+        return self.user
 
 class Post(models.Model):
     id = models.BigAutoField(primary_key=True)
