@@ -37,9 +37,11 @@ def settingChange(request):
     CurrentArtist = ArtistInformation.objects.get(user=CurrentUser)
     form = PostForm(request.POST)
     currentUser = request.user 
-    deleteId = Post.objects.get(user=currentUser)
-    
-   
+    try:
+        deleteId = Post.objects.get(user=currentUser)
+    except:
+        print("account has not made a post")
+        deleteId = ""
          
     if request.method == 'POST':
         original_password = request.POST.get('original_password')
