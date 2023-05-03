@@ -19,7 +19,6 @@ from django.shortcuts import (get_object_or_404,
                               render,
                               HttpResponseRedirect)
 from django.views import View
-from .models import stripePrice
 from django.views.generic import TemplateView
 #from .decorators import *
 
