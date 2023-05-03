@@ -7,20 +7,18 @@ from django.conf.urls.static import static
 
 urlpatterns = [
      path("admin/", admin.site.urls),
-     path("home/", views.home, name="home"),
+     path("", views.home, name="home"),
      path("Login/", views.loginPage, name="login"),
      path("Register/", views.registerPage, name="register"),
      path("Profile/", views.profile, name="profile"),
      path("logout/", views.logoutUser, name="logout"),
      path("products/add/", views.addProductsPage, name= "addProducts"),
-     path("products/delete/<int>", views.deleteProducts, name= "deleteProducts"),
-     path("products/update/<int>", views.updateProducts, name= "updateProducts"),
      path("products/", views.productsPage, name= "products"),
      path("profilepage/", views.findUser, name= "findUser"),
      path("shoppingcart/", views.shoppingcart, name="shoppingcart"),
      path("settingChange/", views.settingChange, name="settingChange"),
-     # path('cart/<itemId>', views.Cart, name='Cart'),
-     # path('checkout/', views.checkout, name='checkout'),
+     path('cart/<itemId>', views.Cart, name='Cart'),
+     path('checkout/', views.checkout, name='checkout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
  
 

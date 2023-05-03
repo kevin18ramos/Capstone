@@ -19,16 +19,16 @@ a {
 }
 
 .profile-user-page .img-user-profile {
-  margin: 0 auto;
+    margin: 0 auto;
   text-align: center; 
 }
 .profile-user-page .img-user-profile .profile-bgHome {
-  border-bottom: .2em solid #f5f5f5;
+    border-bottom: .2em solid #f5f5f5;
   width: 44.23em;
   height: 16em;
   }
 .profile-user-page .img-user-profile .avatar {
-  margin: 0 auto;
+    margin: 0 auto;
   background: #fff;
   width: 7em;
   height: 7em;
@@ -38,7 +38,7 @@ a {
   box-shadow: 0 0 .1em rgba(0, 0, 0, 0.35);
 }
 .profile-user-page button {
-   position: absolute;
+    position: absolute;
   font-size: 13px;
   font-weight: bold;
   cursor: pointer;
