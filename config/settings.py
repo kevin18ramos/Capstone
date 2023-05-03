@@ -132,3 +132,5 @@ if DEBUG:
 # else: 
 #     STRIPE_PUBLIC_KEY = #put actual keys here later
 #     STRIPE_SECRET_KEY = #put actual keys here later
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY= 'same-origin-allow-popups'

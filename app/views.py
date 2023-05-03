@@ -34,6 +34,7 @@ def shoppingcart(request):
 @login_required(login_url = 'login')
 def settingChange(request):
     CurrentUser = request.user
+    CurrentUrl = Url.objects.get(user=CurrentUser)
     CurrentArtist = ArtistInformation.objects.get(user=CurrentUser)
     form = PostForm(request.POST)
     currentUser = request.user 
@@ -48,7 +49,9 @@ def settingChange(request):
         password_x1 = request.POST.get('password_x1')
         password_x2 = request.POST.get('password_x2')
         firstname = request.POST.get('firstname')
-        lastname = request.POST.get('lastname')
+        Instalink = request.POST.get('Instalink')
+        Facebooklink = request.POST.get('Facebooklink')
+        Twitterlink = request.POST.get('Twitterlink')
         email = request.POST.get('email')
         name1 = request.POST.get('name1')
         bio = request.POST.get('bio')
@@ -89,21 +92,21 @@ def settingChange(request):
                 print("went through the save")
                 messages.info(request, 'First name successfully changed.')
                 return redirect('settingChange')
-            # elif Instalink != None and Instalink != CurrentArtist.Instalink and Instalink != "":
-            #     CurrentArtist.Instalink = Instalink
-            #     CurrentArtist.save()
-            #     messages.info(request, 'Last name successfully changed.')
-            #     return redirect('settingChange')
-            # elif Facebooklink != None and Facebooklink != CurrentArtist.Facebooklink and Facebooklink != "":
-            #     CurrentArtist.Facebooklink = Facebooklink
-            #     CurrentArtist.save()
-            #     messages.info(request, 'Last name successfully changed.')
-            #     return redirect('settingChange')
-            # elif Twitterlink != None and Twitterlink != CurrentArtist.Twitterlink and Twitterlink != "":
-            #     CurrentArtist.Twitterlink = Twitterlink
-            #     CurrentArtist.save()
-            #     messages.info(request, 'Last name successfully changed.')
-            #     return redirect('settingChange')
+        elif Instalink != None and Instalink != CurrentUrl.Instalink and Instalink != "":
+            CurrentUrl.Instalink = Instalink
+            CurrentUrl.save()
+            messages.info(request, 'Last name successfully changed.')
+            return redirect('settingChange')
+        elif Facebooklink != None and Facebooklink != CurrentUrl.Facebooklink and Facebooklink != "":
+            CurrentUrl.Facebooklink = Facebooklink
+            CurrentUrl.save()
+            messages.info(request, 'Last name successfully changed.')
+            return redirect('settingChange')
+        elif Twitterlink != None and Twitterlink != CurrentUrl.Twitterlink and Twitterlink != "":
+            CurrentUrl.Twitterlink = Twitterlink
+            CurrentUrl.save()
+            messages.info(request, 'Last name successfully changed.')
+            return redirect('settingChange')
         elif email != None and email != CurrentArtist.email and email != "":
                 CurrentArtist.email = email
                 CurrentArtist.save()
@@ -220,7 +223,10 @@ class ProductLandingPageView(TemplateView):
             "prices": prices
         })
         return context
-        
+    
+class paypal(TemplateView):
+    template_name = "app/paypal.html"       
+
 class SuccessView(TemplateView):
     template_name = "app/success.html"
 
@@ -262,9 +268,16 @@ def registerPage(request):
                 user = user_form.save(commit=False)
                 user.save()
                 print("user artist")
+                
                 ArtistInformation.objects.create(
 				user = user,
                 name = user.username
+			)
+                Url.objects.create(
+				user = user,
+                Instalink = "https://www.instagram.com",
+                Facebooklink = "https://www.facebook.com",
+                Twitterlink = "https://twitter.com"
 			)
               
                 print("after artist")

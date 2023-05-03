@@ -22,14 +22,14 @@ class ArtistInformation(models.Model):
         return self.name
     
 
-# class Url(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     Instalink = models.URLField(max_length=200, null=True)
-#     Facebooklink = models.URLField(max_length=200, null=True)
-#     Twitterlink = models.URLField(max_length=200, null=True)
-
-#     def __str__(self):
-#         return self.user
+class Url(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    Instalink = models.URLField(max_length=200, null=True)
+    Facebooklink = models.URLField(max_length=200, null=True)
+    Twitterlink = models.URLField(max_length=200, null=True)
+    
+    def __str__(self):
+        return f"{self.user.username}'s URLs"
 
 class Post(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -45,13 +45,13 @@ class Post(models.Model):
     def __str__(self):
         return self.name
      
-class stripePrice(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    stripe_price_id = models.CharField(max_length=100)
-    price = models.IntegerField(default=0)  # cents
+# class stripePrice(models.Model):
+#     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+#     stripe_price_id = models.CharField(max_length=100)
+#     price = models.IntegerField(default=0)  # cents
     
-    def get_display_price(self):
-        return "{0:.2f}".format(self.price / 100)
+#     def get_display_price(self):
+#         return "{0:.2f}".format(self.price / 100)
     
 # class Cart(models.Model):
 #     id = models.BigAutoField(primary_key=True)

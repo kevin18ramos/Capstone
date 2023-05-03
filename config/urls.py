@@ -21,7 +21,8 @@ urlpatterns = [
      path('cancel/', CancelView.as_view(), name='cancel'),
      path('success/', SuccessView.as_view(), name='success'),
      path('create-checkout-session/<pk>/', CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
-     path('landing/', ProductLandingPageView.as_view(), name='landing')
+     path('landing/', ProductLandingPageView.as_view(), name='landing'),
+     path('paypal/', paypal.as_view(), name='paypal'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
  
 
