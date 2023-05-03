@@ -40,7 +40,7 @@ def settingChange(request):
     try:
         deleteId = Post.objects.get(user=currentUser)
     except:
-        print("account has not made a post")
+        messages.info(request, 'User has not made a post yet.')
         deleteId = ""
          
     if request.method == 'POST':
