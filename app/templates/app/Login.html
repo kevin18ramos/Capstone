@@ -236,13 +236,13 @@ nav ul li a{
    color: rgb(13, 12, 12);
 }
 
-  </style>
+</style>
 <body>
     <div class="hero">
         <nav>
              <!-- <img src="images/logo.png" class="logo"> -->
              <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="{%url 'home'%}">Home</a></li>
                 <li><a href="#">Features</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
@@ -269,7 +269,7 @@ nav ul li a{
             </div>
           
             <div class="form-item">
-            <p class="pull-left"><a href="Register/"><small>Register</small></a></p>
+            <p class="pull-left"><a href="{% url 'register' %}"><small>Register</small></a></p>
             <input type="submit" class="login pull-right" value="Log In">
             <div class="clear-fix"></div>
             </div> 

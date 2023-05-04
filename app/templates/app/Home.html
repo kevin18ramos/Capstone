@@ -2,27 +2,119 @@
 {% load static %}
   
 {% block content %}
+<style>
+  .footer-dark {
+  padding:50px 0;
+  color:#f0f9ff;
+  background-color:#282d32;
+}
+
+.footer-dark h3 {
+  margin-top:0;
+  margin-bottom:12px;
+  font-weight:bold;
+  font-size:16px;
+}
+
+.footer-dark ul {
+  padding:0;
+  list-style:none;
+  line-height:1.6;
+  font-size:14px;
+  margin-bottom:0;
+}
+
+.footer-dark ul a {
+  color:inherit;
+  text-decoration:none;
+  opacity:0.6;
+}
+
+.footer-dark ul a:hover {
+  opacity:0.8;
+}
+
+@media (max-width:767px) {
+  .footer-dark .item:not(.social) {
+    text-align:center;
+    padding-bottom:20px;
+  }
+}
+
+.footer-dark .item.text {
+  margin-bottom:36px;
+}
+
+@media (max-width:767px) {
+  .footer-dark .item.text {
+    margin-bottom:0;
+  }
+}
+
+.footer-dark .item.text p {
+  opacity:0.6;
+  margin-bottom:0;
+}
+
+.footer-dark .item.social {
+  text-align:center;
+}
+
+@media (max-width:991px) {
+  .footer-dark .item.social {
+    text-align:center;
+    margin-top:20px;
+  }
+}
+
+.footer-dark .item.social > a {
+  font-size:20px;
+  width:36px;
+  height:36px;
+  line-height:36px;
+  display:inline-block;
+  text-align:center;
+  border-radius:50%;
+  box-shadow:0 0 0 1px rgba(255,255,255,0.4);
+  margin:0 8px;
+  color:#fff;
+  opacity:0.75;
+}
+
+.footer-dark .item.social > a:hover {
+  opacity:0.9;
+}
+
+.footer-dark .copyright {
+  text-align:center;
+  padding-top:24px;
+  opacity:0.3;
+  font-size:13px;
+  margin-bottom:0;
+}
+
+</style>
 <body>
  <section>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
 		<div class="container">
-			<a id="a-tag"class="navbar11" href="#">Tim.Maker</a> <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
+			<a id="a-tag"class="navbar11" href="#">Tin.this is noteworthy</a> <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active">
 						<a class="nav-links" href="#">Home</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-links" href="settingChange/">somthing</a>
+						<a class="nav-links" href="Login/">Login</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-links" href="#">Tin.merch</a>
+						<a class="nav-links" href="shoppingcart/">Checkout</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-links" href="#">Art</a>
+						<a class="nav-links" href="#art">Art</a>
 					</li>
 					<li class="nav-item">
-            <a class="nav-links" href="profilepage/">Profile</a>
+            <a class="nav-links" href="profile/">Profile</a>
 					</li>
 	
 				</ul>
@@ -38,16 +130,16 @@
 		<div class="carousel-inner">
 			<div class="carousel-item active">
                 <!-- https://i.postimg.cc/Jn0X0pDS/1.jpg -->
-				<img alt="First slide" class="d-block w-100" src="static/images/img_2.avif">  
+				<img alt="First slide" class="d-block w-100" src="{% static 'images/img_3.avif' %}">  
 				<div class="carousel-caption d-none d-md-block">
 					<h5 class="animated bounceInRight" style="animation-delay: 1s">Tin.Maker-merch</h5>
-					<p class="animated bounceInLeft" style="animation-delay: 2s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
+					<p class="animated bounceInLeft" style="animation-delay: 2s">Loremyttytyttytfttyftyfm dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
 					<p class="animated bounceInRight" style="animation-delay: 3s"><a href="#">More Info</a></p>
 				</div>
 			</div>
 			<div class="carousel-item">
                 <!-- https://i.postimg.cc/SQXZtrTZ/2.jpg -->
-				<img alt="Second slide" class="d-block w-100" src="static/images/img_1.avif">
+				<img alt="Second slide" class="d-block w-100" src="{% static 'images/img_2.avif' %}">"{% static 'css/Profile.css' %}"
 				<div class="carousel-caption d-none d-md-block">
 					<h5 class="animated slideInDown" style="animation-delay: 1s">Tin.Maker-merch</h5>
 					<p class="animated fadeInUp" style="animation-delay: 2s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
@@ -56,7 +148,7 @@
 			</div>
 			<div class="carousel-item">
                 <!-- https://i.postimg.cc/Jh4x3cH5/3.jpg -->
-				<img alt="Third slide" class="d-block w-100" src="static/images/img_3.avif">
+				<img alt="Third slide" class="d-block w-100" src="{% static 'images/img_1.avif' %}">
 				<div class="carousel-caption d-none d-md-block">
 					<h5 class="animated zoomIn" style="animation-delay: 1s">Tin.Maker-merch</h5>
 					<p class="animated fadeInLeft" style="animation-delay: 2s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
@@ -78,9 +170,9 @@
 
 
 
-    <section class="art-setion">
+    <section id="art" class="art-setion">
         <div>
-            <h3 class="art-divder"></h3>
+            <h3 class="art-divder">Art</h3>
         </div>
     </section>
 
@@ -89,183 +181,92 @@
 
     </section>
     <section  class="gallery">
-        <div class="container">
-          <div class="toolbar">
-            <div class="search-wrapper">
-              <input class="ahhh" type="search" placeholder="Search for photos">
-             
-            </div>
-            <ul class="view-options">
-              <li class="zoom">
-                <input type="range" min="180" max="380" value="280">
-              </li>
-              <li class="show-grid active">
-                <button disabled class="grid">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/grid-view.svg" alt="grid view">  
-                </button>
-              </li>
-              <li class="show-list">
-                <button class="list">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/list-view.svg" alt="list view">  
-                </button>
-              </li>
-            </ul>
+      <div class="container">
+        <div class="toolbar">
+          <div class="search-wrapper">
+            <input class="ahhh" type="search" placeholder="Search for photos">
+           
           </div>
-          <ol class="image-list grid-view">
+          <ul class="view-options">
+            <li class="zoom">
+              <input type="range" min="180" max="380" value="280">
+            </li>
+            <li class="show-grid active">
+              <button disabled class="grid">
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/grid-view.svg" alt="grid view">  
+              </button>
+            </li>
+            <li class="show-list">
+              <button class="list">
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/list-view.svg" alt="list view">  
+              </button>
+            </li>
+          </ul>
+        </div>
+        <ol class="image-list grid-view" >
+          {% for product in products %}
+          <li>
+            <figure>
+              <img src="{{product.picture.url}}" alt="">
+              <figcaption>
+                <p>{{product.name}}</p>
+                <p style="display: none;">di</p>
+                <p>{{product.description}}</p>
+                <p>Art by {{product.user}}</p>
+                {%if product.numOfArts < 3%}
+                <p>{{product.numOfArts}} left!</p>
+                {%endif%}
+                <p class="product-price">Price: {{ product.price }}</p> 
+                <p><a><i class="fa-solid fa-cart-shopping"></i>Add to cart</a></p>                </figcaption>
+              </figure>
+            </li>
+            {% endfor %}
 
-            <li>
-              <figure>
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/unsplash_nature1.jpg" alt="">
-                <figcaption>
-                 
-                  <p style="display: none;">di</p>
-                  <p>green leafed trees</p>
-                  <p>Photo by <a href="https://unsplash.com/@redcharlie" target="_blank">redcharlie</a></p>
-                  <p><a><i class="fa-solid fa-cart-shopping"></i>Add to cart</a></p>                </figcaption>
-              </figure>
-            </li>
+        </ol>
+      </div>
+      </figure>
 
 
-            <li>
-              <figure>
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/unsplash_nature2.jpg" alt="">
-                <figcaption>
-            
-                  <p style="display: none;">di</p>
-                  <p>landscape photography of brown mountain</p>
-                  <p>Photo by <a href="https://unsplash.com/@wilstewart3" target="_blank">Wil Stewart</a></p>
-                  <p><a><i class="fa-solid fa-cart-shopping"></i>Add to cart</a></p>                </figcaption>
-              </figure>
-            </li>
-            <li>
-              <figure>
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/unsplash_nature3.jpg" alt="">
-                <figcaption>
-                 
-                  <p style="display: none;">o</p>
-                  <p>blue starry night</p>
-                  <p>Photo by <a href="https://unsplash.com/@ignitedit" target="_blank">Mark Basarab</a></p>
-                  <p><a><i class="fa-solid fa-cart-shopping"></i>Add to cart</a></p>                </figcaption>
-              </figure>
-            </li>
-            <li>
-              <figure>
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/unsplash_nature4.jpg" alt="">
-                <figcaption>
-                    
-                  <p style="display: none;">o</p>
-                  <p>aerial island and beaches</p>
-                  <p>Photo by <a href="https://unsplash.com/@phiestyphung" target="_blank">Amanda Phung</a></p>
-                  <p>$12.00</p>
-                  <p><a><i class="fa-solid fa-cart-shopping"></i>Add to cart</a></p>                </figcaption>
-              </figure>
-            </li>
-            <li>
-              <figure>
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/unsplash_nature5.jpg" alt="">
-                <figcaption>
-                 
-                  <p style="display: none;">p</p>
-                  <p>forest pathway</p>
-                  <p>Photo by <a href="https://unsplash.com/@elke_karin" target="_blank">Elke Karin Lugert</a></p>
-                  <p><a><i class="fa-solid fa-cart-shopping"></i>Add to cart</a></p>                </figcaption>
-              </figure>
-            </li>
-            <li>
-              <figure>
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/unsplash_nature6.jpg" alt="">
-                <figcaption>
-                  
-                  <p style="display: none;">p</p>
-                  <p>photo of two black, white, and orange koi fish</p>
-                  <p>Photo by <a href="https://unsplash.com/@s_sagano" target="_blank">Sora Sagano</a></p>
-                  <p><a><i class="fa-solid fa-cart-shopping"></i>Add to cart</a></p>                </figcaption>
-              </figure>
-            </li>
-            <li>
-              <figure>
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/unsplash_nature7.jpg" alt="">
-                <figcaption>
-                  
-                  <p style="display: none;">p</p>
-                  <p>landscape photo of brown mountain</p>
-                  <p>Photo by <a href="https://unsplash.com/@darrylbrian" target="_blank">Darryl Brian</a></p>
-                  <p><a><i class="fa-solid fa-cart-shopping"></i>Add to cart</a></p>                </figcaption>
-              </figure>
-            </li>
-            <li>
-              <figure>
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/unsplash_nature8.jpg" alt="">
-                <figcaption>
-               
-                  <p style="display: none;">p</p>
-                  <p>moon illustration</p>
-                  <p>Photo by <a href="https://unsplash.com/@metatzon297" target="_blank">Shin Roran</a></p>
-                  <p><a><i class="fa-solid fa-cart-shopping"></i>Add to cart</a></p>                </figcaption>
-              </figure>
-            </li>
-            <li>
-              <figure>
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/unsplash_nature9.jpg" alt="">
-                <figcaption>
-               
-                  <p style="display: none;">dr</p>
-                  <p>bird's eye view of body of water</p>
-                  <p>Photo by <a href="https://unsplash.com/@timmossholder" target="_blank">Tim Mossholder</a></p>
-                  <p><a><i class="fa-solid fa-cart-shopping"></i>Add to cart</a></p>                </figcaption>
-              </figure>
-            </li>
-            <li>
-              <figure>
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/unsplash_nature10.jpg" alt="">
-                <figcaption>                   
-                
-                  <p style="display: none;">dr</p>
-                  <p>high-angle photography of rural area</p>
-                  <p>Photo by <a href="https://unsplash.com/@stlobe" target="_blank">Steven Wong</a></p>
-                  <p><a><i class="fa-solid fa-cart-shopping"></i>Add to cart</a></p>                </figcaption>
-              </figure>
-            </li>
-            <li>
-              <figure>
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/unsplash_nature11.jpg" alt="">
-                <figcaption>
-                 
-                  <p style="display: none;">di</p>
-                  <p>silhoutte of mountains during sunset</p>
-                  <p>Photo by <a href="https://unsplash.com/@von_co" target="_blank">Ivana Cajina</a></p>
-                  <p><a><i class="fa-solid fa-cart-shopping"></i>Add to cart</a></p>                </figcaption>
-              </figure>
-            </li>
-            <li>
-              <figure>
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/unsplash_nature12.jpg" alt="">
-                <figcaption>
-             
-                  <p style="display: none;">di</p>
-                  <p>bird's-eye view of mountain rang</p>
-                  <p>Photo by <a href="https://unsplash.com/@leni_eleni" target="_blank">Elena Prokofyeva</a></p>
-                  <p><a><i class="fa-solid fa-cart-shopping"></i>Add to cart</a></p>                </figcaption>
-              </figure>
-            </li>
-            <li>
-              <figure>
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/unsplash_nature12.jpg" alt="">
-                <figcaption>
-               
-                  <p style="display: none;">di</p>
-                  <p>bird's-eye view of mountain rang</p>
-                  <p>Photo by <a href="https://unsplash.com/@leni_eleni" target="_blank">Elena Prokofyeva</a></p>
-                  <p><a><i class="fa-solid fa-cart-shopping"></i>Add to cart</a></p>
-                </figcaption>
-              </figure>
-            </li>
-            </ol>
-          </div>
       </section>
 
       <script src="https://kit.fontawesome.com/dceaf17e09.js" crossorigin="anonymous"></script>
 
-      <script src="static/js/Cart.js"></script>   
+      <script src="static/js/Cart.js"></script>
+      
+      
+
+
+      <div class="footer-dark">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3 item">
+                        <h3>tin.links</h3>
+                        <ul>
+                            <li><a href="#">link</a></li>
+                            <li><a href="#">link</a></li>
+                            <li><a href="#">link</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-3 item">
+                        <h3>other links</h3>
+                        <ul>
+                            <li><a href="#">link</a></li>
+                            <li><a href="#">link</a></li>
+                            <li><a href="#">link</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 item text">
+                        <h3>Tim.this is noteworthy</h3>
+                        <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
+                    </div>
+                    <!-- <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div> -->
+                </div>
+                <p class="copyright">Tim.this is noteworthy © 2023</p>
+            </div>
+        </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 </body>
 {% endblock %} 
