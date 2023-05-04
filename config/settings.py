@@ -151,7 +151,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'plugins': 'link image preview codesample contextmenu table code lists fullscreen',
     'toolbar1': 'undo redo | backcolor casechange permanentpen formatpainter removeformat formatselect fontselect fontsizeselect',
     'toolbar2': 'bold italic underline blockquote | alignleft aligncenter alignright alignjustify '
-               '| bullist numlist | outdent indent | table | link image | codesample | preview code | tiny_mce_wiris_formulaEditor tiny_mce_wiris_formulaEditorChemistry',
+               '| bullist numlist | outdent indent | table | codesample | preview code | tiny_mce_wiris_formulaEditor tiny_mce_wiris_formulaEditorChemistry',
     'contextmenu': 'formats | link image',
     'block_formats': 'Paragraph=p; Header 1=h1; Header 2=h2',
     'fontsize_formats': "8pt 10pt 12pt 14pt 16pt 18pt",
