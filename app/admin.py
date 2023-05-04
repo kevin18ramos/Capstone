@@ -5,5 +5,5 @@ from .models import *
 admin.site.register(ArtistInformation)
 admin.site.register(Post)
 admin.site.register(Url)
-# admin.site.register(stripePrice)
+
 

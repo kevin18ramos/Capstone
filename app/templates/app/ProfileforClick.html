@@ -1,0 +1,174 @@
+{% extends 'app/profile-Base.html' %}
+{% load static %}
+  
+{% block content %}
+<style>
+
+
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
+body {
+	background: #f9f9f9;
+	font-family: "Roboto", sans-serif;
+}
+
+.shadow {
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+.profile-tab-nav {
+	min-width: 250px;
+}
+
+.tab-content {
+	flex: 1;
+}
+
+.form-group {
+	margin-bottom: 1.5rem;
+}
+
+.nav-pills a.nav-link {
+	padding: 15px 20px;
+	border-bottom: 1px solid #ddd;
+	border-radius: 0;
+	color: #333;
+}
+.nav-pills a.nav-link i {
+	width: 20px;
+}
+
+.img-circle img {
+	height: 100px;
+	width: 100px;
+	border-radius: 100%;
+	border: 5px solid #fff;
+}
+
+
+
+
+
+
+
+
+
+nav{
+   background: #1a1a1a;
+   width: 100%;
+   padding: -27px 10% ;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   position: relative;
+}
+
+
+.logo{
+   width: 120px;
+}
+.user-pic{
+   width: 40px;
+   border-radius: 50%;
+   cursor: pointer;
+   margin-left: 30px;
+}
+
+nav ul{
+  width: 100%;
+  text-align: center;
+}
+
+nav ul li{
+   display: inline-block;
+   list-style: none;
+   margin: 10px 20px;
+}
+
+nav ul li a{
+   color: #fff;
+   text-decoration: none;
+}
+
+</style>
+  <body>
+    <div class="hero">
+        <nav>
+             <!-- <img src="images/logo.png" class="logo"> -->
+             <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href= "{% url 'settingChange' %}">Settings</a></li>
+                <li><a href= "{% url 'settingChange' %}">Logout</a></li>
+         
+             </ul>
+
+
+     
+        </nav>
+        
+
+
+        <div class="content-profile-page">
+            <div class="profile-user-page card">
+               <div class="img-user-profile">
+                 <img class="profile-bgHome" src="">
+                 {% if Artist.profile_pic %}
+                 <img class="avatar" src="{{ Artist.profile_pic.url }}"/>
+               {% else %}
+                 <img alt="jtojr" src="{% static 'images/cabbage.jpg' %}" />
+               {% endif %}
+
+                    </div>
+                   <button>Buy art</button>
+                   <div class="user-profile-data">
+                  <h1>{{Artist.user}}</h1>
+                  {% if Urlperson.PersonalLink != "" %}
+                     <p><a href="{{ Urlperson.PersonalLink }}" target = "_blank">Link to Personal Website</a></p>
+                  {% else %}
+                     <p></p>
+                  {% endif %}
+
+
+                  {% if Artist.email != none %}
+                  <p>{{ Artist.email }}</p>
+                  {% else %}
+                  {% endif %}
+
+
+                   </div> 
+                   {% if Artist.firstname != none and Artist.lastname != none %}
+                   <div class="description-profile">{{ Artist.firstname }} | {{ Artist.lastname }}</div>
+                   {% elif Artist.firstname != none%}
+                   <div class="description-profile">{{ Artist.firstname }} </div>
+                   {% elif Artist.lastname != none%}
+                   <div class="description-profile">{{ Artist.lastname }} </div>
+                   {% endif %}
+
+                   {% if Artist.bio != none %}
+                   <div class="description-profile"> {{ Artist.bio }}</div>
+                   {% else %}
+                  {% endif %}
+
+                  
+                <ul class="data-user">
+                  <li><a href="{{ Urlperson.Facebooklink }}" target = "_blank"><strong>Facebook</strong></a></li>
+                  <li><a href="{{ Urlperson.Instalink }}" target = "_blank"><strong>Instagram</strong></a></li>
+                  <li><a href="{{ Urlperson.Twitterlink }}" target = "_blank"><strong>Twitter</strong></a></li>
+                  
+                    
+                   </div> 
+                </ul>
+               </div>
+             </div>
+         
+    </div>
+
+
+        
+   
+
+
+
+
+  
+{% endblock %}
+

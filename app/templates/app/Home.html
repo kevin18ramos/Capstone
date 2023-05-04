@@ -137,9 +137,6 @@
               <li class="nav-item">
 
                 <a class="nav-links" href="{% url 'shoppingcart'%}">Checkout</a>
-
-	
-
               </li>
               <li class="nav-item">
                 <a class="nav-links" href="#art">Art</a>
@@ -250,7 +247,7 @@
                 <p>{{product.name}}</p>
                 <p style="display: none;">di</p>
                 <p>{{product.description}}</p>
-                <p>Art by {{product.user}}</p>
+                <p>Art by <a href="{% url 'personalProfile' pk=product.user.id %}">{{product.user}}</a></p>
                 {%if product.numOfArts < 3%}
                 <p>{{product.numOfArts}} left!</p>
                 {%endif%}
