@@ -226,8 +226,8 @@ def payMe(request, postId):
         'return_url': f'http:///{host}{reverse("paypal-reverse")}',
         'cancel_url': f'http://{host}{reverse("paypal-cancel")}',
     }
-    #form = PayPalPaymentForms(initial=paypal_dict)
-    #context = {'form':form}
+    form = PayPalPaymentsForm(initial=paypal_dict)
+    context = {'form':form}
     return render(request,'checkout.html')
                   
 def paypal_reverse(request):
