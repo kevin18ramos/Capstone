@@ -15,11 +15,22 @@ class ArtistInformation(models.Model):
     email = models.CharField(max_length=200, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    websiteLink = models.URLField(max_length=200, null=True)
-    bio = models.TextField(null=True, blank=True)
 
+    bio = models.TextField(null=True, blank=True)
+    
     def __str__(self):
         return self.name
+    
+
+class Url(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    PersonalLink = models.URLField(max_length=200, null=True)
+    Instalink = models.URLField(max_length=200, null=True)
+    Facebooklink = models.URLField(max_length=200, null=True)
+    Twitterlink = models.URLField(max_length=200, null=True)
+    
+    def __str__(self):
+        return f"{self.user.username}'s URLs"
 
 class Post(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -29,19 +40,15 @@ class Post(models.Model):
     description = models.CharField(max_length=200) 
     date = models.DateField()
     numOfArts = models.IntegerField(default=1)
-    price = price = models.DecimalField(decimal_places=2, max_digits=10)
-    
+    price = models.DecimalField(decimal_places=2, max_digits=10)
+    stripe_product_id = models.CharField(max_length=100)
+
     def __str__(self):
         return self.name
-    
-class Cart(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(to=Post, on_delete=models.PROTECT)
-    amount = models.DecimalField(decimal_places=2, max_digits=10, default=0)
-    customer_email = models.EmailField(default='default@gmail.com')
-    stripe_payment_intent = models.CharField(max_length=200)
-    has_paid = models.BooleanField(default=False)
+
+class Order(models.Model):
+    pass
+
 
 
 

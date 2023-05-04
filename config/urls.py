@@ -12,7 +12,8 @@ urlpatterns = [
      path("Register/", views.registerPage, name="register"),
      path("Profile/", views.profile, name="profile"),
      path("logout/", views.logoutUser, name="logout"),
-     path("products/add/", views.addProductsPage, name= "addProducts"),
+     path("products/delete/<int>", views.deleteProducts, name= "deleteProducts"),
+     path("products/update/<int>", views.updateProducts, name= "updateProducts"),
      path("products/", views.productsPage, name= "products"),
      path("profilepage/", views.findUser, name= "findUser"),
      # path('nl', views.letter, name='newsletter'),
@@ -23,6 +24,14 @@ urlpatterns = [
      path('newsletter/', views.index, name='index'),
      path('letter/', views.newsletter, name='index'),
      path('validate/', views.validate_email, name='validate_email'),
+     # path("shoppingcart/", views.shoppingcart, name="shoppingcart"),
+     path("settingChange/", views.settingChange, name="settingChange"),
+     path('cancel/', CancelView.as_view(), name='cancel'),
+     path('success/', SuccessView.as_view(), name='success'),
+     path('paypal/', include('paypal.standard.ipn.urls')),
+     path('payment', views.payMe, name='payMe'),
+     path('paypal-return', views.paypal_reverse , name='paypal-cancel'),
+     path('paypal-success', views.paypal_cancel , name='paypal-success'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
  
 

@@ -96,31 +96,65 @@
 </style>
 <body>
  <section>
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-		<div class="container">
-			<a id="a-tag"class="navbar11" href="#">Tin.this is noteworthy</a> <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active">
-						<a class="nav-links" href="#">Home</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-links" href="Login/">Login</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-links" href="shoppingcart/">Checkout</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-links" href="#art">Art</a>
-					</li>
-					<li class="nav-item">
-            <a class="nav-links" href="profile/">Profile</a>
-					</li>
+  {% if request.user.is_authenticated %}
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+          <a id="a-tag"class="navbar11" href="#">Tin.this is noteworthy</a> <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a class="nav-links" href="{% url 'home' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-links" href="{% url 'logout'%}">Logout</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-links" href="checkout/">Checkout</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-links" href="#art">Art</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-links" href="Profile/">Profile</a>
+              </li>
+      
+            </ul>
+          </div>
+        </div>
+      </nav>
+  {% else %}
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+          <a id="a-tag"class="navbar11" href="#">Tin.this is noteworthy</a> <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a class="nav-links" href="{% url 'home' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-links" href="{% url 'login'%}">Login</a>
+              </li>
+              <li class="nav-item">
+
+                <a class="nav-links" href="{% url 'shoppingcart'%}">Checkout</a>
+
 	
-				</ul>
-			</div>
-		</div>
-	</nav>
+
+              </li>
+              <li class="nav-item">
+                <a class="nav-links" href="#art">Art</a>
+              </li>
+              <li class="nav-item">
+    
+            <a class="nav-links" href="{% url 'findUser' %}">Profile</a>
+
+              </li>
+      
+            </ul>
+          </div>
+        </div>
+      </nav>
+    {% endif %}
 	<div class="carousel slide" data-ride="carousel" id="carouselExampleIndicators">
 		<ol class="carousel-indicators">
 			<li class="active" data-slide-to="0" data-target="#carouselExampleIndicators"></li>
@@ -130,28 +164,32 @@
 		<div class="carousel-inner">
 			<div class="carousel-item active">
                 <!-- https://i.postimg.cc/Jn0X0pDS/1.jpg -->
-				<img alt="First slide" class="d-block w-100" src="{% static 'images/img_3.avif' %}">  
+				<img alt="First slide" class="d-block w-100" src="{% static 'images/poster.jpg' %}">  
 				<div class="carousel-caption d-none d-md-block">
-					<h5 class="animated bounceInRight" style="animation-delay: 1s">Tin.Maker-merch</h5>
-					<p class="animated bounceInLeft" style="animation-delay: 2s">Loremyttytyttytfttyftyfm dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
+					<h5 class="animated bounceInRight" style="animation-delay: 1s">Tin.News</h5>
+					<p class="animated bounceInLeft" style="animation-delay: 2s">FREE concert in Water Valley this Wednesday evening!! Bring a friend, chair, blanket, picnic, etc and enjoy the sounds of Asheville, Atlanta, and Athens from your neighbor's lawn 🙂</p>
 					<p class="animated bounceInRight" style="animation-delay: 3s"><a href="#">More Info</a></p>
 				</div>
 			</div>
 			<div class="carousel-item">
                 <!-- https://i.postimg.cc/SQXZtrTZ/2.jpg -->
-				<img alt="Second slide" class="d-block w-100" src="{% static 'images/img_2.avif' %}">"{% static 'css/Profile.css' %}"
+				<img alt="Second slide" class="d-block w-100" src="{% static 'images/dog.jpg' %}">"{% static 'css/Profile.css' %}"
 				<div class="carousel-caption d-none d-md-block">
-					<h5 class="animated slideInDown" style="animation-delay: 1s">Tin.Maker-merch</h5>
-					<p class="animated fadeInUp" style="animation-delay: 2s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
+					<h5 class="animated slideInDown" style="animation-delay: 1s">Tin.News</h5>
+					<p class="animated fadeInUp" style="animation-delay: 2s">Congratulations to Manuel Domingo Pablo for "Perro" winning the juried art selection and TIN's $100 award at the 2nd Annual WVHS Art Reception & Auction!!
+
+            If you missed the event tonight, you still have the opportunity to bid on the 100+ pieces via thisisnoteworthy.org/auctions through Sunday, April 16th.
+            
+            Thanks to Water Valley High School, Ms. Corso, the students, parents, volunteers, and our sponsors Turnage Drugstore, BTC Grocery, and Dancing Bear Sanctuary for a spectacular event ❤️</p>
 					<p class="animated zoomIn" style="animation-delay: 3s"><a href="#">More Info</a></p>
 				</div>
 			</div>
 			<div class="carousel-item">
                 <!-- https://i.postimg.cc/Jh4x3cH5/3.jpg -->
-				<img alt="Third slide" class="d-block w-100" src="{% static 'images/img_1.avif' %}">
+				<img alt="Third slide" class="d-block w-100" src="{% static 'images/mucic.jpg' %}">
 				<div class="carousel-caption d-none d-md-block">
-					<h5 class="animated zoomIn" style="animation-delay: 1s">Tin.Maker-merch</h5>
-					<p class="animated fadeInLeft" style="animation-delay: 2s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
+					<h5 class="animated zoomIn" style="animation-delay: 1s">Tin.News</h5>
+					<p class="animated fadeInLeft" style="animation-delay: 2s">We're stoked to welcome Schaefer Llana and Treespots to TIN's Listening Room on Saturday, April 1! $10 at the door. BYOB. Seating is limited, so RSVP at thisisnoteworthy.org/calendar to guarantee your spot.</p>
 					<p class="animated zoomIn" style="animation-delay: 3s"><a href="#">More Info</a></p>
 				</div>
 			</div>
@@ -217,7 +255,7 @@
                 <p>{{product.numOfArts}} left!</p>
                 {%endif%}
                 <p class="product-price">Price: {{ product.price }}</p> 
-                <p><a><i class="fa-solid fa-cart-shopping"></i>Add to cart</a></p>                </figcaption>
+                <p><a href="/cart/{{ product.id }}"><i class="fa-solid fa-cart-shopping"></i>Add to cart</a></p>                </figcaption>
               </figure>
             </li>
             {% endfor %}
@@ -231,7 +269,7 @@
 
       <script src="https://kit.fontawesome.com/dceaf17e09.js" crossorigin="anonymous"></script>
 
-      <script src="static/js/Cart.js"></script>
+      <script src="{% static 'js/Cart.js' %}"></script>
       
       
 
@@ -243,26 +281,25 @@
                     <div class="col-sm-6 col-md-3 item">
                         <h3>tin.links</h3>
                         <ul>
-                            <li><a href="#">link</a></li>
-                            <li><a href="#">link</a></li>
-                            <li><a href="#">link</a></li>
+                          <li><a href="https://thisisnoteworthy.org" target='_blank'>tin.website</a></li>
+                          <li><a href="https://thisisnoteworthy.org/calendar" target='_blank'>tin.calendar</a></li>
+                          <li><a href="https://thisisnoteworthy.org/about" target='_blank'>tin.about</a></li>
                         </ul>
                     </div>
                     <div class="col-sm-6 col-md-3 item">
-                        <h3>other links</h3>
+                        <h3>more links</h3>
                         <ul>
-                            <li><a href="#">link</a></li>
-                            <li><a href="#">link</a></li>
-                            <li><a href="#">link</a></li>
+                          <li><a href="https://www.facebook.com/thisisnoteworthy/" target='_blank'>facebook</a></li>
+                          <li><a href="https://www.paypal.com/us/fundraiser/charity/1329743" target='_blank'>donate!</a></li>
                         </ul>
                     </div>
                     <div class="col-md-6 item text">
-                        <h3>Tim.this is noteworthy</h3>
-                        <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
+                        <h3>tin.this is noteworthy</h3>
+                        <p>This is Noteworthy is an educational, multi-media, and events nonprofit</p>
                     </div>
                     <!-- <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div> -->
                 </div>
-                <p class="copyright">Tim.this is noteworthy © 2023</p>
+                <p class="copyright">tin.this is noteworthy © 2023</p>
             </div>
         </footer>
     </div>
