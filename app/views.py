@@ -213,6 +213,7 @@ def updateProducts(request, id):
     return render(request, '', context)
 
 def payMe(request, postId):
+    host = request.get_host()
     postDetails = Post.objects.filter(id=postId)
     artistDetails = ArtistInformation.objects.filter(name = postDetails.user.name)
     paypal_dict = {
