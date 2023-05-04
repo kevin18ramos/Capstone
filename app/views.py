@@ -1,6 +1,6 @@
 from urllib import request
 from django.shortcuts import render,redirect
-from django.http import HttpResponse,  HttpResponseRedirect,get_object_or_404,render
+from django.http import HttpResponse,  HttpResponseRedirect
 from .models import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -12,7 +12,10 @@ from django.conf import settings
 from django.http.response import HttpResponseNotFound, JsonResponse
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView
-#from paypal.standard.forms import PayPalPaymentsForm
+from django.shortcuts import (get_object_or_404,
+                              render,
+                              HttpResponseRedirect)
+from paypal.standard.forms import PayPalPaymentsForm
 import uuid
 from django.urls import reverse 
 #from .decorators import *
@@ -209,22 +212,22 @@ def updateProducts(request, id):
     }
     return render(request, '', context)
 
-# def payMe(request, postId):
-#     postDetails = Post.objects.filter(id=postId)
-#     artistDetails = ArtistInformation.objects.filter(name = postDetails.user.name)
-#     paypal_dict = {
-#         'business': artistDetails.emails,
-#         'amount': postDetails.price,
-#         'item_name': postDetails.name,
-#         'invoice': str(uuid.uuid4()),
-#         'currency_code': 'USD',
-#         'notify_url': f'http://{host}{reverse("papypal-ipn")}',
-#         'return_url': f'http:///{host}{reverse("paypal-reverse")}',
-#         'cancel_url': f'http://{host}{reverse("paypal-cancel")}',
-#     }
-#     #form = PayPalPaymentForms(initial=paypal_dict)
-#     #context = {'form':form}
-#     return render(request,'checkout.html')
+def payMe(request, postId):
+    postDetails = Post.objects.filter(id=postId)
+    artistDetails = ArtistInformation.objects.filter(name = postDetails.user.name)
+    paypal_dict = {
+        'business': artistDetails.emails,
+        'amount': postDetails.price,
+        'item_name': postDetails.name,
+        'invoice': str(uuid.uuid4()),
+        'currency_code': 'USD',
+        'notify_url': f'http://{host}{reverse("papypal-ipn")}',
+        'return_url': f'http:///{host}{reverse("paypal-reverse")}',
+        'cancel_url': f'http://{host}{reverse("paypal-cancel")}',
+    }
+    #form = PayPalPaymentForms(initial=paypal_dict)
+    #context = {'form':form}
+    return render(request,'checkout.html')
                   
 def paypal_reverse(request):
      messages.success(request, "you've made the payment")
