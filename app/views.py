@@ -228,24 +228,22 @@ def payMe(request, postId):
     }
     form = PayPalPaymentsForm(initial=paypal_dict)
     context = {'form':form}
-    return render(request,'checkout.html')
+    return render(request,'Checkout.html',context)
                   
 def paypal_reverse(request):
-     messages.success(request, "you've made the payment")
-     return redirect('home')
+    messages.success(request, "you've made the payment")
+    postDetails = Post.objects.filter(id=postId)
+    postDetails.delete()
+    return redirect('home')
 
 def paypal_cancel(request):
-     messages.success(request, "payment canceled")
-     return redirect('home')
+    messages.success(request, "payment canceled")
+    postDetails = Post.objects.filter(id=postId)
+    postDetails.delete()
+    return redirect('home')
 
 class paypal(TemplateView):
     template_name = "app/paypal.html"       
-
-class SuccessView(TemplateView):
-    template_name = "app/xsuccess.html"
-
-class CancelView(TemplateView):
-    template_name = "app/cancel.html"
 
 #login register and logout
 def loginPage(request):
