@@ -226,60 +226,34 @@ nav ul li a{
     </nav>
 
     <main>
-      <form id="register" method="post" enctype="multipart/form-data">
-      <h2 id="register__title">Create your profile</h2>
-      <div class="register__box">
-        <label for="user">First Name<i class="fas fa-asterisk"></i></label>
-        <input id="user" type="text" maxLength="64" required placeholder="First Name">
-      </div>
-      <div class="register__box">
-        <label for="user">Last Name<i class="fas fa-asterisk"></i></label>
-        <input id="user" type="text" maxLength="64" required placeholder="Last Name">
-      </div>
-      <div class="register__box">
-        <label for="user">User<i class="fas fa-asterisk"></i></label>
-        <input id="user" type="text" maxLength="64" required placeholder="Username">
-      </div>
-      <div class="register__box">
-        <label for="mail">E-mail<i class="fas fa-asterisk"></i></label>
-        <input id="mail" type="email" size="64" maxLength="64" required placeholder="Example@gmail.com" pattern=".+@gmail.com" title="Example@gmail.com">
-      </div>
-      <div class="register__box">
-        <label for="password">Password<i class="fas fa-asterisk"></i></label>
-        <input id="password" type="password" minLength="6" required placeholder="Password">
-      </div>
-      <div class="register__box conteiner__check">
-        <label for="genders">Gender</label>
-        <ul class="conteiner__check">
-          <li>
-            <input id="female" name="gender" type="radio" value="Female">
-            <label for="female">Female</label>
-          </li>
-          <li>
-            <input id="male" name="gender" type="radio" value="Male">
-            <label for="male">Male</label>
-          </li>
-          <li>
-            <input id="other" name="gender" type="radio" value="Other">
-            <label for="other">Other</label>
-          </li>
-        </ul>
-      </div>
-      <div class="register__box">
-        <label for="age">Age</label>
-        <input id="age" type="date" minLength="2">
-      </div>
-      <div class="register__box">
-        <label for="image">Choose profile picture</label>
-        <input type="file" id="image" name="image" accept="image/*">
-        <div id="preview">
-            <p>No files currently selected for upload</p>
-        </div>
-      </div>       
-       <p class="pull-left"><a href="http://127.0.0.1:8000/Login/"><small>Already have an Account?</small></a></p>
 
-      <input type="button" value="Create profile" id="register__btn">
-      </form>
+      <form id="register" method="post" enctype="multipart/form-data" action="">
+        {% csrf_token %}
+        <h2 id="register__title">Create your profile</h2>        
+        <div class="register__box">
+            <label for="{{ user_form.username.id_for_label }}">Username<i class="fas fa-asterisk" name="username"></i></label>
+            {{ user_form.username }}
+        </div>
+        <div class="register__box">
+            <label for="{{ user_form.password1.id_for_label }}">Password<i class="fas fa-asterisk" name="password"></i></label>
+            {{ user_form.password1 }}
+        </div>
+        <div class="register__box">
+            <label for="{{ user_form.password2.id_for_label }}">Re-enter Password<i class="fas fa-asterisk" name="password2"></i></label>
+            {{ user_form.password2 }}
+        </div>
+        {% comment %} <div class="register__box">
+            <label for="{{ artist_form.image.id_for_label }}">Choose profile picture</label>
+            {{ artist_form.image }}
+            <div id="preview">
+                <p>No files currently selected for upload</p>
+            </div>
+        </div>     {% endcomment %}
+        <p class="pull-left"><a href="{% url 'login' %}"><small>Already have an Account?</small></a></p>
+        <input type="submit" value="Create profile" id="register__btn">
+    </form>
+      
+
       <div id="overlay" class="hidden">
         <div id="avatar"></div>
       </div>

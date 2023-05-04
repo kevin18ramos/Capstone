@@ -3,6 +3,7 @@ from django.db import models
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
+from urllib import request
 # Create your models here.
 
 class ArtistInformation(models.Model):
@@ -14,38 +15,43 @@ class ArtistInformation(models.Model):
     email = models.CharField(max_length=200, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    websiteLink = models.URLField(max_length=200, null=True)
+
     bio = models.TextField(null=True, blank=True)
-    cart = models.CharField(max_length=200,null=True)
-
-
-
+    
     def __str__(self):
         return self.name
+    
+
+class Url(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    PersonalLink = models.URLField(max_length=200, null=True)
+    Instalink = models.URLField(max_length=200, null=True)
+    Facebooklink = models.URLField(max_length=200, null=True)
+    Twitterlink = models.URLField(max_length=200, null=True)
+    
+    def __str__(self):
+        return f"{self.user.username}'s URLs"
 
 class Post(models.Model):
+    id = models.BigAutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    picture = models.ImageField(upload_to='pics/', null = True, blank = True)
+    picture = models.ImageField(upload_to='images/', null = True, blank = True)
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=200) 
     date = models.DateField()
-    price = price = models.DecimalField(decimal_places=2, max_digits=10)
-    # art_id = models.IntegerField(max_length=200)
-    
+    numOfArts = models.IntegerField(default=1)
+    price = models.DecimalField(decimal_places=2, max_digits=10)
+    stripe_product_id = models.CharField(max_length=100)
+
     def __str__(self):
         return self.name
-    
-class Cart(models.Model):
-    art = models.ForeignKey(User, on_delete=models.CASCADE)
-    TotalPrice = 0
 
-    def add_to_cart(self):
-        pass
+class Order(models.Model):
+    pass
 
-    def remove_from_cart(self):
-        pass
 
-    def __str__(self):
-        return self.art
+
+
+
 
 
