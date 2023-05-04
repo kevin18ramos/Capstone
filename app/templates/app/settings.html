@@ -98,8 +98,8 @@ nav ul li a{
              <!-- <img src="images/logo.png" class="logo"> -->
              <ul>
                 <li><a href="{% url 'home'%}">Home</a></li>
-                <li><a href="http://127.0.0.1:8000/#art">Art</a></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a href="http://127.0.0.1:8000/#art/">Art</a></li>
+                <li><a href="#">Logout</a></li>
              </ul>
 
         </nav>
@@ -127,17 +127,14 @@ nav ul li a{
 							<i class="fa fa-key text-center mr-1"></i> 
 							Password
 						</a>
-						<a class="nav-link" id="security-tab" data-toggle="pill" href="#security" role="tab" aria-controls="security" aria-selected="false">
-							<i class="fa fa-user text-center mr-1"></i> 
-							Security
-						</a>
+						
 						<a class="nav-link" id="application-tab" data-toggle="pill" href="#application" role="tab" aria-controls="application" aria-selected="false">
-							<i class="fa fa-tv text-center mr-1"></i> 
-							Art
+							<i class="fa fa-user text-center mr-1"></i> 
+							Profile Picture
 						</a>
 						<a class="nav-link" id="notification-tab" data-toggle="pill" href="#notification" role="tab" aria-controls="notification" aria-selected="false">
-							<i class="fa fa-bell text-center mr-1"></i> 
-							Notification
+							<i class="fa fa-tv text-center mr-1"></i> 
+							Art post
 						</a>
 					</div>
 				</div>
@@ -151,19 +148,27 @@ nav ul li a{
 							<div class="col-md-6">
 								<div class="form-group">
 								  	<label>First Name</label>
-								  	<input type="text" class="form-control" name = "firstname" placeholder={{request.user.artistinformation.firstname}}>   <!-- Displaying the user's first name
+								  	<input type="text" class="form-control" name = "firstname" placeholder={{request.user.artistinformation.firstname}}>    
 								</div>
 							</div>
+							
 							<div class="col-md-6">
 								<div class="form-group">
 								  	<label>Last Name</label>
-								  	<input type="text" class="form-control" name = "lastname" placeholder={{request.user.artistinformation.lastname}}>   <!-- Displaying the user's last name -->
+								  	<input type="text" class="form-control" name = "lastname" placeholder={{request.user.artistinformation.lastname}}>  
 								</div>
 							</div>
+							
 							<div class="col-md-6">
 								<div class="form-group">
 								  	<label>Email</label>
 								  	<input type="text" class="form-control" name = "email" placeholder={{request.user.artistinformation.email}}>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Personal Website Link</label>
+								  	<input type="text" class="form-control" name = "PersonalLink" placeholder={{request.user.url.PersonalLink}}>
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -201,10 +206,36 @@ nav ul li a{
 						<div>
 							<button class="btn btn-primary" type="submit">Update</button>
 							<button class="btn btn-light">Cancel</button>
+							
 						</div>
 					</div>
 					</form>
 
+
+					<form method="POST" enctype="multipart/form-data" class="tab-pane fade" id="application" role="tabpanel" aria-labelledby="application-tab">
+						{% csrf_token %}
+						<div>
+							<h3 class="mb-4">Images Settings</h3>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<div class="form-check">
+											<form action="/action_page.php">
+												<p>Profile Image</p>
+												<input type="file" id="myFile" name="profilepic">
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<button class="btn btn-primary" type="submit">Update</button>
+								<button class="btn btn-light">Cancel</button>
+							</div>
+						</div>
+					</form>
+					
+				
 
 					<form method="POST"  class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab" action = "">
 						{% csrf_token %}
@@ -270,7 +301,7 @@ nav ul li a{
 							<button class="btn btn-light">Cancel</button>
 						</div>
 					</div>
-					<form method="POST"  enctype="multipart/form-data" class="tab-pane fade" id="application" role="tabpanel" aria-labelledby="application-tab">
+					<form method="POST"  enctype="multipart/form-data" class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="notification-tab">
 						{% csrf_token %} {%comment%}{{post_form}} {% endcomment %}
 						<div class="addProductsPage"></div>
 							{% comment %} connects the addproductspage {% endcomment %}
@@ -312,42 +343,12 @@ nav ul li a{
 									{{post_form.picture}}
 								  <button class="btn btn-primary">Update</button>
 								  <button class="btn btn-light">Cancel</button>
-								  <button class="btn btn-primary" href = "products/delete/{{deleteId}}">Delete</button>
+								  <button class="btn btn-light">Delete</button>
 								</div>
-							</div>
-						</form>
-	
-					<div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="notification-tab">
-						<h3 class="mb-4">Notification Settings(newsletter)</h3>
-						<div class="form-group">
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" value="" id="notification1">
-								<label class="form-check-label" for="notification1">
-										option 1
-								</label>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" value="" id="notification2" >
-								<label class="form-check-label" for="notification2">
-									option 2
-								</label>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" value="" id="notification3" >
-								<label class="form-check-label" for="notification3">
-									option 3
-								</label>
-							</div>
-						</div>
-						<div>
-							<button class="btn btn-primary">Update</button>
-							<button class="btn btn-light">Cancel</button>
-						</div>
 					</div>
+					</form>
+	
+					
 				</div>
 			</div>
 		</div>

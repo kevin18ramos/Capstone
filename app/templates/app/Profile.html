@@ -121,11 +121,32 @@ nav ul li a{
                    <button>Buy art</button>
                    <div class="user-profile-data">
                      <h1>{{request.user}}</h1>
-                     <p>main-store.com</p>
-                     <p>{{ request.user.artistinformation.email }}</p>
+                  {% if request.user.url.PersonalLink != "" %}
+                     <p><a href="{{ request.user.url.PersonalLink }}" target = "_blank">Link to Personal Website</a></p>
+                  {% else %}
+                     <p></p>
+                  {% endif %}
+
+
+                  {% if request.user.artistinformation.email != none %}
+                  <p>{{ request.user.artistinformation.email }}</p>
+                  {% else %}
+                  {% endif %}
+
+
                    </div> 
-                   <div class="description-profile">digital | painting | blender | <a href="https://basecamelinks" title="link"><strong></strong></a> | latin tex fill</div>
+                   {% if request.user.artistinformation.firstname != none and request.user.artistinformation.lastname != none %}
+                   <div class="description-profile">{{ request.user.artistinformation.firstname }} | {{ request.user.artistinformation.lastname }}</div>
+                   {% elif request.user.artistinformation.firstname != none%}
+                   <div class="description-profile">{{ request.user.artistinformation.firstname }} </div>
+                   {% elif request.user.artistinformation.lastname != none%}
+                   <div class="description-profile">{{ request.user.artistinformation.lastname }} </div>
+                   {% endif %}
+
+                   {% if request.user.artistinformation.bio != none %}
                    <div class="description-profile"> {{ request.user.artistinformation.bio }}</div>
+                   {% else %}
+                  {% endif %}
                 <ul class="data-user">
                  <li><a><strong>Facebook</strong><span>link</span></a></li>
                  <li><a><strong>Instagram</strong><span>link</span></a></li>

@@ -1,25 +1,20 @@
 from urllib import request
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse,  HttpResponseRedirect,get_object_or_404,render, HttpResponseRedirect
 from .models import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-from .forms import PostForm
 from .forms import *
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from django.http.response import HttpResponseNotFound, JsonResponse
 from django.urls import reverse, reverse_lazy
-import stripe
-import json
-from django.shortcuts import (get_object_or_404,
-                              render,
-                              HttpResponseRedirect)
-from django.views import View
 from django.views.generic import TemplateView
+from paypal.standard.forms import PayPalPaymentForm
+import uuid
+from django.urls import reverse 
 #from .decorators import *
 
 # home view
@@ -49,6 +44,8 @@ def settingChange(request):
         password_x1 = request.POST.get('password_x1')
         password_x2 = request.POST.get('password_x2')
         firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+        PersonalLink = request.POST.get('PersonalLink')
         Instalink = request.POST.get('Instalink')
         Facebooklink = request.POST.get('Facebooklink')
         Twitterlink = request.POST.get('Twitterlink')
@@ -92,6 +89,18 @@ def settingChange(request):
                 print("went through the save")
                 messages.info(request, 'First name successfully changed.')
                 return redirect('settingChange')
+        elif lastname != None and lastname != CurrentArtist.lastname and lastname != "":
+                print("went through the elif")
+                CurrentArtist.lastname = lastname
+                CurrentArtist.save()
+                print("went through the save")
+                messages.info(request, 'First name successfully changed.')
+                return redirect('settingChange')
+        elif PersonalLink != None and PersonalLink != CurrentUrl.PersonalLink and PersonalLink != "":
+            CurrentUrl.PersonalLink = PersonalLink
+            CurrentUrl.save()
+            messages.info(request, 'Last name successfully changed.')
+            return redirect('settingChange')
         elif Instalink != None and Instalink != CurrentUrl.Instalink and Instalink != "":
             CurrentUrl.Instalink = Instalink
             CurrentUrl.save()
@@ -129,16 +138,7 @@ def settingChange(request):
             posted = Post.objects.filter(user=currentUser).first() # use .first() to retrieve a single instance
             form = PostForm(request.POST, request.FILES, instance=posted) # pass the instance to the form
             if form.is_valid():
-                if posted is None:
-                    form = PostForm(request.POST, request.FILES)
-                    post = form.save(commit=False) # Save form instance to post variable
-                    post.user = currentUser # Set user field
-                    post.save() # Save to the database  
-                    messages.info(request, 'Product Posted')
-                    return redirect('settingChange')
-                
-                # updates instead of adding to preexisting object
-                else:                                                             
+                if Post.objects.filter(user=currentUser).exists():
                     if request.method == "POST":
                         form = PostForm(request.POST, request.FILES, instance=posted)
                         if form.is_valid():
@@ -147,6 +147,15 @@ def settingChange(request):
                             return redirect ('settingChange')
                     else:
                         form = PostForm(instance=posted)  
+                # updates instead of adding to preexisting object
+                else:                                                             
+                    form = PostForm(request.POST, request.FILES)
+                    post = form.save(commit=False) # Save form instance to post variable
+                    post.user = currentUser # Set user field
+                    post.save() # Save to the database  
+                    messages.info(request, 'Product Posted')
+                    return redirect('settingChange')
+                
             else:
                 for field, errors in form.errors.items():
                     for error in errors:
@@ -190,40 +199,29 @@ def updateProducts(request, id):
     }
     return render(request, '', context)
 
-stripe.api_key = settings.STRIPE_SECRET_KEY
-class CreateCheckoutSessionView(View):
-    def post(self, request, *args, **kwargs):
-        price = stripePrice.objects.get(id=self.kwargs["pk"])
-        domain = "https://yourdomain.com"
-        if settings.DEBUG:
-            domain = "http://127.0.0.1:8000"
-        checkout_session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
-            line_items=[
-                {
-                    'price': price.stripe_price_id,
-                    'quantity': 1,
-                },
-            ],
-            mode='payment',
-            success_url=domain + '/success/',
-            cancel_url=domain + '/cancel/',
-        )
-        return redirect(checkout_session.url)
+def payMe(request):
+    paypal_dict = {
+        'business': '',
+        'amount': '',
+        'item_name': '',
+        'invoice': str(uuid.uuid4()),
+        'currency_code': 'USD',
+        'notify_url': f'http://{host}{reverse("papypal-ipn")}',
+        'return_url': f'http:///{host}{reverse("paypal-reverse")}',
+        'cancel_url': f'http://{host}{reverse("paypal-cancel")}',
+    }
+    form = PayPalPaymentForms(initial=paypal_dict)
+    context = {'form':form}
+    return render(request,'checkout.html',context)
+                  
+def paypal_reverse(request):
+     messages.success(request, "you've made the payment")
+     return redirect('home')
 
-class ProductLandingPageView(TemplateView):
-    template_name = "app/landing.html"
-    def get_context_data(self, **kwargs):
-        post = Post.objects.get(name="guts")
-        prices = stripePrice.objects.filter(post=post)
-        context = super(ProductLandingPageView,
-                        self).get_context_data(**kwargs)
-        context.update({
-            "product": post,
-            "prices": prices
-        })
-        return context
-    
+def paypal_cancel(request):
+     messages.success(request, "payment canceled")
+     return redirect('home')
+
 class paypal(TemplateView):
     template_name = "app/paypal.html"       
 
@@ -275,6 +273,7 @@ def registerPage(request):
 			)
                 Url.objects.create(
 				user = user,
+                PersonalLink = "",
                 Instalink = "https://www.instagram.com",
                 Facebooklink = "https://www.facebook.com",
                 Twitterlink = "https://twitter.com"
