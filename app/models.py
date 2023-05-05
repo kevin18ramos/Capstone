@@ -7,7 +7,7 @@ from urllib import request
 # Create your models here.
 
 class ArtistInformation(models.Model):
-    profile_pic = models.ImageField(default="images/cabbage.jpg", null=True, blank=True)
+    profile_pic = models.ImageField(default="images/defaultpfp.png", null=True, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(null = True, max_length=255)
     firstname = models.CharField(max_length=200, null=True)

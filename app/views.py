@@ -172,12 +172,11 @@ def profile(request):
 
 @login_required(login_url = 'login')
 def personalProfile(request,pk):
-    allusers = User.objects.all()
     Artist = ArtistInformation.objects.get(id = pk)
+    useronscreen = Artist.user
+    userpost = Post.objects.get(user = useronscreen)
     Urlperson = Url.objects.get(id = pk)
-
-
-    context = {'Urlperson':Urlperson,'Artist':Artist}
+    context = {'Urlperson':Urlperson,'Artist':Artist, 'userpost':userpost}
     return render(request, 'app/ProfileforClick.html',context)
 
 @login_required(login_url = 'login')
