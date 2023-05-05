@@ -1,5 +1,3 @@
-
-<!-- writes out the form tag automatically -->
 <html>
     <head>
         <title>Thanks for your order!</title>
@@ -14,9 +12,8 @@
                 {% for message in messages %}
                     <li>{{message}}</li>
                 {% endfor %}
-            {% endfor %}
+            {% endif %}
             {{ form.render }}
-            <a href="{% url 'landing' %}">Test again</a>
         </section>
     </body>
 </html>

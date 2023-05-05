@@ -17,7 +17,6 @@ from django.shortcuts import (get_object_or_404,
                               HttpResponseRedirect)
 from paypal.standard.forms import PayPalPaymentsForm
 import uuid
-from django.urls import reverse 
 #from .decorators import *
 
 # home view
@@ -213,33 +212,30 @@ def updateProducts(request, id):
     return render(request, '', context)
 
 def payMe(request, postId):
-    host = request.get_host()
-    postDetails = Post.objects.filter(id=postId)
-    artistDetails = ArtistInformation.objects.filter(name = postDetails.user.name)
+    postDetails = Post.objects.get(id=postId)
+    artistDetails = ArtistInformation.objects.get(user = postDetails.user)
     paypal_dict = {
-        'business': artistDetails.emails,
+        'business': artistDetails.email,
         'amount': postDetails.price,
         'item_name': postDetails.name,
         'invoice': str(uuid.uuid4()),
         'currency_code': 'USD',
-        'notify_url': f'http://{host}{reverse("papypal-ipn")}',
-        'return_url': f'http:///{host}{reverse("paypal-reverse")}',
-        'cancel_url': f'http://{host}{reverse("paypal-cancel")}',
+        'notify_url': request.build_absolute_uri(reverse("paypal-ipn")),
+        'return': request.build_absolute_uri(reverse("paypal-reverse")),
+        'cancel_return': request.build_absolute_uri(reverse("paypal-cancel")),
     }
     form = PayPalPaymentsForm(initial=paypal_dict)
     context = {'form':form}
-    return render(request,'Checkout.html',context)
+    return render(request,'app/paypalpayment.html',context)
                   
-def paypal_reverse(request):
+def paypal_reverse(request, postId):
     messages.success(request, "you've made the payment")
     postDetails = Post.objects.filter(id=postId)
     postDetails.delete()
     return redirect('home')
 
-def paypal_cancel(request):
+def paypal_cancel(request, postId):
     messages.success(request, "payment canceled")
-    postDetails = Post.objects.filter(id=postId)
-    postDetails.delete()
     return redirect('home')
 
 class paypal(TemplateView):

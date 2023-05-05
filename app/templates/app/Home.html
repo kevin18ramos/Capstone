@@ -252,7 +252,7 @@
                 <p>{{product.numOfArts}} left!</p>
                 {%endif%}
                 <p class="product-price">Price: {{ product.price }}</p> 
-                <p><a href="/cart/{{ product.id }}"><i class="fa-solid fa-cart-shopping"></i>Add to cart</a></p>                </figcaption>
+                <p><a href="/payment/{{product.id}}"><i class="fa-solid fa-cart-shopping"></i>Buy</a></p>                </figcaption>
               </figure>
             </li>
             {% endfor %}
