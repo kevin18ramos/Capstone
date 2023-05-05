@@ -51,7 +51,7 @@ class Order(models.Model):
 
 
 class SubscribedUsers(models.Model):
-    email = models.CharField(unique=True, max_length=50)
+    email = models.CharField(unique=True, max_length=50,null=True)
     name = models.CharField(max_length=50)
     # Date_Created = models.DateTimeField(False, True, editable=False)
 

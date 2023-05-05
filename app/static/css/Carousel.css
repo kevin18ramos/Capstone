@@ -46,10 +46,10 @@
 	letter-spacing: 2px;
 }
 .navbar-light .navbar-nav .active>.nav-links, .navbar-light .navbar-nav .nav-links.active, .navbar-light .navbar-nav .nav-links.show, .navbar-light .navbar-nav .show>.nav-links {
-	color: #fff;
+	color: black;
 }
 .navbar-light .navbar-nav .nav-links {
-	color: #fff;
+	color: black;
 }
 .navbar-nav {
 	text-align: center;
@@ -58,16 +58,16 @@
 	padding: .2rem 1rem;
 }
 .nav-links.active, .nav-links:focus {
-	color: #fff;
+	color: black;
 }
 .navbar-toggler {
 	padding: 1px 5px;
 	font-size: 18px;
 	line-height: 0.3;
-	background: #fff;
+	background: black;
 }
 .navbar-light .navbar-nav .nav-links:focus, .navbar-light .navbar-nav .nav-links:hover {
-	color: #fff;
+	color: black;
 }
 .w-100 {
 	height: 100vh;
@@ -100,7 +100,7 @@
     font-size: 2.25rem;
     line-height: inherit;
     white-space: nowrap;
-	color:rgb(255, 255, 255);
+	color:rgb(0, 0, 0);
 }
 @media only screen and (max-width: 767px) {
 	.navbar-nav.ml-auto {

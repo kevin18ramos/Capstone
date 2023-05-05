@@ -327,6 +327,7 @@ def index(request):
         subscribedUsers = SubscribedUsers()
         subscribedUsers.email = email
         subscribedUsers.name = name
+        # subscribedUsers.full_clean ()
         subscribedUsers.save()
         # send a confirmation mail
         subject = 'NewsLetter Subscription'
