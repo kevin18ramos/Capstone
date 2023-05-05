@@ -98,58 +98,55 @@ nav ul li a{
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href= "{% url 'settingChange' %}">Settings</a></li>
                 <li><a href= "{% url 'logout' %}">Logout</a></li>
-         
              </ul>
-
-
-     
         </nav>
-        
-
-
         <div class="content-profile-page">
             <div class="profile-user-page card">
                <div class="img-user-profile">
                  <img class="profile-bgHome">
-                 {% if request.user.artistinformation.profile_pic %}
-                 <img class="avatar" src="{{ request.user.artistinformation.profile_pic.url }}"/>
+                 {% if Artist.profile_pic %}
+                 <img class="avatar" src="{{ Artist.profile_pic.url }}"/>
                {% else %}
                  <img alt="jtojr" src="{% static 'images/defaultpfp.png' %}" />
                {% endif %}
 
                     </div>
+                   <button href="{% url 'personalProfile' userpost.id %}">Buy art</button>
                    <div class="user-profile-data">
-                     <h1>{{request.user}}</h1>
-                  {% if request.user.url.PersonalLink != "" %}
-                     <p><a href="{{ request.user.url.PersonalLink }}" target = "_blank">Link to Personal Website</a></p>
+                  <h1>{{Artist.user}}</h1>
+                  {% if Urlperson.PersonalLink != "" %}
+                     <p><a href="{{ Urlperson.PersonalLink }}" target = "_blank">Link to Personal Website</a></p>
                   {% else %}
                      <p></p>
                   {% endif %}
 
 
-                  {% if request.user.artistinformation.email != none %}
-                  <p>{{ request.user.artistinformation.email }}</p>
+                  {% if Artist.email != none %}
+                  <p>{{ Artist.email }}</p>
                   {% else %}
                   {% endif %}
 
 
                    </div> 
-                   {% if request.user.artistinformation.firstname != none and request.user.artistinformation.lastname != none %}
-                   <div class="description-profile">{{ request.user.artistinformation.firstname }} | {{ request.user.artistinformation.lastname }}</div>
-                   {% elif request.user.artistinformation.firstname != none%}
-                   <div class="description-profile">{{ request.user.artistinformation.firstname }} </div>
-                   {% elif request.user.artistinformation.lastname != none%}
-                   <div class="description-profile">{{ request.user.artistinformation.lastname }} </div>
+                   {% if Artist.firstname != none and Artist.lastname != none %}
+                   <div class="description-profile">{{ Artist.firstname }} | {{ Artist.lastname }}</div>
+                   {% elif Artist.firstname != none%}
+                   <div class="description-profile">{{ Artist.firstname }} </div>
+                   {% elif Artist.lastname != none%}
+                   <div class="description-profile">{{ Artist.lastname }} </div>
                    {% endif %}
 
-                   {% if request.user.artistinformation.bio != none %}
-                   <div class="description-profile"> {{ request.user.artistinformation.bio }}</div>
+                   {% if Artist.bio != none %}
+                   <div class="description-profile"> {{ Artist.bio }}</div>
                    {% else %}
                   {% endif %}
+
+                  
                 <ul class="data-user">
-                  <li><a href="{{ request.user.url.Facebooklink }}" target = "_blank"><strong>Facebook</strong></a></li>
-                  <li><a href="{{ request.user.url.Instalink }}" target = "_blank"><strong>Instagram</strong></a></li>
-                  <li><a href="{{ request.user.url.Twitterlink }}" target = "_blank"><strong>Twitter</strong></a></li>
+                  <li><a href="{{ Urlperson.Facebooklink }}" target = "_blank"><strong>Facebook</strong></a></li>
+                  <li><a href="{{ Urlperson.Instalink }}" target = "_blank"><strong>Instagram</strong></a></li>
+                  <li><a href="{{ Urlperson.Twitterlink }}" target = "_blank"><strong>Twitter</strong></a></li>
+                  
                     
                    </div> 
                 </ul>

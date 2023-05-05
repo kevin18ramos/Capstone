@@ -180,4 +180,3 @@ TINYMCE_DEFAULT_CONFIG = {
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-SECURE_CROSS_ORIGIN_OPENER_POLICY= 'same-origin-allow-popups'

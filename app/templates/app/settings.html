@@ -98,8 +98,7 @@ nav ul li a{
              <!-- <img src="images/logo.png" class="logo"> -->
              <ul>
                 <li><a href="{% url 'home'%}">Home</a></li>
-                <li><a href="http://127.0.0.1:8000/#art/">Art</a></li>
-                <li><a href="#">Logout</a></li>
+                <li><a href="{% url 'logout'%}">Logout</a></li>
              </ul>
 
         </nav>
@@ -113,7 +112,7 @@ nav ul li a{
 							{% if request.user.artistinformation.profile_pic %}
 							<img  style="margin-left: 50px;" src="{{ request.user.artistinformation.profile_pic.url }}" alt="Image" class="shadow"/>
 						  {% else %}
-							<img src="{% static 'images/cabbage.jpg' %}" alt="Image" class="shadow"/>
+							<img src="{% static 'images/defaultpfp.png' %}" alt="Image" class="shadow"/>
 						  {% endif %}
 						</div>
 						<h4 class="text-center">{{request.user.artistinformation.name}}</h4>

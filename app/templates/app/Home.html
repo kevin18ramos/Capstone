@@ -106,18 +106,14 @@
                 <a class="nav-links" href="{% url 'home' %}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-links" href="{% url 'logout'%}">Logout</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-links" href="checkout/">Checkout</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-links" href="#art">Art</a>
               </li>
               <li class="nav-item">
                 <a class="nav-links" href="Profile/">Profile</a>
               </li>
-      
+              <li class="nav-item">
+                <a class="nav-links" href="{% url 'logout'%}">Logout</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -135,21 +131,11 @@
                 <a class="nav-links" href="{% url 'login'%}">Login</a>
               </li>
               <li class="nav-item">
-
-                <a class="nav-links" href="{% url 'shoppingcart'%}">Checkout</a>
-
-	
-
-              </li>
-              <li class="nav-item">
                 <a class="nav-links" href="#art">Art</a>
               </li>
               <li class="nav-item">
-    
             <a class="nav-links" href="{% url 'findUser' %}">Profile</a>
-
               </li>
-      
             </ul>
           </div>
         </div>
@@ -250,12 +236,13 @@
                 <p>{{product.name}}</p>
                 <p style="display: none;">di</p>
                 <p>{{product.description}}</p>
-                <p>Art by {{product.user}}</p>
+                <p>Art by <a href="{% url 'personalProfile' pk=product.user.id %}">{{product.user}}</a></p>
                 {%if product.numOfArts < 3%}
                 <p>{{product.numOfArts}} left!</p>
                 {%endif%}
                 <p class="product-price">Price: {{ product.price }}</p> 
-                <p><a href="/cart/{{ product.id }}"><i class="fa-solid fa-cart-shopping"></i>Add to cart</a></p>                </figcaption>
+                <p><a href="/payment/{{product.id}}"><i class="fa-solid fa-cart-shopping"></i>Buy</a></p>
+              </figcaption>
               </figure>
             </li>
             {% endfor %}

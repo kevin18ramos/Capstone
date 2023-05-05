@@ -1,28 +1,22 @@
 from urllib import request
 from django.shortcuts import render,redirect
-from django.http import HttpResponse,  HttpResponseRedirect,get_object_or_404,render, HttpResponseRedirect
+from django.http import HttpResponse,  HttpResponseRedirect
 from .models import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-from .forms import PostForm
-# from django.core.validators import validate_email
-from django.core.validators import ValidationError
-import re
-from .models import SubscribedUsers
-from django.core.mail import send_mail
-from django.core.mail import EmailMessage
-from django.conf import settings
 from .forms import *
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from django.http.response import HttpResponseNotFound, JsonResponse
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView
-from paypal.standard.forms import PayPalPaymentForm
+from django.shortcuts import (get_object_or_404,
+                              render,
+                              HttpResponseRedirect)
+from paypal.standard.forms import PayPalPaymentsForm
 import uuid
-from django.urls import reverse 
 #from .decorators import *
 
 # home view
@@ -177,6 +171,15 @@ def profile(request):
     return render(request, 'app/Profile.html')
 
 @login_required(login_url = 'login')
+def personalProfile(request,pk):
+    Artist = ArtistInformation.objects.get(id = pk)
+    useronscreen = Artist.user
+    userpost = Post.objects.get(user = useronscreen)
+    Urlperson = Url.objects.get(id = pk)
+    context = {'Urlperson':Urlperson,'Artist':Artist, 'userpost':userpost}
+    return render(request, 'app/ProfileforClick.html',context)
+
+@login_required(login_url = 'login')
 # view products view
 def productsPage(request):
     products = Post.objects.all()
@@ -207,37 +210,35 @@ def updateProducts(request, id):
     }
     return render(request, '', context)
 
-def payMe(request):
+def payMe(request, postId):
+    postDetails = Post.objects.get(id=postId)
+    artistDetails = ArtistInformation.objects.get(user = postDetails.user)
     paypal_dict = {
-        'business': '',
-        'amount': '',
-        'item_name': '',
+        'business': artistDetails.email,
+        'amount': postDetails.price,
+        'item_name': postDetails.name,
         'invoice': str(uuid.uuid4()),
         'currency_code': 'USD',
-        'notify_url': f'http://{host}{reverse("papypal-ipn")}',
-        'return_url': f'http:///{host}{reverse("paypal-reverse")}',
-        'cancel_url': f'http://{host}{reverse("paypal-cancel")}',
+        'notify_url': request.build_absolute_uri(reverse("paypal-ipn")),
+        'return': request.build_absolute_uri(reverse("paypal-reverse")),
+        'cancel_return': request.build_absolute_uri(reverse("paypal-cancel")),
     }
-    form = PayPalPaymentForms(initial=paypal_dict)
+    form = PayPalPaymentsForm(initial=paypal_dict)
     context = {'form':form}
-    return render(request,'checkout.html',context)
+    return render(request,'app/paypalpayment.html',context)
                   
-def paypal_reverse(request):
-     messages.success(request, "you've made the payment")
-     return redirect('home')
+def paypal_reverse(request, postId):
+    messages.success(request, "you've made the payment")
+    postDetails = Post.objects.filter(id=postId)
+    postDetails.delete()
+    return redirect('home')
 
-def paypal_cancel(request):
-     messages.success(request, "payment canceled")
-     return redirect('home')
+def paypal_cancel(request, postId):
+    messages.success(request, "payment canceled")
+    return redirect('home')
 
 class paypal(TemplateView):
     template_name = "app/paypal.html"       
-
-class SuccessView(TemplateView):
-    template_name = "app/success.html"
-
-class CancelView(TemplateView):
-    template_name = "app/cancel.html"
 
 #login register and logout
 def loginPage(request):
@@ -305,89 +306,3 @@ def findUser(request):
 def logoutUser(request):
     logout(request)
     return redirect('login')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# news--
-
-
-
-
-
-def index(request):
-    if request.method == 'POST':
-        post_data = request.POST.copy()
-        email = post_data.get("email", None)
-        name = post_data.get("name", None)
-        subscribedUsers = SubscribedUsers()
-        subscribedUsers.email = email
-        subscribedUsers.name = name
-        subscribedUsers.save()
-        # send a confirmation mail
-        subject = 'NewsLetter Subscription'
-        message = 'Hello ' + name + ', Thanks for subseibing us. You will get notification of latest  posted art on our website. Please do not reply on this email.'
-        email_from = settings.EMAIL_HOST_USER
-        recipient_list = [email, ]
-        send_mail(subject, message, email_from, recipient_list,  fail_silently=True)
-        res = JsonResponse({'msg': 'Thanks. Subscribed Successfully!'})
-        return res
-    return render(request, 'app/index.html')
-
-def validate_email(request): 
-    email = request.POST.get("email", None)   
-    if email is None:
-        res = JsonResponse({'msg': 'Emaiil is required.'})
-    elif SubscribedUsers.objects.get(email = email):
-        res = JsonResponse({'msg': 'Email Address already exists'})
-    elif not re.match(r"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", email):
-        res = JsonResponse({'msg': 'Invalid Email Address'})
-    else:
-        res = JsonResponse({'msg': ''})
-    return res
-
-
-def newsletter(request):
-    if request.method == 'POST':
-        form = NewsletterForm(request.POST)
-        if form.is_valid():
-            subject = form.cleaned_data.get('subject')
-            receivers = form.cleaned_data.get('receivers').split(',')
-            email_message = form.cleaned_data.get('message')
-
-            mail = EmailMessage(subject, email_message, settings.EMAIL_HOST_USER, bcc=receivers)
-            mail.content_subtype = 'html'
-            mail.send()
-
-            if mail.send():
-                messages.success(request, "Email sent succesfully")
-            else:
-                messages.error(request, "There was an error sending email")
-
-        else:
-            for error in list(form.errors.values()):
-                messages.error(request, error)
-
-        return redirect("/")
-
-    form = NewsletterForm()
-    form.fields['receivers'].initial = ','.join([active.email for active in SubscribedUsers.objects.all()])
-    return render(request=request, template_name='app/newsletter.html', context={'form': form})
-
-
-# def letter(request):
-#     return render(request, 'app/newsletter.html')
-

@@ -26,5 +26,5 @@ def show_me_the_money(sender, **kwargs):
             ...
     else:
         #...
-
+        pass
 valid_ipn_received.connect(show_me_the_money)

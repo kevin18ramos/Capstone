@@ -7,7 +7,7 @@ from urllib import request
 # Create your models here.
 
 class ArtistInformation(models.Model):
-    profile_pic = models.ImageField(default="images/cabbage.jpg", null=True, blank=True)
+    profile_pic = models.ImageField(default="images/defaultpfp.png", null=True, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(null = True, max_length=255)
     firstname = models.CharField(max_length=200, null=True)
@@ -41,8 +41,6 @@ class Post(models.Model):
     date = models.DateField()
     numOfArts = models.IntegerField(default=1)
     price = models.DecimalField(decimal_places=2, max_digits=10)
-    stripe_product_id = models.CharField(max_length=100)
-
     def __str__(self):
         return self.name
 
