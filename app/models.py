@@ -61,9 +61,6 @@ class SubscribedUsers(models.Model):
 
 
 
-class Mine(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField()
 
 
 
